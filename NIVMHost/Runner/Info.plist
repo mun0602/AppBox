@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh-Hans</string>
 	<key>CFBundleDisplayName</key>
-	<string>Quietform</string>
+	<string>临时邮箱</string>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>zh-Hans</string>
@@ -18,7 +18,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Quietform</string>
+	<string>TempMail</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -47,16 +47,14 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>QuietformCatalogBaseURL</key>
-	<string>$(APPBOX_CATALOG_BASE_URL)</string>
-	<key>QuietformVerificationBaseURL</key>
-	<string>$(APPBOX_VERIFICATION_BASE_URL)</string>
-	<key>QuietformClientAESKey</key>
-	<string>$(APPBOX_CLIENT_AES_KEY)</string>
-	<key>QuietformAssetAESKey</key>
-	<string>$(APPBOX_ASSET_AES_KEY)</string>
-	<key>QuietformAssetAESIV</key>
-	<string>$(APPBOX_ASSET_AES_IV)</string>
+	<key>TempMailCatalogBaseURL</key>
+	<string>$(TEMPMAIL_CATALOG_BASE_URL)</string>
+	<key>TempMailClientAESKey</key>
+	<string>$(TEMPMAIL_CLIENT_AES_KEY)</string>
+	<key>TempMailAssetAESKey</key>
+	<string>$(TEMPMAIL_ASSET_AES_KEY)</string>
+	<key>TempMailAssetAESIV</key>
+	<string>$(TEMPMAIL_ASSET_AES_IV)</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UISupportedInterfaceOrientations</key>
@@ -65,59 +63,50 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-	<!-- Quietform uses its own callback scheme. appbox remains as a legacy
-	     deep-link alias until deployed links have migrated. -->
+	<!-- TempMail deep-link scheme used to select and restore an application surface. -->
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>quietform.sandbox.callback</string>
+			<string>tempmail.sandbox.callback</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>quietform</string>
-				<string>appbox</string>
+				<string>tempmail</string>
 			</array>
 		</dict>
 	</array>
 
     <!-- 仅保留已链接运行组件可能调用的系统隐私能力。所有权限均由用户操作触发。 -->
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>Quietform 仅在您主动选择图片或视频时访问相册。</string>
+    <string>临时邮箱仅在您主动选择图片或视频时访问相册。</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Quietform 仅在您主动保存图片或视频时写入相册。</string>
+    <string>临时邮箱仅在您主动保存图片或视频时写入相册。</string>
     
     <key>NSCameraUsageDescription</key>
-    <string>Quietform 仅在您主动扫描二维码或拍摄内容时使用相机。</string>
+    <string>临时邮箱仅在您主动扫描二维码或拍摄内容时使用相机。</string>
     
     <key>NSMicrophoneUsageDescription</key>
-    <string>Quietform 仅在您主动使用录音或语音功能时使用麦克风。</string>
+    <string>临时邮箱仅在您主动使用录音或语音功能时使用麦克风。</string>
 
     <key>NSContactsUsageDescription</key>
-    <string>Quietform 仅在您主动选择联系人时访问通讯录。</string>
+    <string>临时邮箱仅在您主动选择联系人时访问通讯录。</string>
     <key>NSSpeechRecognitionUsageDescription</key>
-    <string>Quietform 仅在您主动启用语音输入时使用语音识别，将语音转换为文字。</string>
+    <string>临时邮箱仅在您主动启用语音输入时使用语音识别，将语音转换为文字。</string>
     <key>NSCalendarsUsageDescription</key>
-    <string>Quietform 仅在您主动管理日程时访问您选择的日历内容。</string>
+    <string>临时邮箱仅在您主动管理日程时访问您选择的日历内容。</string>
     <key>NSCalendarsFullAccessUsageDescription</key>
-    <string>Quietform 仅在您主动管理日程时读取或更新您选择的日历内容。</string>
+    <string>临时邮箱仅在您主动管理日程时读取或更新您选择的日历内容。</string>
     
     <!-- 定位权限（用户主动创建的地点专注规则） -->
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Quietform 使用当前位置创建您主动设置的地点专注规则。</string>
+    <string>临时邮箱仅在您主动使用位置相关功能时访问当前位置。</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>Quietform 仅在您启用地点规则后监听到达或离开事件，以自动应用您设置的专注保护。</string>
+    <string>临时邮箱仅在您主动启用位置相关功能后使用位置变化。</string>
 </dict>
 </plist>

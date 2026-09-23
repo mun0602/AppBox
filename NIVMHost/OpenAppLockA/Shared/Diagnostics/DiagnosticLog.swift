@@ -21,7 +21,7 @@ nonisolated enum Diag {
     private static let lock = NSLock()
     nonisolated(unsafe) private static var writer: LogFileWriter?
     nonisolated(unsafe) private static var loggers: [LogCategory: Logger] = [:]
-    private static let subsystem = "dev.bchen.OpenAppLock"
+    private static let subsystem = "com.tianya.tempmail"
 
     /// The process this build is running as, inferred once from the bundle id.
     static let source = LogSource.current(bundleIdentifier: Bundle.main.bundleIdentifier)

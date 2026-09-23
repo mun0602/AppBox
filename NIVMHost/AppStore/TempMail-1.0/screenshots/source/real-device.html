@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>临时邮箱真机商店截图</title>
+  <style>
+    :root {
+      --brand: #18ca88;
+      --brand-deep: #0bae72;
+      --ink: #1d211f;
+      --muted: #68726d;
+      --canvas: #f5f7f6;
+      --dark: #18201d;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #dfe5e2; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+    .shot {
+      position: relative;
+      width: 1320px;
+      height: 2868px;
+      overflow: hidden;
+      isolation: isolate;
+      background: var(--shot-bg, var(--canvas));
+    }
+    .shot::before,
+    .shot::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+    .shot::before {
+      width: 740px;
+      height: 740px;
+      right: -330px;
+      top: -310px;
+      background: rgba(24, 202, 136, .08);
+    }
+    .shot::after {
+      width: 480px;
+      height: 480px;
+      left: -300px;
+      top: 440px;
+      border: 88px solid rgba(24, 202, 136, .042);
+    }
+    .header {
+      position: absolute;
+      top: 92px;
+      left: 100px;
+      right: 100px;
+      z-index: 4;
+    }
+    .brand { display: flex; align-items: center; gap: 24px; }
+    .brand img { width: 100px; height: 100px; border-radius: 24px; box-shadow: 0 12px 30px rgba(9, 92, 61, .16); }
+    .brand span { font-size: 35px; font-weight: 600; color: #46504b; }
+    h1 { margin: 52px 0 0; font-size: 90px; line-height: 1.08; font-weight: 600; letter-spacing: 0; }
+    .subtitle { margin: 25px 0 0; max-width: 1000px; font-size: 35px; line-height: 1.46; color: var(--muted); }
+    .device {
+      position: absolute;
+      left: 170px;
+      top: 648px;
+      width: 980px;
+      height: 2125px;
+      overflow: hidden;
+      border-radius: 72px;
+      background: #e8edf1;
+      border: 10px solid rgba(255,255,255,.90);
+      box-shadow:
+        0 8px 18px rgba(35,58,49,.07),
+        0 40px 92px rgba(35,58,49,.22),
+        0 0 0 1px rgba(176,199,188,.34);
+    }
+    .device > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .privacy-overlay { position: absolute; z-index: 3; }
+    .masked-address {
+      display: grid;
+      align-items: center;
+      background: #fff;
+      color: #080908;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .home-address {
+      left: 12.1%; top: 53.45%; width: 75.8%; height: 4.7%;
+      justify-items: center;
+      font-size: 38px;
+    }
+    .picker-address {
+      left: 14.6%; top: 22.85%; width: 64%; height: 4.2%;
+      font-size: 35px;
+    }
+    .manager-address {
+      left: 18.8%; top: 21.7%; width: 54.5%; height: 4.35%;
+      font-size: 34px;
+    }
+    .demo-card {
+      left: 1.7%;
+      width: 96.65%;
+      padding: 29px 40px 24px 44px;
+      border-radius: 40px;
+      background: #fff;
+      color: #090a09;
+    }
+    .demo-card.c1 { top: 29.25%; height: 12.0%; }
+    .demo-card.c2 { top: 42.05%; height: 9.9%; }
+    .demo-card.c3 { top: 52.65%; height: 9.9%; }
+    .demo-top { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; }
+    .demo-sender { font-size: 32px; font-weight: 600; }
+    .demo-time { font-size: 26px; color: #92969a; }
+    .demo-subject { margin-top: 24px; font-size: 34px; line-height: 1.2; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .demo-preview { margin-top: 10px; font-size: 28px; line-height: 1.34; color: #969aa0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .dark-shot { --shot-bg: var(--dark); color: rgba(255,255,255,.95); }
+    .dark-shot::before { background: rgba(24,202,136,.105); }
+    .dark-shot::after { border-color: rgba(24,202,136,.05); }
+    .dark-shot .brand span { color: rgba(255,255,255,.70); }
+    .dark-shot .subtitle { color: rgba(255,255,255,.60); }
+    .dark-shot .device { border-color: rgba(255,255,255,.10); box-shadow: 0 42px 96px rgba(0,0,0,.38), 0 0 0 1px rgba(176,199,217,.145); }
+    .dark-shot .picker-address,
+    .dark-shot .demo-card { background: #3d4041; color: rgba(255,255,255,.95); }
+    .dark-shot .demo-time,
+    .dark-shot .demo-preview { color: rgba(255,255,255,.55); }
+  </style>
+</head>
+<body>
+  <section class="shot" id="shot-01">
+    <header class="header">
+      <div class="brand"><img src="../../../../Design/Branding/TempMail-AppIcon-Master.png" /><span>临时邮箱</span></div>
+      <h1>一个地址，马上收信</h1>
+      <p class="subtitle">无需注册，复制临时邮箱地址即可开始使用。</p>
+    </header>
+    <div class="device">
+      <img src="../../../../Build/TestArtifacts/2026-09-14-appstore-real-device/01-home.png" />
+      <div class="privacy-overlay masked-address home-address">mint7q4k2d@tianyamail.com</div>
+    </div>
+  </section>
+
+  <section class="shot" id="shot-02" style="--shot-bg:#f2f8f5">
+    <header class="header">
+      <div class="brand"><img src="../../../../Design/Branding/TempMail-AppIcon-Master.png" /><span>临时邮箱</span></div>
+      <h1>新邮件，一目了然</h1>
+      <p class="subtitle">发件人、主题、时间与内容摘要，在同一页快速浏览。</p>
+    </header>
+    <div class="device">
+      <img src="../../../../Build/TestArtifacts/2026-09-14-appstore-real-device/02-inbox-light.png" />
+      <div class="privacy-overlay masked-address picker-address">mint7q4k2d@tianyamail.com</div>
+      <article class="privacy-overlay demo-card c1"><div class="demo-top"><span class="demo-sender">账户安全中心</span><span class="demo-time">刚刚　›</span></div><div class="demo-subject">登录验证码：472 816</div><div class="demo-preview">验证码将在 10 分钟后失效，请勿转发给其他人。</div></article>
+      <article class="privacy-overlay demo-card c2"><div class="demo-top"><span class="demo-sender">旅行清单</span><span class="demo-time">12 分钟前　›</span></div><div class="demo-subject">周末行程确认</div><div class="demo-preview">您的车票与入住信息已经整理完成。</div></article>
+      <article class="privacy-overlay demo-card c3"><div class="demo-top"><span class="demo-sender">设计周报</span><span class="demo-time">上午 8:26　›</span></div><div class="demo-subject">本周界面检查结果</div><div class="demo-preview">首页留白与邮件详情排版已经更新。</div></article>
+    </div>
+  </section>
+
+  <section class="shot" id="shot-03" style="--shot-bg:#f7f5ef">
+    <header class="header">
+      <div class="brand"><img src="../../../../Design/Branding/TempMail-AppIcon-Master.png" /><span>临时邮箱</span></div>
+      <h1>邮箱管理，简单直接</h1>
+      <p class="subtitle">复制当前地址或创建新邮箱，常用操作触手可及。</p>
+    </header>
+    <div class="device">
+      <img src="../../../../Build/TestArtifacts/2026-09-14-appstore-real-device/03-manage-light.png" />
+      <div class="privacy-overlay masked-address manager-address">mint7q4k2d@tianyamail…</div>
+    </div>
+  </section>
+
+  <section class="shot" id="shot-04" style="--shot-bg:#f3f6f4">
+    <header class="header">
+      <div class="brand"><img src="../../../../Design/Branding/TempMail-AppIcon-Master.png" /><span>临时邮箱</span></div>
+      <h1>外观与偏好，由你决定</h1>
+      <p class="subtitle">在一个清爽的侧边栏中管理外观、动画与帮助信息。</p>
+    </header>
+    <div class="device"><img src="../../../../Build/TestArtifacts/2026-09-14-appstore-real-device/04-drawer-light.png" /></div>
+  </section>
+
+  <section class="shot dark-shot" id="shot-05">
+    <header class="header">
+      <div class="brand"><img src="../../../../Design/Branding/TempMail-AppIcon-Master.png" /><span>临时邮箱</span></div>
+      <h1>深浅模式，都清晰</h1>
+      <p class="subtitle">跟随系统外观，在不同环境中保持舒适阅读。</p>
+    </header>
+    <div class="device">
+      <img src="../../../../Build/TestArtifacts/2026-09-14-appstore-real-device/05-inbox-dark.png" />
+      <div class="privacy-overlay masked-address picker-address">mint7q4k2d@tianyamail.com</div>
+      <article class="privacy-overlay demo-card c1"><div class="demo-top"><span class="demo-sender">账户安全中心</span><span class="demo-time">刚刚　›</span></div><div class="demo-subject">登录验证码：472 816</div><div class="demo-preview">验证码将在 10 分钟后失效，请勿转发给其他人。</div></article>
+      <article class="privacy-overlay demo-card c2"><div class="demo-top"><span class="demo-sender">旅行清单</span><span class="demo-time">12 分钟前　›</span></div><div class="demo-subject">周末行程确认</div><div class="demo-preview">您的车票与入住信息已经整理完成。</div></article>
+      <article class="privacy-overlay demo-card c3"><div class="demo-top"><span class="demo-sender">设计周报</span><span class="demo-time">上午 8:26　›</span></div><div class="demo-subject">本周界面检查结果</div><div class="demo-preview">首页留白与邮件详情排版已经更新。</div></article>
+    </div>
+  </section>
+</body>
+</html>

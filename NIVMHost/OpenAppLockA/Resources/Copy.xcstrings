@@ -513,7 +513,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quietform"
+            "value": "TempMail"
           }
         }
       }
@@ -645,7 +645,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quietform 的通知已关闭。请在系统设置中开启，以接收这些提醒。"
+            "value": "TempMail 的通知已关闭。请在系统设置中开启，以接收这些提醒。"
           }
         }
       }
@@ -733,7 +733,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "屏幕使用时间权限未获允许。没有此权限，Quietform 无法阻止应用。"
+            "value": "屏幕使用时间权限未获允许。没有此权限，TempMail 无法阻止应用。"
           }
         }
       }
@@ -810,7 +810,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quietform 使用 Apple 的屏幕使用时间框架阻止你选择的应用。"
+            "value": "TempMail 使用 Apple 的屏幕使用时间框架阻止你选择的应用。"
           }
         }
       }
@@ -832,7 +832,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quietform"
+            "value": "TempMail"
           }
         }
       }
@@ -1899,7 +1899,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "没有屏幕使用时间权限，Quietform 无法执行阻止。请在系统设置中重新开启，以确保规则正常工作。"
+            "value": "没有屏幕使用时间权限，TempMail 无法执行阻止。请在系统设置中重新开启，以确保规则正常工作。"
           }
         }
       }
@@ -2086,7 +2086,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "此应用已被 Quietform 阻止。"
+            "value": "此应用已被 TempMail 阻止。"
           }
         }
       }

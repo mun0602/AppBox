@@ -34,7 +34,7 @@ nonisolated final class LogFileWriter: @unchecked Sendable {
         self.directory = directory
         self.source = source
         self.calendar = calendar
-        self.queue = DispatchQueue(label: "dev.bchen.OpenAppLock.log.\(source.rawValue)")
+        self.queue = DispatchQueue(label: "com.tianya.tempmail.log.\(source.rawValue)")
     }
 
     /// Appends `line` (a single, newline-free record) to the file for `day`.

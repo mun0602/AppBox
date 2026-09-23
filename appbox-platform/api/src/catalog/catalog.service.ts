@@ -14,6 +14,18 @@ export class CatalogService {
 
   async getCatalog(): Promise<CatalogResponseDTO> {
     const data = await this.store.read();
+
+    // Temporarily hide the public catalog without mutating the admin-managed
+    // application records. Removing this environment flag restores the
+    // original catalog immediately.
+    if (process.env.APPBOX_CATALOG_EMPTY === "true") {
+      return {
+        v: data.version,
+        ts: new Date().toISOString(),
+        c: []
+      };
+    }
+
     const enabledApps = data.apps
       .filter((app) => app.enabled)
       .sort((a, b) => a.sort - b.sort);

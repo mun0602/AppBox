@@ -23,141 +23,141 @@
 #include <sys/ucontext.h>
 #include <unistd.h>
 
-typedef void (*AppBoxNUDGuestHooksInitFunction)(void);
-typedef void (*AppBoxPBPlayerSetupAppFunction)(void);
-typedef void *(*AppBoxAdversarysOpenFunction)(const char *, const char *);
-typedef void *(*AppBoxAdversarysOpenLooseFunction)(const char *);
-typedef void *(*AppBoxAdversarysSymbolFunction)(void *, const char *);
-typedef const char *(*AppBoxAdversarysErrorFunction)(void);
-typedef void (*AppBoxAdversarysClassFunction)(const char *);
-typedef void (*AppBoxAdversarysAbortFunction)(int);
-typedef void (*AppBoxAdversarysHandlerFunction)(void (*)(const char *));
-typedef void (*AppBoxSwiftRegisterRangeFunction)(const void *, const void *);
+typedef void (*TempMailNUDGuestHooksInitFunction)(void);
+typedef void (*TempMailPBPlayerSetupAppFunction)(void);
+typedef void *(*TempMailAdversarysOpenFunction)(const char *, const char *);
+typedef void *(*TempMailAdversarysOpenLooseFunction)(const char *);
+typedef void *(*TempMailAdversarysSymbolFunction)(void *, const char *);
+typedef const char *(*TempMailAdversarysErrorFunction)(void);
+typedef void (*TempMailAdversarysClassFunction)(const char *);
+typedef void (*TempMailAdversarysAbortFunction)(int);
+typedef void (*TempMailAdversarysHandlerFunction)(void (*)(const char *));
+typedef void (*TempMailSwiftRegisterRangeFunction)(const void *, const void *);
 
-extern void AppBoxProbeLNKiwiDecrypt(const char *input);
+extern void TempMailProbeLNKiwiDecrypt(const char *input);
 
-static AppBoxNUDGuestHooksInitFunction AppBoxNUDGuestHooksInit;
-static AppBoxPBPlayerSetupAppFunction AppBoxPBPlayerSetupApp;
-static AppBoxAdversarysOpenFunction AppBoxAdversarysOpen;
-static AppBoxAdversarysOpenLooseFunction AppBoxAdversarysOpenLoose;
-static AppBoxAdversarysSymbolFunction AppBoxAdversarysSymbol;
-static AppBoxAdversarysErrorFunction AppBoxAdversarysError;
-static AppBoxAdversarysClassFunction AppBoxAdversarysClass;
-static AppBoxAdversarysAbortFunction AppBoxAdversarysAbort;
-static AppBoxAdversarysHandlerFunction AppBoxAdversarysHandler;
-static uintptr_t AppBoxDiagnosticAdversarysBase;
-static int AppBoxDiagnosticSignalFile = -1;
-static BOOL AppBoxDiagnosticDispatchOnceArmed;
-static volatile sig_atomic_t AppBoxDiagnosticWatchArmed;
-static uintptr_t AppBoxDiagnosticWatchAddress;
-static uintptr_t AppBoxDiagnosticWatchGuestState;
-static volatile sig_atomic_t AppBoxDiagnosticSampleCount;
-static const sig_atomic_t AppBoxDiagnosticSampleLimit = 5000;
-static volatile int AppBoxDiagnosticBurstStarted;
-static volatile int AppBoxDiagnosticFileBurstStarted;
-static volatile int AppBoxDiagnosticFocusedBurstStarted;
-static BOOL AppBoxDiagnosticFirstFrameHooked;
-static IMP AppBoxOriginalKiwiInitWithListener;
-static Class AppBoxNativeKiwiClass;
-static IMP AppBoxNativeKiwiInit;
-static IMP AppBoxOriginalDyzbKiwiInitEx;
-static Class AppBoxNativeYunCengPluginClass;
-static Class AppBoxNativeFlutterMethodChannelClass;
-static char AppBoxNativeYunCengPluginAssociationKey;
-static char AppBoxNativeYunCengTokenAssociationKey;
-static char AppBoxNativeYunCengChannelAssociationKey;
-static char AppBoxNativeYunCengHandlerAssociationKey;
-static BOOL AppBoxInProcessGuestBootstrap;
-static id AppBoxInProcessGuestDelegate;
-static UIWindow *AppBoxInProcessGuestWindow;
-static UIViewController *AppBoxInProcessGuestRootController;
-static NSBundle *AppBoxGuestMainBundle;
-static CFBundleRef AppBoxGuestMainCFBundle;
-static NSBundle *AppBoxHostBundle;
-static NSMutableArray<NSValue *> *AppBoxLooseGuestImages;
-static uintptr_t AppBoxChungongKingfisherBase;
+static TempMailNUDGuestHooksInitFunction TempMailNUDGuestHooksInit;
+static TempMailPBPlayerSetupAppFunction TempMailPBPlayerSetupApp;
+static TempMailAdversarysOpenFunction TempMailAdversarysOpen;
+static TempMailAdversarysOpenLooseFunction TempMailAdversarysOpenLoose;
+static TempMailAdversarysSymbolFunction TempMailAdversarysSymbol;
+static TempMailAdversarysErrorFunction TempMailAdversarysError;
+static TempMailAdversarysClassFunction TempMailAdversarysClass;
+static TempMailAdversarysAbortFunction TempMailAdversarysAbort;
+static TempMailAdversarysHandlerFunction TempMailAdversarysHandler;
+static uintptr_t TempMailDiagnosticAdversarysBase;
+static int TempMailDiagnosticSignalFile = -1;
+static BOOL TempMailDiagnosticDispatchOnceArmed;
+static volatile sig_atomic_t TempMailDiagnosticWatchArmed;
+static uintptr_t TempMailDiagnosticWatchAddress;
+static uintptr_t TempMailDiagnosticWatchGuestState;
+static volatile sig_atomic_t TempMailDiagnosticSampleCount;
+static const sig_atomic_t TempMailDiagnosticSampleLimit = 5000;
+static volatile int TempMailDiagnosticBurstStarted;
+static volatile int TempMailDiagnosticFileBurstStarted;
+static volatile int TempMailDiagnosticFocusedBurstStarted;
+static BOOL TempMailDiagnosticFirstFrameHooked;
+static IMP TempMailOriginalKiwiInitWithListener;
+static Class TempMailNativeKiwiClass;
+static IMP TempMailNativeKiwiInit;
+static IMP TempMailOriginalDyzbKiwiInitEx;
+static Class TempMailNativeYunCengPluginClass;
+static Class TempMailNativeFlutterMethodChannelClass;
+static char TempMailNativeYunCengPluginAssociationKey;
+static char TempMailNativeYunCengTokenAssociationKey;
+static char TempMailNativeYunCengChannelAssociationKey;
+static char TempMailNativeYunCengHandlerAssociationKey;
+static BOOL TempMailInProcessGuestBootstrap;
+static id TempMailInProcessGuestDelegate;
+static UIWindow *TempMailInProcessGuestWindow;
+static UIViewController *TempMailInProcessGuestRootController;
+static NSBundle *TempMailGuestMainBundle;
+static CFBundleRef TempMailGuestMainCFBundle;
+static NSBundle *TempMailHostBundle;
+static NSMutableArray<NSValue *> *TempMailLooseGuestImages;
+static uintptr_t TempMailChungongKingfisherBase;
 
 typedef struct {
   uintptr_t value;
   uintptr_t state;
-} AppBoxChungongMetadataResponse;
+} TempMailChungongMetadataResponse;
 
-typedef AppBoxChungongMetadataResponse
-    (*AppBoxSwiftGetGenericMetadataFunction)(
+typedef TempMailChungongMetadataResponse
+    (*TempMailSwiftGetGenericMetadataFunction)(
         uintptr_t, const void *const *, const void *);
 
-static AppBoxSwiftGetGenericMetadataFunction
-    AppBoxChungongSwiftGetGenericMetadata;
-static const void *AppBoxChungongKingfisherWrapperDescriptor;
-typedef AppBoxChungongMetadataResponse
-    (*AppBoxSwiftGetSingletonMetadataFunction)(uintptr_t, const void *);
-static AppBoxSwiftGetSingletonMetadataFunction
-    AppBoxChungongSwiftGetSingletonMetadata;
-static const void *AppBoxChungongKingfisherImageResourceDescriptor;
+static TempMailSwiftGetGenericMetadataFunction
+    TempMailChungongSwiftGetGenericMetadata;
+static const void *TempMailChungongKingfisherWrapperDescriptor;
+typedef TempMailChungongMetadataResponse
+    (*TempMailSwiftGetSingletonMetadataFunction)(uintptr_t, const void *);
+static TempMailSwiftGetSingletonMetadataFunction
+    TempMailChungongSwiftGetSingletonMetadata;
+static const void *TempMailChungongKingfisherImageResourceDescriptor;
 
-static AppBoxChungongMetadataResponse
-AppBoxChungongKingfisherWrapperMetadataAccessor(
+static TempMailChungongMetadataResponse
+TempMailChungongKingfisherWrapperMetadataAccessor(
     uintptr_t request, const void *argument0, const void *argument1,
     const void *argument2) {
-  if (AppBoxChungongSwiftGetGenericMetadata == NULL ||
-      AppBoxChungongKingfisherWrapperDescriptor == NULL) {
-    AppBoxChungongMetadataResponse failure = {0, 0};
+  if (TempMailChungongSwiftGetGenericMetadata == NULL ||
+      TempMailChungongKingfisherWrapperDescriptor == NULL) {
+    TempMailChungongMetadataResponse failure = {0, 0};
     return failure;
   }
   const void *arguments[3] = {argument0, argument1, argument2};
-  return AppBoxChungongSwiftGetGenericMetadata(
-      request, arguments, AppBoxChungongKingfisherWrapperDescriptor);
+  return TempMailChungongSwiftGetGenericMetadata(
+      request, arguments, TempMailChungongKingfisherWrapperDescriptor);
 }
 
-static AppBoxChungongMetadataResponse
-AppBoxChungongKingfisherImageResourceMetadataAccessor(uintptr_t request) {
-  if (AppBoxChungongKingfisherBase == 0 ||
-      AppBoxChungongSwiftGetSingletonMetadata == NULL ||
-      AppBoxChungongKingfisherImageResourceDescriptor == NULL) {
-    AppBoxChungongMetadataResponse failure = {0, 0};
+static TempMailChungongMetadataResponse
+TempMailChungongKingfisherImageResourceMetadataAccessor(uintptr_t request) {
+  if (TempMailChungongKingfisherBase == 0 ||
+      TempMailChungongSwiftGetSingletonMetadata == NULL ||
+      TempMailChungongKingfisherImageResourceDescriptor == NULL) {
+    TempMailChungongMetadataResponse failure = {0, 0};
     return failure;
   }
   const void *cached = *(const void *const *)(
-      AppBoxChungongKingfisherBase + 0x000D63F0);
+      TempMailChungongKingfisherBase + 0x000D63F0);
   if (cached != NULL) {
-    AppBoxChungongMetadataResponse response = {
+    TempMailChungongMetadataResponse response = {
         (uintptr_t)cached, 0};
     return response;
   }
-  return AppBoxChungongSwiftGetSingletonMetadata(
-      request, AppBoxChungongKingfisherImageResourceDescriptor);
+  return TempMailChungongSwiftGetSingletonMetadata(
+      request, TempMailChungongKingfisherImageResourceDescriptor);
 }
 
-static AppBoxChungongMetadataResponse
-AppBoxChungongKingfisherDownloadTaskMetadataAccessor(uintptr_t request) {
+static TempMailChungongMetadataResponse
+TempMailChungongKingfisherDownloadTaskMetadataAccessor(uintptr_t request) {
   (void)request;
-  AppBoxChungongMetadataResponse response = {
-      AppBoxChungongKingfisherBase + 0x000C8F68, 0};
+  TempMailChungongMetadataResponse response = {
+      TempMailChungongKingfisherBase + 0x000C8F68, 0};
   return response;
 }
 
 typedef struct {
-  AppBoxSwiftRegisterRangeFunction registerProtocols;
-  AppBoxSwiftRegisterRangeFunction registerConformances;
-  AppBoxSwiftRegisterRangeFunction registerTypes;
+  TempMailSwiftRegisterRangeFunction registerProtocols;
+  TempMailSwiftRegisterRangeFunction registerConformances;
+  TempMailSwiftRegisterRangeFunction registerTypes;
   NSUInteger images;
   NSUInteger protocolSections;
   NSUInteger conformanceSections;
   NSUInteger typeSections;
-} AppBoxSwiftRegistrationContext;
+} TempMailSwiftRegistrationContext;
 
-static BOOL AppBoxMachONameEquals(const char rawName[16],
+static BOOL TempMailMachONameEquals(const char rawName[16],
                                   const char *expected) {
   size_t length = strlen(expected);
   return length <= 16 && memcmp(rawName, expected, length) == 0 &&
       (length == 16 || rawName[length] == '\0');
 }
 
-static BOOL AppBoxRegisterSwiftMetadataForImage(
+static BOOL TempMailRegisterSwiftMetadataForImage(
     uintptr_t headerAddress,
     uintptr_t allowedStart,
     uintptr_t allowedEnd,
-    AppBoxSwiftRegistrationContext *context) {
+    TempMailSwiftRegistrationContext *context) {
   const struct mach_header_64 *header =
       (const struct mach_header_64 *)headerAddress;
   if (header->magic != MH_MAGIC_64 || header->cputype != CPU_TYPE_ARM64 ||
@@ -185,7 +185,7 @@ static BOOL AppBoxRegisterSwiftMetadataForImage(
         command->cmdsize >= sizeof(struct segment_command_64)) {
       const struct segment_command_64 *segment =
           (const struct segment_command_64 *)command;
-      if (AppBoxMachONameEquals(segment->segname, SEG_TEXT) &&
+      if (TempMailMachONameEquals(segment->segname, SEG_TEXT) &&
           segment->fileoff == 0) {
         textSegment = segment;
       }
@@ -227,18 +227,18 @@ static BOOL AppBoxRegisterSwiftMetadataForImage(
         }
         const void *begin = (const void *)beginAddress;
         const void *end = (const void *)(beginAddress + section->size);
-        if (AppBoxMachONameEquals(section->sectname, "__swift5_protos") &&
+        if (TempMailMachONameEquals(section->sectname, "__swift5_protos") &&
             context->registerProtocols != NULL) {
           context->registerProtocols(begin, end);
           context->protocolSections++;
           registeredImage = YES;
-        } else if (AppBoxMachONameEquals(section->sectname,
+        } else if (TempMailMachONameEquals(section->sectname,
                                          "__swift5_proto") &&
                    context->registerConformances != NULL) {
           context->registerConformances(begin, end);
           context->conformanceSections++;
           registeredImage = YES;
-        } else if (AppBoxMachONameEquals(section->sectname,
+        } else if (TempMailMachONameEquals(section->sectname,
                                          "__swift5_types") &&
                    context->registerTypes != NULL) {
           context->registerTypes(begin, end);
@@ -255,26 +255,26 @@ static BOOL AppBoxRegisterSwiftMetadataForImage(
   return registeredImage;
 }
 
-static BOOL AppBoxRegisterMappedGuestSwiftMetadata(void) {
-  if (AppBoxDiagnosticAdversarysBase == 0) {
-    NSLog(@"APPBOX_SWIFT_METADATA registration_failed reason=runtime_base");
+static BOOL TempMailRegisterMappedGuestSwiftMetadata(void) {
+  if (TempMailDiagnosticAdversarysBase == 0) {
+    NSLog(@"TEMPMAIL_SWIFT_METADATA registration_failed reason=runtime_base");
     return NO;
   }
-  AppBoxSwiftRegistrationContext context = {
-    .registerProtocols = (AppBoxSwiftRegisterRangeFunction)dlsym(
+  TempMailSwiftRegistrationContext context = {
+    .registerProtocols = (TempMailSwiftRegisterRangeFunction)dlsym(
         RTLD_DEFAULT, "swift_registerProtocols"),
-    .registerConformances = (AppBoxSwiftRegisterRangeFunction)dlsym(
+    .registerConformances = (TempMailSwiftRegisterRangeFunction)dlsym(
         RTLD_DEFAULT, "swift_registerProtocolConformances"),
-    .registerTypes = (AppBoxSwiftRegisterRangeFunction)dlsym(
+    .registerTypes = (TempMailSwiftRegisterRangeFunction)dlsym(
         RTLD_DEFAULT, "swift_registerTypeMetadataRecords"),
   };
   if (context.registerConformances == NULL) {
-    NSLog(@"APPBOX_SWIFT_METADATA registration_failed reason=runtime_api");
+    NSLog(@"TEMPMAIL_SWIFT_METADATA registration_failed reason=runtime_api");
     return NO;
   }
 
-  uintptr_t allowedStart = AppBoxDiagnosticAdversarysBase + 0x05000000;
-  uintptr_t allowedEnd = AppBoxDiagnosticAdversarysBase + 0x10000000;
+  uintptr_t allowedStart = TempMailDiagnosticAdversarysBase + 0x05000000;
+  uintptr_t allowedEnd = TempMailDiagnosticAdversarysBase + 0x10000000;
   uintptr_t page =
       (allowedStart + vm_page_size - 1) & ~(uintptr_t)(vm_page_size - 1);
   for (; page + sizeof(struct mach_header_64) <= allowedEnd;
@@ -282,11 +282,11 @@ static BOOL AppBoxRegisterMappedGuestSwiftMetadata(void) {
     const struct mach_header_64 *header =
         (const struct mach_header_64 *)page;
     if (header->magic == MH_MAGIC_64) {
-      AppBoxRegisterSwiftMetadataForImage(
+      TempMailRegisterSwiftMetadataForImage(
           page, allowedStart, allowedEnd, &context);
     }
   }
-  NSLog(@"APPBOX_SWIFT_METADATA registered images=%lu protocols=%lu "
+  NSLog(@"TEMPMAIL_SWIFT_METADATA registered images=%lu protocols=%lu "
         "conformances=%lu types=%lu",
         (unsigned long)context.images,
         (unsigned long)context.protocolSections,
@@ -295,12 +295,12 @@ static BOOL AppBoxRegisterMappedGuestSwiftMetadata(void) {
   return context.conformanceSections > 0;
 }
 
-static const struct mach_header_64 *AppBoxMappedChungongMainImageHeader(void) {
-  if (AppBoxDiagnosticAdversarysBase == 0) {
+static const struct mach_header_64 *TempMailMappedChungongMainImageHeader(void) {
+  if (TempMailDiagnosticAdversarysBase == 0) {
     return NULL;
   }
-  uintptr_t allowedStart = AppBoxDiagnosticAdversarysBase + 0x05000000;
-  uintptr_t allowedEnd = AppBoxDiagnosticAdversarysBase + 0x10000000;
+  uintptr_t allowedStart = TempMailDiagnosticAdversarysBase + 0x05000000;
+  uintptr_t allowedEnd = TempMailDiagnosticAdversarysBase + 0x10000000;
   uintptr_t page =
       (allowedStart + vm_page_size - 1) & ~(uintptr_t)(vm_page_size - 1);
   for (; page + sizeof(struct mach_header_64) <= allowedEnd;
@@ -314,13 +314,13 @@ static const struct mach_header_64 *AppBoxMappedChungongMainImageHeader(void) {
   return NULL;
 }
 
-static const struct mach_header_64 *AppBoxMappedGuestDylibHeaderWithSuffix(
+static const struct mach_header_64 *TempMailMappedGuestDylibHeaderWithSuffix(
     const char *suffix) {
-  if (AppBoxDiagnosticAdversarysBase == 0 || suffix == NULL) {
+  if (TempMailDiagnosticAdversarysBase == 0 || suffix == NULL) {
     return NULL;
   }
-  uintptr_t allowedStart = AppBoxDiagnosticAdversarysBase + 0x05000000;
-  uintptr_t allowedEnd = AppBoxDiagnosticAdversarysBase + 0x10000000;
+  uintptr_t allowedStart = TempMailDiagnosticAdversarysBase + 0x05000000;
+  uintptr_t allowedEnd = TempMailDiagnosticAdversarysBase + 0x10000000;
   uintptr_t page =
       (allowedStart + vm_page_size - 1) & ~(uintptr_t)(vm_page_size - 1);
   size_t suffixLength = strlen(suffix);
@@ -366,12 +366,12 @@ static const struct mach_header_64 *AppBoxMappedGuestDylibHeaderWithSuffix(
   return NULL;
 }
 
-static BOOL AppBoxPrewarmChungongKingfisherWrapperMetadata(void) {
+static BOOL TempMailPrewarmChungongKingfisherWrapperMetadata(void) {
   const struct mach_header_64 *header =
-      AppBoxMappedGuestDylibHeaderWithSuffix(
+      TempMailMappedGuestDylibHeaderWithSuffix(
           "Kingfisher.framework/Kingfisher");
   if (header == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_metadata_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_metadata_failed "
           "reason=image_missing");
     return NO;
   }
@@ -390,14 +390,14 @@ static BOOL AppBoxPrewarmChungongKingfisherWrapperMetadata(void) {
   int32_t relativeTarget = 0;
   memcpy(&relativeTarget, (const void *)fieldAddress, sizeof(relativeTarget));
   uintptr_t targetAddress = fieldAddress + (intptr_t)relativeTarget;
-  uintptr_t runtimeStart = AppBoxDiagnosticAdversarysBase;
+  uintptr_t runtimeStart = TempMailDiagnosticAdversarysBase;
   uintptr_t nativeTarget =
-      (uintptr_t)(void *)&AppBoxChungongKingfisherWrapperMetadataAccessor;
+      (uintptr_t)(void *)&TempMailChungongKingfisherWrapperMetadataAccessor;
   BOOL targetIsRuntimeThunk =
       targetAddress >= runtimeStart &&
       targetAddress < runtimeStart + 0x05000000;
   if (!targetIsRuntimeThunk && targetAddress != nativeTarget) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_metadata_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_metadata_failed "
           "reason=target_invalid field=%p target=%p",
           (void *)fieldAddress, (void *)targetAddress);
     return NO;
@@ -408,68 +408,68 @@ static BOOL AppBoxPrewarmChungongKingfisherWrapperMetadata(void) {
       (SwiftGetObjCClassMetadataFunction)dlsym(
           RTLD_DEFAULT, "swift_getObjCClassMetadata");
   if (getObjCClassMetadata == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_metadata_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_metadata_failed "
           "reason=objc_metadata_api");
     return NO;
   }
   const void *imageViewMetadata =
       getObjCClassMetadata([UIImageView class]);
   if (imageViewMetadata == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_metadata_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_metadata_failed "
           "reason=image_view_metadata");
     return NO;
   }
 
-  AppBoxSwiftGetGenericMetadataFunction getGenericMetadata =
-      (AppBoxSwiftGetGenericMetadataFunction)dlsym(
+  TempMailSwiftGetGenericMetadataFunction getGenericMetadata =
+      (TempMailSwiftGetGenericMetadataFunction)dlsym(
           RTLD_DEFAULT, "swift_getGenericMetadata");
   if (getGenericMetadata == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_metadata_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_metadata_failed "
           "reason=generic_metadata_api");
     return NO;
   }
   const void *arguments[3] = {imageViewMetadata, NULL, NULL};
   const void *descriptor = (const void *)((uintptr_t)header + 0x000B6880);
-  NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_metadata_prewarm_start "
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_metadata_prewarm_start "
         "field=%p target=%p descriptor=%p argument=%p",
         (void *)fieldAddress, (void *)targetAddress, descriptor,
         imageViewMetadata);
-  AppBoxChungongMetadataResponse response =
+  TempMailChungongMetadataResponse response =
       getGenericMetadata(0xFF, arguments, descriptor);
   if (response.value == 0) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_metadata_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_metadata_failed "
           "reason=nil_result");
     return NO;
   }
-  NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_metadata_prewarm_done "
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_metadata_prewarm_done "
         "value=%p state=%p",
         (void *)response.value, (void *)response.state);
   return YES;
 }
 
 enum {
-  AppBoxChungongKingfisherWrapperMetadataStubOffset = 0x0088BB28,
-  AppBoxChungongKingfisherImageResourceMetadataStubOffset = 0x0088BB40,
-  AppBoxChungongKingfisherDownloadTaskMetadataStubOffset = 0x0088BB58,
-  AppBoxChungongKingfisherWrapperMetadataSlotOffset = 0x062E3FC0,
-  AppBoxChungongKingfisherImageResourceMetadataSlotOffset = 0x062E3FC8,
-  AppBoxChungongKingfisherDownloadTaskMetadataSlotOffset = 0x062E3FD0,
+  TempMailChungongKingfisherWrapperMetadataStubOffset = 0x0088BB28,
+  TempMailChungongKingfisherImageResourceMetadataStubOffset = 0x0088BB40,
+  TempMailChungongKingfisherDownloadTaskMetadataStubOffset = 0x0088BB58,
+  TempMailChungongKingfisherWrapperMetadataSlotOffset = 0x062E3FC0,
+  TempMailChungongKingfisherImageResourceMetadataSlotOffset = 0x062E3FC8,
+  TempMailChungongKingfisherDownloadTaskMetadataSlotOffset = 0x062E3FD0,
 };
 
 __attribute__((noreturn, used, visibility("default")))
-void AppBoxEnterGuestMainLoop(void) {
-  NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_main_loop_enter");
+void TempMailEnterGuestMainLoop(void) {
+  NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_main_loop_enter");
   for (;;) {
     CFRunLoopRun();
   }
 }
 
-static BOOL AppBoxPopulateChungongCachedMetadataStub(
+static BOOL TempMailPopulateChungongCachedMetadataStub(
     uintptr_t stubOffset, uintptr_t slotOffset, uintptr_t metadata,
     const char *name, uintptr_t *targetOut) {
-  uintptr_t runtimeStart = AppBoxDiagnosticAdversarysBase;
+  uintptr_t runtimeStart = TempMailDiagnosticAdversarysBase;
   if (runtimeStart == 0 || metadata == 0) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT cached_metadata_stub_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT cached_metadata_stub_failed "
           "name=%s reason=missing_value runtime=%p metadata=%p",
           name, (void *)runtimeStart, (void *)metadata);
     return NO;
@@ -480,7 +480,7 @@ static BOOL AppBoxPopulateChungongCachedMetadataStub(
   uintptr_t installed = 0;
   memcpy(&installed, (const void *)slot, sizeof(installed));
   if (installed != metadata) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT cached_metadata_stub_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT cached_metadata_stub_failed "
           "name=%s reason=slot_verify slot=%p expected=%p actual=%p",
           name, (void *)slot, (void *)metadata, (void *)installed);
     return NO;
@@ -488,19 +488,19 @@ static BOOL AppBoxPopulateChungongCachedMetadataStub(
   if (targetOut != NULL) {
     *targetOut = target;
   }
-  NSLog(@"APPBOX_CHUNGONG_COMPAT cached_metadata_stub_ready "
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT cached_metadata_stub_ready "
         "name=%s target=%p slot=%p metadata=%p",
         name, (void *)target, (void *)slot, (void *)metadata);
   return YES;
 }
 
-static BOOL AppBoxInstallChungongKingfisherWrapperMetadataCompatibility(
+static BOOL TempMailInstallChungongKingfisherWrapperMetadataCompatibility(
     void) {
   const struct mach_header_64 *header =
-      AppBoxMappedGuestDylibHeaderWithSuffix(
+      TempMailMappedGuestDylibHeaderWithSuffix(
           "Kingfisher.framework/Kingfisher");
   if (header == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_wrapper_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_wrapper_failed "
           "reason=image_missing");
     return NO;
   }
@@ -509,22 +509,22 @@ static BOOL AppBoxInstallChungongKingfisherWrapperMetadataCompatibility(
   int32_t relativeTarget = 0;
   memcpy(&relativeTarget, (const void *)fieldAddress, sizeof(relativeTarget));
   uintptr_t oldTarget = fieldAddress + (intptr_t)relativeTarget;
-  uintptr_t runtimeStart = AppBoxDiagnosticAdversarysBase;
+  uintptr_t runtimeStart = TempMailDiagnosticAdversarysBase;
   if (oldTarget < runtimeStart || oldTarget >= runtimeStart + 0x05000000) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_wrapper_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_wrapper_failed "
           "reason=target_invalid field=%p target=%p",
           (void *)fieldAddress, (void *)oldTarget);
     return NO;
   }
 
-  AppBoxChungongKingfisherBase = (uintptr_t)header;
-  AppBoxChungongKingfisherWrapperDescriptor =
+  TempMailChungongKingfisherBase = (uintptr_t)header;
+  TempMailChungongKingfisherWrapperDescriptor =
       (const void *)((uintptr_t)header + 0x000B6880);
-  AppBoxChungongSwiftGetGenericMetadata =
-      (AppBoxSwiftGetGenericMetadataFunction)dlsym(
+  TempMailChungongSwiftGetGenericMetadata =
+      (TempMailSwiftGetGenericMetadataFunction)dlsym(
           RTLD_DEFAULT, "swift_getGenericMetadata");
-  if (AppBoxChungongSwiftGetGenericMetadata == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_wrapper_failed "
+  if (TempMailChungongSwiftGetGenericMetadata == NULL) {
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_wrapper_failed "
           "reason=generic_metadata_api");
     return NO;
   }
@@ -537,21 +537,21 @@ static BOOL AppBoxInstallChungongKingfisherWrapperMetadataCompatibility(
       ? NULL
       : getObjCClassMetadata([UIImageView class]);
   if (imageViewMetadata == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_wrapper_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_wrapper_failed "
           "reason=image_view_metadata");
     return NO;
   }
   const void *arguments[3] = {imageViewMetadata, NULL, NULL};
-  AppBoxChungongMetadataResponse response =
-      AppBoxChungongSwiftGetGenericMetadata(
-          0xFF, arguments, AppBoxChungongKingfisherWrapperDescriptor);
+  TempMailChungongMetadataResponse response =
+      TempMailChungongSwiftGetGenericMetadata(
+          0xFF, arguments, TempMailChungongKingfisherWrapperDescriptor);
   uintptr_t nativeTarget = 0;
   if (response.value == 0 ||
-      !AppBoxPopulateChungongCachedMetadataStub(
-          AppBoxChungongKingfisherWrapperMetadataStubOffset,
-          AppBoxChungongKingfisherWrapperMetadataSlotOffset,
+      !TempMailPopulateChungongCachedMetadataStub(
+          TempMailChungongKingfisherWrapperMetadataStubOffset,
+          TempMailChungongKingfisherWrapperMetadataSlotOffset,
           response.value, "kingfisher_wrapper", &nativeTarget)) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_wrapper_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_wrapper_failed "
           "reason=metadata_prewarm value=%p state=%p",
           (void *)response.value, (void *)response.state);
     return NO;
@@ -559,7 +559,7 @@ static BOOL AppBoxInstallChungongKingfisherWrapperMetadataCompatibility(
   intptr_t nativeDisplacement =
       (intptr_t)nativeTarget - (intptr_t)fieldAddress;
   if (nativeDisplacement < INT32_MIN || nativeDisplacement > INT32_MAX) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_wrapper_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_wrapper_failed "
           "reason=native_target_out_of_range target=%p",
           (void *)nativeTarget);
     return NO;
@@ -570,7 +570,7 @@ static BOOL AppBoxInstallChungongKingfisherWrapperMetadataCompatibility(
       vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE,
                  VM_PROT_READ | VM_PROT_WRITE);
   if (protection != KERN_SUCCESS) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_wrapper_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_wrapper_failed "
           "reason=protect_write code=%d",
           protection);
     return NO;
@@ -578,20 +578,20 @@ static BOOL AppBoxInstallChungongKingfisherWrapperMetadataCompatibility(
   int32_t replacement = (int32_t)nativeDisplacement;
   memcpy((void *)fieldAddress, &replacement, sizeof(replacement));
   vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE, VM_PROT_READ);
-  NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_wrapper_patched "
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_wrapper_patched "
         "field=%p old=%p native=%p descriptor=%p metadata=%p",
         (void *)fieldAddress, (void *)oldTarget, (void *)nativeTarget,
-        AppBoxChungongKingfisherWrapperDescriptor, (void *)response.value);
+        TempMailChungongKingfisherWrapperDescriptor, (void *)response.value);
   return YES;
 }
 
-static BOOL AppBoxInstallChungongKingfisherImageResourceMetadataCompatibility(
+static BOOL TempMailInstallChungongKingfisherImageResourceMetadataCompatibility(
     void) {
   const struct mach_header_64 *header =
-      AppBoxMappedGuestDylibHeaderWithSuffix(
+      TempMailMappedGuestDylibHeaderWithSuffix(
           "Kingfisher.framework/Kingfisher");
   if (header == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_image_resource_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_image_resource_failed "
           "reason=image_missing");
     return NO;
   }
@@ -603,36 +603,36 @@ static BOOL AppBoxInstallChungongKingfisherImageResourceMetadataCompatibility(
   int32_t relativeTarget = 0;
   memcpy(&relativeTarget, (const void *)fieldAddress, sizeof(relativeTarget));
   uintptr_t oldTarget = fieldAddress + (intptr_t)relativeTarget;
-  uintptr_t runtimeStart = AppBoxDiagnosticAdversarysBase;
+  uintptr_t runtimeStart = TempMailDiagnosticAdversarysBase;
   if (oldTarget < runtimeStart || oldTarget >= runtimeStart + 0x05000000) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_image_resource_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_image_resource_failed "
           "reason=target_invalid field=%p target=%p",
           (void *)fieldAddress, (void *)oldTarget);
     return NO;
   }
 
-  AppBoxChungongKingfisherBase = (uintptr_t)header;
-  AppBoxChungongKingfisherImageResourceDescriptor =
+  TempMailChungongKingfisherBase = (uintptr_t)header;
+  TempMailChungongKingfisherImageResourceDescriptor =
       (const void *)((uintptr_t)header + 0x000B701C);
-  AppBoxChungongSwiftGetSingletonMetadata =
-      (AppBoxSwiftGetSingletonMetadataFunction)dlsym(
+  TempMailChungongSwiftGetSingletonMetadata =
+      (TempMailSwiftGetSingletonMetadataFunction)dlsym(
           RTLD_DEFAULT, "swift_getSingletonMetadata");
-  if (AppBoxChungongSwiftGetSingletonMetadata == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_image_resource_failed "
+  if (TempMailChungongSwiftGetSingletonMetadata == NULL) {
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_image_resource_failed "
           "reason=singleton_metadata_api");
     return NO;
   }
 
-  AppBoxChungongMetadataResponse response =
-      AppBoxChungongSwiftGetSingletonMetadata(
-          0xFF, AppBoxChungongKingfisherImageResourceDescriptor);
+  TempMailChungongMetadataResponse response =
+      TempMailChungongSwiftGetSingletonMetadata(
+          0xFF, TempMailChungongKingfisherImageResourceDescriptor);
   uintptr_t nativeTarget = 0;
   if (response.value == 0 ||
-      !AppBoxPopulateChungongCachedMetadataStub(
-          AppBoxChungongKingfisherImageResourceMetadataStubOffset,
-          AppBoxChungongKingfisherImageResourceMetadataSlotOffset,
+      !TempMailPopulateChungongCachedMetadataStub(
+          TempMailChungongKingfisherImageResourceMetadataStubOffset,
+          TempMailChungongKingfisherImageResourceMetadataSlotOffset,
           response.value, "kingfisher_image_resource", &nativeTarget)) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_image_resource_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_image_resource_failed "
           "reason=metadata_prewarm value=%p state=%p",
           (void *)response.value, (void *)response.state);
     return NO;
@@ -640,7 +640,7 @@ static BOOL AppBoxInstallChungongKingfisherImageResourceMetadataCompatibility(
   intptr_t nativeDisplacement =
       (intptr_t)nativeTarget - (intptr_t)fieldAddress;
   if (nativeDisplacement < INT32_MIN || nativeDisplacement > INT32_MAX) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_image_resource_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_image_resource_failed "
           "reason=native_target_out_of_range target=%p",
           (void *)nativeTarget);
     return NO;
@@ -651,7 +651,7 @@ static BOOL AppBoxInstallChungongKingfisherImageResourceMetadataCompatibility(
       vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE,
                  VM_PROT_READ | VM_PROT_WRITE);
   if (protection != KERN_SUCCESS) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_image_resource_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_image_resource_failed "
           "reason=protect_write code=%d",
           protection);
     return NO;
@@ -659,21 +659,21 @@ static BOOL AppBoxInstallChungongKingfisherImageResourceMetadataCompatibility(
   int32_t replacement = (int32_t)nativeDisplacement;
   memcpy((void *)fieldAddress, &replacement, sizeof(replacement));
   vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE, VM_PROT_READ);
-  NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_image_resource_patched "
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_image_resource_patched "
         "field=%p old=%p native=%p descriptor=%p metadata=%p",
         (void *)fieldAddress, (void *)oldTarget, (void *)nativeTarget,
-        AppBoxChungongKingfisherImageResourceDescriptor,
+        TempMailChungongKingfisherImageResourceDescriptor,
         (void *)response.value);
   return YES;
 }
 
-static BOOL AppBoxInstallChungongKingfisherDownloadTaskMetadataCompatibility(
+static BOOL TempMailInstallChungongKingfisherDownloadTaskMetadataCompatibility(
     void) {
   const struct mach_header_64 *header =
-      AppBoxMappedGuestDylibHeaderWithSuffix(
+      TempMailMappedGuestDylibHeaderWithSuffix(
           "Kingfisher.framework/Kingfisher");
   if (header == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_download_task_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_download_task_failed "
           "reason=image_missing");
     return NO;
   }
@@ -687,29 +687,29 @@ static BOOL AppBoxInstallChungongKingfisherDownloadTaskMetadataCompatibility(
   int32_t relativeTarget = 0;
   memcpy(&relativeTarget, (const void *)fieldAddress, sizeof(relativeTarget));
   uintptr_t oldTarget = fieldAddress + (intptr_t)relativeTarget;
-  uintptr_t runtimeStart = AppBoxDiagnosticAdversarysBase;
+  uintptr_t runtimeStart = TempMailDiagnosticAdversarysBase;
   if (oldTarget < runtimeStart || oldTarget >= runtimeStart + 0x05000000) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_download_task_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_download_task_failed "
           "reason=target_invalid field=%p target=%p",
           (void *)fieldAddress, (void *)oldTarget);
     return NO;
   }
 
-  AppBoxChungongKingfisherBase = (uintptr_t)header;
-  uintptr_t metadata = AppBoxChungongKingfisherBase + 0x000C8F68;
+  TempMailChungongKingfisherBase = (uintptr_t)header;
+  uintptr_t metadata = TempMailChungongKingfisherBase + 0x000C8F68;
   uintptr_t nativeTarget = 0;
-  if (!AppBoxPopulateChungongCachedMetadataStub(
-          AppBoxChungongKingfisherDownloadTaskMetadataStubOffset,
-          AppBoxChungongKingfisherDownloadTaskMetadataSlotOffset,
+  if (!TempMailPopulateChungongCachedMetadataStub(
+          TempMailChungongKingfisherDownloadTaskMetadataStubOffset,
+          TempMailChungongKingfisherDownloadTaskMetadataSlotOffset,
           metadata, "kingfisher_download_task", &nativeTarget)) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_download_task_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_download_task_failed "
           "reason=metadata_stub");
     return NO;
   }
   intptr_t nativeDisplacement =
       (intptr_t)nativeTarget - (intptr_t)fieldAddress;
   if (nativeDisplacement < INT32_MIN || nativeDisplacement > INT32_MAX) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_download_task_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_download_task_failed "
           "reason=native_target_out_of_range target=%p",
           (void *)nativeTarget);
     return NO;
@@ -720,7 +720,7 @@ static BOOL AppBoxInstallChungongKingfisherDownloadTaskMetadataCompatibility(
       vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE,
                  VM_PROT_READ | VM_PROT_WRITE);
   if (protection != KERN_SUCCESS) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_download_task_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_download_task_failed "
           "reason=protect_write code=%d",
           protection);
     return NO;
@@ -728,16 +728,16 @@ static BOOL AppBoxInstallChungongKingfisherDownloadTaskMetadataCompatibility(
   int32_t replacement = (int32_t)nativeDisplacement;
   memcpy((void *)fieldAddress, &replacement, sizeof(replacement));
   vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE, VM_PROT_READ);
-  NSLog(@"APPBOX_CHUNGONG_COMPAT kingfisher_download_task_patched "
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT kingfisher_download_task_patched "
         "field=%p old=%p native=%p metadata=%p",
         (void *)fieldAddress, (void *)oldTarget, (void *)nativeTarget,
         (void *)metadata);
   return YES;
 }
 
-static Class AppBoxMappedChungongFullScreenControllerClass(void) {
+static Class TempMailMappedChungongFullScreenControllerClass(void) {
   const struct mach_header_64 *header =
-      AppBoxMappedChungongMainImageHeader();
+      TempMailMappedChungongMainImageHeader();
   if (header == NULL) {
     return Nil;
   }
@@ -747,11 +747,11 @@ static Class AppBoxMappedChungongFullScreenControllerClass(void) {
   return (__bridge Class)((void *)((uintptr_t)header + 0x010C3850));
 }
 
-static BOOL AppBoxPrewarmChungongUIViewControllerMetadata(void) {
+static BOOL TempMailPrewarmChungongUIViewControllerMetadata(void) {
   const struct mach_header_64 *header =
-      AppBoxMappedChungongMainImageHeader();
+      TempMailMappedChungongMainImageHeader();
   if (header == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT metadata_prewarm_failed reason=image_missing");
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT metadata_prewarm_failed reason=image_missing");
     return NO;
   }
 
@@ -764,10 +764,10 @@ static BOOL AppBoxPrewarmChungongUIViewControllerMetadata(void) {
   int32_t relativeTarget = 0;
   memcpy(&relativeTarget, (const void *)fieldAddress, sizeof(relativeTarget));
   uintptr_t targetAddress = fieldAddress + (intptr_t)relativeTarget;
-  uintptr_t runtimeStart = AppBoxDiagnosticAdversarysBase;
+  uintptr_t runtimeStart = TempMailDiagnosticAdversarysBase;
   uintptr_t runtimeEnd = runtimeStart + 0x05000000;
   if (targetAddress < runtimeStart || targetAddress >= runtimeEnd) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT metadata_prewarm_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT metadata_prewarm_failed "
           "reason=target_invalid field=%p target=%p",
           (void *)fieldAddress, (void *)targetAddress);
     return NO;
@@ -775,11 +775,11 @@ static BOOL AppBoxPrewarmChungongUIViewControllerMetadata(void) {
 
   uintptr_t (*accessor)(uintptr_t, uintptr_t, uintptr_t) =
       (uintptr_t(*)(uintptr_t, uintptr_t, uintptr_t))(void *)targetAddress;
-  NSLog(@"APPBOX_CHUNGONG_COMPAT metadata_prewarm_start field=%p target=%p",
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT metadata_prewarm_start field=%p target=%p",
         (void *)fieldAddress, (void *)targetAddress);
   uintptr_t value = accessor(0, 0, 0);
   if (value == 0) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT metadata_prewarm_failed reason=nil_result");
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT metadata_prewarm_failed reason=nil_result");
     return NO;
   }
 
@@ -787,7 +787,7 @@ static BOOL AppBoxPrewarmChungongUIViewControllerMetadata(void) {
   intptr_t nativeDisplacement =
       (intptr_t)cachedReturnStub - (intptr_t)fieldAddress;
   if (nativeDisplacement < INT32_MIN || nativeDisplacement > INT32_MAX) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT metadata_prewarm_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT metadata_prewarm_failed "
           "reason=native_target_out_of_range target=%p",
           (void *)cachedReturnStub);
     return NO;
@@ -797,7 +797,7 @@ static BOOL AppBoxPrewarmChungongUIViewControllerMetadata(void) {
       vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE,
                  VM_PROT_READ | VM_PROT_WRITE);
   if (protection != KERN_SUCCESS) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT metadata_prewarm_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT metadata_prewarm_failed "
           "reason=protect_write code=%d",
           protection);
     return NO;
@@ -805,17 +805,17 @@ static BOOL AppBoxPrewarmChungongUIViewControllerMetadata(void) {
   int32_t replacement = (int32_t)nativeDisplacement;
   memcpy((void *)fieldAddress, &replacement, sizeof(replacement));
   vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE, VM_PROT_READ);
-  NSLog(@"APPBOX_CHUNGONG_COMPAT metadata_prewarm_done value=%p native=%p",
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT metadata_prewarm_done value=%p native=%p",
         (void *)value, (void *)cachedReturnStub);
   return YES;
 }
 
-static BOOL AppBoxInstallChungongObjectMapperCompatibility(void) {
+static BOOL TempMailInstallChungongObjectMapperCompatibility(void) {
   const struct mach_header_64 *header =
-      AppBoxMappedGuestDylibHeaderWithSuffix(
+      TempMailMappedGuestDylibHeaderWithSuffix(
           "ObjectMapper.framework/ObjectMapper");
   if (header == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT objectmapper_failed reason=image_missing");
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT objectmapper_failed reason=image_missing");
     return NO;
   }
   // ObjectMapper __TEXT,__const+0x28f14 points to
@@ -826,10 +826,10 @@ static BOOL AppBoxInstallChungongObjectMapperCompatibility(void) {
   int32_t relativeTarget = 0;
   memcpy(&relativeTarget, (const void *)fieldAddress, sizeof(relativeTarget));
   uintptr_t targetAddress = fieldAddress + (intptr_t)relativeTarget;
-  uintptr_t runtimeStart = AppBoxDiagnosticAdversarysBase;
+  uintptr_t runtimeStart = TempMailDiagnosticAdversarysBase;
   if (targetAddress < runtimeStart ||
       targetAddress >= runtimeStart + 0x05000000) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT objectmapper_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT objectmapper_failed "
           "reason=target_invalid field=%p target=%p",
           (void *)fieldAddress, (void *)targetAddress);
     return NO;
@@ -837,7 +837,7 @@ static BOOL AppBoxInstallChungongObjectMapperCompatibility(void) {
   uintptr_t nativeStub = runtimeStart + 0x0088B7CC;
   intptr_t displacement = (intptr_t)nativeStub - (intptr_t)fieldAddress;
   if (displacement < INT32_MIN || displacement > INT32_MAX) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT objectmapper_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT objectmapper_failed "
           "reason=native_target_out_of_range target=%p",
           (void *)nativeStub);
     return NO;
@@ -847,7 +847,7 @@ static BOOL AppBoxInstallChungongObjectMapperCompatibility(void) {
       vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE,
                  VM_PROT_READ | VM_PROT_WRITE);
   if (protection != KERN_SUCCESS) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT objectmapper_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT objectmapper_failed "
           "reason=protect_write code=%d",
           protection);
     return NO;
@@ -869,7 +869,7 @@ static BOOL AppBoxInstallChungongObjectMapperCompatibility(void) {
     uintptr_t oldTarget = codableFields[index] + (intptr_t)oldRelative;
     if (oldTarget < runtimeStart ||
         oldTarget >= runtimeStart + 0x05000000) {
-      NSLog(@"APPBOX_CHUNGONG_COMPAT objectmapper_failed "
+      NSLog(@"TEMPMAIL_CHUNGONG_COMPAT objectmapper_failed "
             "reason=codable_target_invalid field=%p target=%p",
             (void *)codableFields[index], (void *)oldTarget);
       vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE,
@@ -894,7 +894,7 @@ static BOOL AppBoxInstallChungongObjectMapperCompatibility(void) {
          sizeof(mapDeallocTarget));
   if (mapDeallocTarget < runtimeStart ||
       mapDeallocTarget >= runtimeStart + 0x05000000) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT objectmapper_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT objectmapper_failed "
           "reason=map_target_invalid field=%p target=%p",
           (void *)mapDeallocField, (void *)mapDeallocTarget);
     return NO;
@@ -905,7 +905,7 @@ static BOOL AppBoxInstallChungongObjectMapperCompatibility(void) {
       vm_protect(mach_task_self(), mapPage, vm_page_size, FALSE,
                  VM_PROT_READ | VM_PROT_WRITE);
   if (mapProtection != KERN_SUCCESS) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT objectmapper_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT objectmapper_failed "
           "reason=protect_map code=%d",
           mapProtection);
     return NO;
@@ -913,7 +913,7 @@ static BOOL AppBoxInstallChungongObjectMapperCompatibility(void) {
   memcpy((void *)mapDeallocField, &nativeStub, sizeof(nativeStub));
   vm_protect(mach_task_self(), mapPage, vm_page_size, FALSE,
              VM_PROT_READ | VM_PROT_WRITE);
-  NSLog(@"APPBOX_CHUNGONG_COMPAT objectmapper_patched "
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT objectmapper_patched "
         "mapper_field=%p mapper_old=%p codable_old=%p map_field=%p "
         "map_old=%p native=%p",
         (void *)fieldAddress, (void *)targetAddress,
@@ -922,17 +922,17 @@ static BOOL AppBoxInstallChungongObjectMapperCompatibility(void) {
   return YES;
 }
 
-static BOOL AppBoxInstallChungongObjectMapperMetadataCompatibility(void) {
+static BOOL TempMailInstallChungongObjectMapperMetadataCompatibility(void) {
   const struct mach_header_64 *header =
-      AppBoxMappedGuestDylibHeaderWithSuffix(
+      TempMailMappedGuestDylibHeaderWithSuffix(
           "ObjectMapper.framework/ObjectMapper");
   if (header == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT objectmapper_metadata_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT objectmapper_metadata_failed "
           "reason=image_missing");
     return NO;
   }
 
-  uintptr_t runtimeStart = AppBoxDiagnosticAdversarysBase;
+  uintptr_t runtimeStart = TempMailDiagnosticAdversarysBase;
   uintptr_t allocationStub = runtimeStart + 0x0088B7E4;
   uintptr_t enumCompletionStub = runtimeStart + 0x0088B824;
   uintptr_t mapperCompletionStub = runtimeStart + 0x0088B874;
@@ -951,7 +951,7 @@ static BOOL AppBoxInstallChungongObjectMapperMetadataCompatibility(void) {
       vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE,
                  VM_PROT_READ | VM_PROT_WRITE);
   if (protection != KERN_SUCCESS) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT objectmapper_metadata_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT objectmapper_metadata_failed "
           "reason=protect_write code=%d",
           protection);
     return NO;
@@ -970,7 +970,7 @@ static BOOL AppBoxInstallChungongObjectMapperMetadataCompatibility(void) {
         oldTarget >= runtimeStart + 0x05000000) {
       vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE,
                  VM_PROT_READ);
-      NSLog(@"APPBOX_CHUNGONG_COMPAT objectmapper_metadata_failed "
+      NSLog(@"TEMPMAIL_CHUNGONG_COMPAT objectmapper_metadata_failed "
             "reason=allocation_target_invalid field=%p target=%p",
             (void *)allocationFields[index], (void *)oldTarget);
       return NO;
@@ -1002,7 +1002,7 @@ static BOOL AppBoxInstallChungongObjectMapperMetadataCompatibility(void) {
         oldTarget >= runtimeStart + 0x05000000) {
       vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE,
                  VM_PROT_READ);
-      NSLog(@"APPBOX_CHUNGONG_COMPAT objectmapper_metadata_failed "
+      NSLog(@"TEMPMAIL_CHUNGONG_COMPAT objectmapper_metadata_failed "
             "reason=completion_target_invalid field=%p target=%p",
             (void *)completionFields[index], (void *)oldTarget);
       return NO;
@@ -1016,7 +1016,7 @@ static BOOL AppBoxInstallChungongObjectMapperMetadataCompatibility(void) {
     oldCompletions[index] = oldTarget;
   }
   vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE, VM_PROT_READ);
-  NSLog(@"APPBOX_CHUNGONG_COMPAT objectmapper_metadata_patched "
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT objectmapper_metadata_patched "
         "allocation_old=%p allocation_native=%p enum_old=%p enum_native=%p "
         "mapper_old=%p mapper_native=%p",
         (void *)oldAllocation, (void *)allocationStub,
@@ -1025,11 +1025,11 @@ static BOOL AppBoxInstallChungongObjectMapperMetadataCompatibility(void) {
   return YES;
 }
 
-static BOOL AppBoxInstallChungongAppearanceEnumCompatibility(void) {
+static BOOL TempMailInstallChungongAppearanceEnumCompatibility(void) {
   const struct mach_header_64 *header =
-      AppBoxMappedChungongMainImageHeader();
+      TempMailMappedChungongMainImageHeader();
   if (header == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT appearance_enum_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT appearance_enum_failed "
           "reason=image_missing");
     return NO;
   }
@@ -1040,9 +1040,9 @@ static BOOL AppBoxInstallChungongAppearanceEnumCompatibility(void) {
   int32_t oldRelative = 0;
   memcpy(&oldRelative, (const void *)fieldAddress, sizeof(oldRelative));
   uintptr_t oldTarget = fieldAddress + (intptr_t)oldRelative;
-  uintptr_t runtimeStart = AppBoxDiagnosticAdversarysBase;
+  uintptr_t runtimeStart = TempMailDiagnosticAdversarysBase;
   if (oldTarget < runtimeStart || oldTarget >= runtimeStart + 0x05000000) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT appearance_enum_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT appearance_enum_failed "
           "reason=target_invalid field=%p target=%p",
           (void *)fieldAddress, (void *)oldTarget);
     return NO;
@@ -1050,7 +1050,7 @@ static BOOL AppBoxInstallChungongAppearanceEnumCompatibility(void) {
   uintptr_t nativeStub = runtimeStart + 0x0088B7D0;
   intptr_t displacement = (intptr_t)nativeStub - (intptr_t)fieldAddress;
   if (displacement < INT32_MIN || displacement > INT32_MAX) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT appearance_enum_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT appearance_enum_failed "
           "reason=native_target_out_of_range target=%p",
           (void *)nativeStub);
     return NO;
@@ -1060,7 +1060,7 @@ static BOOL AppBoxInstallChungongAppearanceEnumCompatibility(void) {
       vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE,
                  VM_PROT_READ | VM_PROT_WRITE);
   if (protection != KERN_SUCCESS) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT appearance_enum_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT appearance_enum_failed "
           "reason=protect_write code=%d",
           protection);
     return NO;
@@ -1068,17 +1068,17 @@ static BOOL AppBoxInstallChungongAppearanceEnumCompatibility(void) {
   int32_t replacement = (int32_t)displacement;
   memcpy((void *)fieldAddress, &replacement, sizeof(replacement));
   vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE, VM_PROT_READ);
-  NSLog(@"APPBOX_CHUNGONG_COMPAT appearance_enum_patched "
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT appearance_enum_patched "
         "field=%p old=%p native=%p",
         (void *)fieldAddress, (void *)oldTarget, (void *)nativeStub);
   return YES;
 }
 
-static BOOL AppBoxPrewarmChungongModelWitness(void) {
+static BOOL TempMailPrewarmChungongModelWitness(void) {
   const struct mach_header_64 *header =
-      AppBoxMappedChungongMainImageHeader();
+      TempMailMappedChungongMainImageHeader();
   if (header == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT model_witness_prewarm_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT model_witness_prewarm_failed "
           "reason=image_missing");
     return NO;
   }
@@ -1092,10 +1092,10 @@ static BOOL AppBoxPrewarmChungongModelWitness(void) {
   int32_t relativeTarget = 0;
   memcpy(&relativeTarget, (const void *)fieldAddress, sizeof(relativeTarget));
   uintptr_t targetAddress = fieldAddress + (intptr_t)relativeTarget;
-  uintptr_t runtimeStart = AppBoxDiagnosticAdversarysBase;
+  uintptr_t runtimeStart = TempMailDiagnosticAdversarysBase;
   if (targetAddress < runtimeStart ||
       targetAddress >= runtimeStart + 0x05000000) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT model_witness_prewarm_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT model_witness_prewarm_failed "
           "reason=target_invalid field=%p target=%p",
           (void *)fieldAddress, (void *)targetAddress);
     return NO;
@@ -1103,12 +1103,12 @@ static BOOL AppBoxPrewarmChungongModelWitness(void) {
 
   uintptr_t (*accessor)(uintptr_t, uintptr_t, uintptr_t) =
       (uintptr_t(*)(uintptr_t, uintptr_t, uintptr_t))(void *)targetAddress;
-  NSLog(@"APPBOX_CHUNGONG_COMPAT model_witness_prewarm_start "
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT model_witness_prewarm_start "
         "field=%p target=%p",
         (void *)fieldAddress, (void *)targetAddress);
   uintptr_t value = accessor(0, 0, 0);
   if (value == 0) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT model_witness_prewarm_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT model_witness_prewarm_failed "
           "reason=nil_result");
     return NO;
   }
@@ -1117,7 +1117,7 @@ static BOOL AppBoxPrewarmChungongModelWitness(void) {
   intptr_t displacement =
       (intptr_t)nativeStub - (intptr_t)fieldAddress;
   if (displacement < INT32_MIN || displacement > INT32_MAX) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT model_witness_prewarm_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT model_witness_prewarm_failed "
           "reason=native_target_out_of_range target=%p",
           (void *)nativeStub);
     return NO;
@@ -1127,7 +1127,7 @@ static BOOL AppBoxPrewarmChungongModelWitness(void) {
       vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE,
                  VM_PROT_READ | VM_PROT_WRITE);
   if (protection != KERN_SUCCESS) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT model_witness_prewarm_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT model_witness_prewarm_failed "
           "reason=protect_write code=%d",
           protection);
     return NO;
@@ -1135,21 +1135,21 @@ static BOOL AppBoxPrewarmChungongModelWitness(void) {
   int32_t replacement = (int32_t)displacement;
   memcpy((void *)fieldAddress, &replacement, sizeof(replacement));
   vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE, VM_PROT_READ);
-  NSLog(@"APPBOX_CHUNGONG_COMPAT model_witness_prewarm_done "
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT model_witness_prewarm_done "
         "value=%p native=%p",
         (void *)value, (void *)nativeStub);
   return YES;
 }
 
-typedef void *(*AppBoxSwiftBridgeObjectRetainFunction)(void *object);
-typedef void (*AppBoxSwiftBridgeObjectReleaseFunction)(void *object);
+typedef void *(*TempMailSwiftBridgeObjectRetainFunction)(void *object);
+typedef void (*TempMailSwiftBridgeObjectReleaseFunction)(void *object);
 
-static AppBoxSwiftBridgeObjectRetainFunction
-    AppBoxChungongBridgeObjectRetain = NULL;
-static AppBoxSwiftBridgeObjectReleaseFunction
-    AppBoxChungongBridgeObjectRelease = NULL;
+static TempMailSwiftBridgeObjectRetainFunction
+    TempMailChungongBridgeObjectRetain = NULL;
+static TempMailSwiftBridgeObjectReleaseFunction
+    TempMailChungongBridgeObjectRelease = NULL;
 
-static void *AppBoxChungongModelCopyWitness(void *destination,
+static void *TempMailChungongModelCopyWitness(void *destination,
                                             const void *source) {
   memcpy(destination, source, 0xB1);
   const uintptr_t bridgeOffsets[] = {
@@ -1161,12 +1161,12 @@ static void *AppBoxChungongModelCopyWitness(void *destination,
     void *object = NULL;
     memcpy(&object, (const uint8_t *)destination + bridgeOffsets[index],
            sizeof(object));
-    AppBoxChungongBridgeObjectRetain(object);
+    TempMailChungongBridgeObjectRetain(object);
   }
   return destination;
 }
 
-static void AppBoxChungongModelDestroyWitness(void *value) {
+static void TempMailChungongModelDestroyWitness(void *value) {
   const uintptr_t bridgeOffsets[] = {
       0x08, 0x18, 0x28, 0x38, 0x48, 0x58,
       0x68, 0x78, 0x88, 0x98, 0xA8,
@@ -1176,27 +1176,27 @@ static void AppBoxChungongModelDestroyWitness(void *value) {
     void *object = NULL;
     memcpy(&object, (const uint8_t *)value + bridgeOffsets[index],
            sizeof(object));
-    AppBoxChungongBridgeObjectRelease(object);
+    TempMailChungongBridgeObjectRelease(object);
   }
 }
 
-static BOOL AppBoxInstallChungongModelValueWitnessCompatibility(void) {
+static BOOL TempMailInstallChungongModelValueWitnessCompatibility(void) {
   const struct mach_header_64 *header =
-      AppBoxMappedChungongMainImageHeader();
+      TempMailMappedChungongMainImageHeader();
   if (header == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT model_value_witness_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT model_value_witness_failed "
           "reason=image_missing");
     return NO;
   }
-  AppBoxChungongBridgeObjectRetain =
-      (AppBoxSwiftBridgeObjectRetainFunction)dlsym(
+  TempMailChungongBridgeObjectRetain =
+      (TempMailSwiftBridgeObjectRetainFunction)dlsym(
           RTLD_DEFAULT, "swift_bridgeObjectRetain");
-  AppBoxChungongBridgeObjectRelease =
-      (AppBoxSwiftBridgeObjectReleaseFunction)dlsym(
+  TempMailChungongBridgeObjectRelease =
+      (TempMailSwiftBridgeObjectReleaseFunction)dlsym(
           RTLD_DEFAULT, "swift_bridgeObjectRelease");
-  if (AppBoxChungongBridgeObjectRetain == NULL ||
-      AppBoxChungongBridgeObjectRelease == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT model_value_witness_failed "
+  if (TempMailChungongBridgeObjectRetain == NULL ||
+      TempMailChungongBridgeObjectRelease == NULL) {
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT model_value_witness_failed "
           "reason=swift_runtime_symbols");
     return NO;
   }
@@ -1211,10 +1211,10 @@ static BOOL AppBoxInstallChungongModelValueWitnessCompatibility(void) {
   uintptr_t oldCopy = 0;
   memcpy(&oldDestroy, (const void *)destroyField, sizeof(oldDestroy));
   memcpy(&oldCopy, (const void *)copyField, sizeof(oldCopy));
-  uintptr_t runtimeStart = AppBoxDiagnosticAdversarysBase;
+  uintptr_t runtimeStart = TempMailDiagnosticAdversarysBase;
   if (oldDestroy < runtimeStart || oldDestroy >= runtimeStart + 0x05000000 ||
       oldCopy < runtimeStart || oldCopy >= runtimeStart + 0x05000000) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT model_value_witness_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT model_value_witness_failed "
           "reason=target_invalid destroy=%p copy=%p",
           (void *)oldDestroy, (void *)oldCopy);
     return NO;
@@ -1224,28 +1224,28 @@ static BOOL AppBoxInstallChungongModelValueWitnessCompatibility(void) {
       vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE,
                  VM_PROT_READ | VM_PROT_WRITE);
   if (protection != KERN_SUCCESS) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT model_value_witness_failed "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT model_value_witness_failed "
           "reason=protect_write code=%d",
           protection);
     return NO;
   }
   uintptr_t nativeDestroy =
-      (uintptr_t)(void *)&AppBoxChungongModelDestroyWitness;
-  uintptr_t nativeCopy = (uintptr_t)(void *)&AppBoxChungongModelCopyWitness;
+      (uintptr_t)(void *)&TempMailChungongModelDestroyWitness;
+  uintptr_t nativeCopy = (uintptr_t)(void *)&TempMailChungongModelCopyWitness;
   memcpy((void *)destroyField, &nativeDestroy, sizeof(nativeDestroy));
   memcpy((void *)copyField, &nativeCopy, sizeof(nativeCopy));
   vm_protect(mach_task_self(), pageAddress, vm_page_size, FALSE, VM_PROT_READ);
-  NSLog(@"APPBOX_CHUNGONG_COMPAT model_value_witness_patched "
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT model_value_witness_patched "
         "destroy_old=%p destroy_native=%p copy_old=%p copy_native=%p",
         (void *)oldDestroy, (void *)nativeDestroy,
         (void *)oldCopy, (void *)nativeCopy);
   return YES;
 }
 
-static void AppBoxChungongLaunchPreparationViewDidLoad(id controller,
+static void TempMailChungongLaunchPreparationViewDidLoad(id controller,
                                                         SEL selector) {
   (void)selector;
-  NSLog(@"APPBOX_CHUNGONG_COMPAT native_launch_view_did_load_begin");
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT native_launch_view_did_load_begin");
 
   UIViewController *viewController = (UIViewController *)controller;
   UIView *view = viewController.view;
@@ -1258,7 +1258,7 @@ static void AppBoxChungongLaunchPreparationViewDidLoad(id controller,
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.clipsToBounds = YES;
     imageView.image = [UIImage imageNamed:@"ic_welcome_m"
-                                 inBundle:AppBoxGuestMainBundle
+                                 inBundle:TempMailGuestMainBundle
             compatibleWithTraitCollection:nil];
     [view addSubview:imageView];
 
@@ -1275,24 +1275,24 @@ static void AppBoxChungongLaunchPreparationViewDidLoad(id controller,
                                               constant:-36.0],
     ]];
   }
-  NSLog(@"APPBOX_CHUNGONG_COMPAT native_launch_view_loaded image=%d",
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT native_launch_view_loaded image=%d",
         [UIImage imageNamed:@"ic_welcome_m"
-                   inBundle:AppBoxGuestMainBundle
+                   inBundle:TempMailGuestMainBundle
           compatibleWithTraitCollection:nil] != nil);
 }
 
-static void AppBoxChungongLaunchPreparationLoadView(id controller,
+static void TempMailChungongLaunchPreparationLoadView(id controller,
                                                      SEL selector) {
   (void)selector;
-  NSLog(@"APPBOX_CHUNGONG_COMPAT native_launch_load_view_begin");
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT native_launch_load_view_begin");
   CGRect bounds = UIScreen.mainScreen.bounds;
   UIView *view = [[UIView alloc] initWithFrame:bounds];
   view.backgroundColor = UIColor.blackColor;
   ((UIViewController *)controller).view = view;
-  NSLog(@"APPBOX_CHUNGONG_COMPAT native_launch_load_view_end");
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT native_launch_load_view_end");
 }
 
-static void AppBoxInstallChungongLaunchControllerCompatibility(void) {
+static void TempMailInstallChungongLaunchControllerCompatibility(void) {
   Class controllerClass =
       NSClassFromString(@"Seal.LaunchPreparationViewController");
   if (controllerClass == Nil) {
@@ -1306,18 +1306,18 @@ static void AppBoxInstallChungongLaunchControllerCompatibility(void) {
       (strcmp(className, "Seal.LaunchPreparationViewController") != 0 &&
        strcmp(className,
               "_TtC4Seal31LaunchPreparationViewController") != 0)) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT launch_controller_missing");
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT launch_controller_missing");
     return;
   }
   SEL selector = @selector(viewDidLoad);
   Method method = class_getInstanceMethod(controllerClass, selector);
   if (method == NULL) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT launch_view_method_missing");
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT launch_view_method_missing");
     return;
   }
   class_replaceMethod(
       controllerClass, selector,
-      (IMP)AppBoxChungongLaunchPreparationViewDidLoad,
+      (IMP)TempMailChungongLaunchPreparationViewDidLoad,
       method_getTypeEncoding(method));
   SEL loadViewSelector = @selector(loadView);
   Method loadViewMethod = class_getInstanceMethod(
@@ -1325,19 +1325,19 @@ static void AppBoxInstallChungongLaunchControllerCompatibility(void) {
   if (loadViewMethod != NULL) {
     class_replaceMethod(
         controllerClass, loadViewSelector,
-        (IMP)AppBoxChungongLaunchPreparationLoadView,
+        (IMP)TempMailChungongLaunchPreparationLoadView,
         method_getTypeEncoding(loadViewMethod));
   }
-  NSLog(@"APPBOX_CHUNGONG_COMPAT launch_view_patched class=%s load_view=%d",
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT launch_view_patched class=%s load_view=%d",
         className, loadViewMethod != NULL);
 }
 
-static void AppBoxInstallChungongUIKitCompatibility(void) {
+static void TempMailInstallChungongUIKitCompatibility(void) {
   Class registeredClass = NSClassFromString(@"Seal.CLFullScreenController");
   if (registeredClass == Nil) {
     registeredClass = objc_getClass("_TtC4Seal22CLFullScreenController");
   }
-  Class mappedClass = AppBoxMappedChungongFullScreenControllerClass();
+  Class mappedClass = TempMailMappedChungongFullScreenControllerClass();
   Class controllerClasses[] = {registeredClass, mappedClass};
   NSUInteger matched = 0;
   NSUInteger replaced = 0;
@@ -1353,7 +1353,7 @@ static void AppBoxInstallChungongUIKitCompatibility(void) {
     if (className == NULL ||
         (strcmp(className, "Seal.CLFullScreenController") != 0 &&
          strcmp(className, "_TtC4Seal22CLFullScreenController") != 0)) {
-      NSLog(@"APPBOX_CHUNGONG_COMPAT candidate_rejected pointer=%p name=%s",
+      NSLog(@"TEMPMAIL_CHUNGONG_COMPAT candidate_rejected pointer=%p name=%s",
             controllerClass, className ?: "unknown");
       continue;
     }
@@ -1384,27 +1384,27 @@ static void AppBoxInstallChungongUIKitCompatibility(void) {
       classReplaced += 1;
       replaced += 1;
     }
-    NSLog(@"APPBOX_CHUNGONG_COMPAT class_patched pointer=%p name=%s "
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT class_patched pointer=%p name=%s "
           "superclass=%@ methods=%lu",
           controllerClass, className, NSStringFromClass(superclass),
           (unsigned long)classReplaced);
   }
   if (matched == 0) {
-    NSLog(@"APPBOX_CHUNGONG_COMPAT install_failed reason=controller_missing");
+    NSLog(@"TEMPMAIL_CHUNGONG_COMPAT install_failed reason=controller_missing");
     return;
   }
-  NSLog(@"APPBOX_CHUNGONG_COMPAT installed classes=%lu methods=%lu",
+  NSLog(@"TEMPMAIL_CHUNGONG_COMPAT installed classes=%lu methods=%lu",
         (unsigned long)matched, (unsigned long)replaced);
-  AppBoxInstallChungongLaunchControllerCompatibility();
+  TempMailInstallChungongLaunchControllerCompatibility();
 }
 
-static IMP AppBoxOriginalMakeKeyAndVisible = NULL;
-static IMP AppBoxOriginalSetRootViewController = NULL;
-static BOOL AppBoxDeferGuestWindowVisibility = NO;
-static UIWindow *AppBoxDeferredGuestRootWindow = nil;
-static UIViewController *AppBoxDeferredGuestRootController = nil;
+static IMP TempMailOriginalMakeKeyAndVisible = NULL;
+static IMP TempMailOriginalSetRootViewController = NULL;
+static BOOL TempMailDeferGuestWindowVisibility = NO;
+static UIWindow *TempMailDeferredGuestRootWindow = nil;
+static UIViewController *TempMailDeferredGuestRootController = nil;
 
-static UIWindow *AppBoxCurrentForegroundWindow(UIApplication *application) {
+static UIWindow *TempMailCurrentForegroundWindow(UIApplication *application) {
   UIWindow *visibleWindow = nil;
   for (UIScene *scene in application.connectedScenes) {
     if (![scene isKindOfClass:UIWindowScene.class]) {
@@ -1422,153 +1422,153 @@ static UIWindow *AppBoxCurrentForegroundWindow(UIApplication *application) {
   return visibleWindow ?: application.windows.firstObject;
 }
 
-static void AppBoxGuestAwareMakeKeyAndVisible(UIWindow *window, SEL selector) {
-  if (AppBoxDeferGuestWindowVisibility) {
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME window_visibility_deferred class=%@",
+static void TempMailGuestAwareMakeKeyAndVisible(UIWindow *window, SEL selector) {
+  if (TempMailDeferGuestWindowVisibility) {
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME window_visibility_deferred class=%@",
           NSStringFromClass(window.class));
     return;
   }
-  if (AppBoxOriginalMakeKeyAndVisible != NULL) {
-    ((void (*)(id, SEL))AppBoxOriginalMakeKeyAndVisible)(window, selector);
+  if (TempMailOriginalMakeKeyAndVisible != NULL) {
+    ((void (*)(id, SEL))TempMailOriginalMakeKeyAndVisible)(window, selector);
   }
 }
 
-static void AppBoxGuestAwareSetRootViewController(
+static void TempMailGuestAwareSetRootViewController(
     UIWindow *window, SEL selector, UIViewController *controller) {
-  if (AppBoxDeferGuestWindowVisibility) {
-    AppBoxDeferredGuestRootWindow = window;
-    AppBoxDeferredGuestRootController = controller;
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME root_controller_deferred window=%@ root=%@",
+  if (TempMailDeferGuestWindowVisibility) {
+    TempMailDeferredGuestRootWindow = window;
+    TempMailDeferredGuestRootController = controller;
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME root_controller_deferred window=%@ root=%@",
           NSStringFromClass(window.class),
           NSStringFromClass(controller.class));
     return;
   }
-  if (AppBoxOriginalSetRootViewController != NULL) {
-    ((void (*)(id, SEL, id))AppBoxOriginalSetRootViewController)(
+  if (TempMailOriginalSetRootViewController != NULL) {
+    ((void (*)(id, SEL, id))TempMailOriginalSetRootViewController)(
         window, selector, controller);
   }
 }
 
-static BOOL AppBoxBeginGuestWindowVisibilityDeferral(void) {
+static BOOL TempMailBeginGuestWindowVisibilityDeferral(void) {
   Method visibilityMethod = class_getInstanceMethod(
       UIWindow.class, @selector(makeKeyAndVisible));
   Method rootControllerMethod = class_getInstanceMethod(
       UIWindow.class, @selector(setRootViewController:));
   if (visibilityMethod == NULL || rootControllerMethod == NULL) {
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME window_visibility_deferral_failed");
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME window_visibility_deferral_failed");
     return NO;
   }
-  if (AppBoxOriginalMakeKeyAndVisible == NULL) {
-    AppBoxOriginalMakeKeyAndVisible = method_setImplementation(
-        visibilityMethod, (IMP)AppBoxGuestAwareMakeKeyAndVisible);
+  if (TempMailOriginalMakeKeyAndVisible == NULL) {
+    TempMailOriginalMakeKeyAndVisible = method_setImplementation(
+        visibilityMethod, (IMP)TempMailGuestAwareMakeKeyAndVisible);
   }
-  if (AppBoxOriginalSetRootViewController == NULL) {
-    AppBoxOriginalSetRootViewController = method_setImplementation(
-        rootControllerMethod, (IMP)AppBoxGuestAwareSetRootViewController);
+  if (TempMailOriginalSetRootViewController == NULL) {
+    TempMailOriginalSetRootViewController = method_setImplementation(
+        rootControllerMethod, (IMP)TempMailGuestAwareSetRootViewController);
   }
-  AppBoxDeferredGuestRootWindow = nil;
-  AppBoxDeferredGuestRootController = nil;
-  AppBoxDeferGuestWindowVisibility = YES;
+  TempMailDeferredGuestRootWindow = nil;
+  TempMailDeferredGuestRootController = nil;
+  TempMailDeferGuestWindowVisibility = YES;
   return YES;
 }
 
-static void AppBoxEndGuestWindowVisibilityDeferral(BOOL installed,
+static void TempMailEndGuestWindowVisibilityDeferral(BOOL installed,
                                                    BOOL applyImmediately) {
   if (installed) {
-    AppBoxDeferGuestWindowVisibility = NO;
+    TempMailDeferGuestWindowVisibility = NO;
     if (!applyImmediately) {
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME root_controller_apply_deferred");
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME root_controller_apply_deferred");
       return;
     }
-    UIWindow *window = AppBoxDeferredGuestRootWindow;
-    UIViewController *controller = AppBoxDeferredGuestRootController;
-    AppBoxDeferredGuestRootWindow = nil;
-    AppBoxDeferredGuestRootController = nil;
-    if (window != nil && AppBoxOriginalSetRootViewController != NULL) {
-      ((void (*)(id, SEL, id))AppBoxOriginalSetRootViewController)(
+    UIWindow *window = TempMailDeferredGuestRootWindow;
+    UIViewController *controller = TempMailDeferredGuestRootController;
+    TempMailDeferredGuestRootWindow = nil;
+    TempMailDeferredGuestRootController = nil;
+    if (window != nil && TempMailOriginalSetRootViewController != NULL) {
+      ((void (*)(id, SEL, id))TempMailOriginalSetRootViewController)(
           window, @selector(setRootViewController:), controller);
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME root_controller_applied window=%@ root=%@",
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME root_controller_applied window=%@ root=%@",
             NSStringFromClass(window.class),
             NSStringFromClass(controller.class));
     }
   }
 }
 
-static void AppBoxApplyDeferredGuestRootControllerToWindow(
+static void TempMailApplyDeferredGuestRootControllerToWindow(
     UIWindow *destinationWindow) {
-  UIWindow *guestWindow = AppBoxDeferredGuestRootWindow;
-  UIViewController *controller = AppBoxDeferredGuestRootController;
-  AppBoxDeferredGuestRootWindow = nil;
-  AppBoxDeferredGuestRootController = nil;
+  UIWindow *guestWindow = TempMailDeferredGuestRootWindow;
+  UIViewController *controller = TempMailDeferredGuestRootController;
+  TempMailDeferredGuestRootWindow = nil;
+  TempMailDeferredGuestRootController = nil;
   UIWindow *window = destinationWindow ?: guestWindow;
   if (window == nil || controller == nil ||
-      AppBoxOriginalSetRootViewController == NULL) {
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME root_controller_apply_skipped guest=%@ "
+      TempMailOriginalSetRootViewController == NULL) {
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME root_controller_apply_skipped guest=%@ "
           "destination=%@ root=%@",
           NSStringFromClass(guestWindow.class),
           NSStringFromClass(destinationWindow.class),
           NSStringFromClass(controller.class));
     return;
   }
-  NSLog(@"APPBOX_PLAYBOX_RUNTIME root_controller_apply_begin guest=%@ "
+  NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME root_controller_apply_begin guest=%@ "
         "destination=%@ root=%@",
         NSStringFromClass(guestWindow.class), NSStringFromClass(window.class),
         NSStringFromClass(controller.class));
-  ((void (*)(id, SEL, id))AppBoxOriginalSetRootViewController)(
+  ((void (*)(id, SEL, id))TempMailOriginalSetRootViewController)(
       window, @selector(setRootViewController:), controller);
-  NSLog(@"APPBOX_PLAYBOX_RUNTIME root_controller_applied window=%@ root=%@",
+  NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME root_controller_applied window=%@ root=%@",
         NSStringFromClass(window.class), NSStringFromClass(controller.class));
 }
 
-static UIViewController *AppBoxTakeDeferredGuestRootController(
+static UIViewController *TempMailTakeDeferredGuestRootController(
     UIWindow **guestWindowOut) {
-  UIWindow *guestWindow = AppBoxDeferredGuestRootWindow;
-  UIViewController *controller = AppBoxDeferredGuestRootController;
-  AppBoxDeferredGuestRootWindow = nil;
-  AppBoxDeferredGuestRootController = nil;
+  UIWindow *guestWindow = TempMailDeferredGuestRootWindow;
+  UIViewController *controller = TempMailDeferredGuestRootController;
+  TempMailDeferredGuestRootWindow = nil;
+  TempMailDeferredGuestRootController = nil;
   if (guestWindowOut != NULL) {
     *guestWindowOut = guestWindow;
   }
   return controller;
 }
 
-typedef void (*AppBoxTerminateHandlerFunction)(void);
-typedef AppBoxTerminateHandlerFunction (*AppBoxSetTerminateFunction)(
-    AppBoxTerminateHandlerFunction);
+typedef void (*TempMailTerminateHandlerFunction)(void);
+typedef TempMailTerminateHandlerFunction (*TempMailSetTerminateFunction)(
+    TempMailTerminateHandlerFunction);
 
-static void AppBoxDiagnosticTerminateHandler(void) {
+static void TempMailDiagnosticTerminateHandler(void) {
   void *frames[96] = {0};
   int count = backtrace(frames, (int)(sizeof(frames) / sizeof(frames[0])));
-  dprintf(STDERR_FILENO, "APPBOX_DIAGNOSTIC_TERMINATE frames=%d\n", count);
+  dprintf(STDERR_FILENO, "TEMPMAIL_DIAGNOSTIC_TERMINATE frames=%d\n", count);
   backtrace_symbols_fd(frames, count, STDERR_FILENO);
   _exit(199);
 }
 
-static void AppBoxInstallDiagnosticTerminateHandler(void) {
-  AppBoxSetTerminateFunction setTerminate =
-      (AppBoxSetTerminateFunction)dlsym(RTLD_DEFAULT,
+static void TempMailInstallDiagnosticTerminateHandler(void) {
+  TempMailSetTerminateFunction setTerminate =
+      (TempMailSetTerminateFunction)dlsym(RTLD_DEFAULT,
                                         "_ZSt13set_terminatePFvvE");
   if (setTerminate == NULL) {
-    NSLog(@"APPBOX_DIAGNOSTIC_TERMINATE install_failed error=%s", dlerror());
+    NSLog(@"TEMPMAIL_DIAGNOSTIC_TERMINATE install_failed error=%s", dlerror());
     return;
   }
-  setTerminate(AppBoxDiagnosticTerminateHandler);
-  NSLog(@"APPBOX_DIAGNOSTIC_TERMINATE installed");
+  setTerminate(TempMailDiagnosticTerminateHandler);
+  NSLog(@"TEMPMAIL_DIAGNOSTIC_TERMINATE installed");
 }
 
-static BOOL AppBoxPreloadLooseGuestImages(NSString *bundlePath) {
+static BOOL TempMailPreloadLooseGuestImages(NSString *bundlePath) {
   NSString *manifestPath =
-      [bundlePath stringByAppendingPathComponent:@"AppBoxLooseImages.plist"];
+      [bundlePath stringByAppendingPathComponent:@"TempMailLooseImages.plist"];
   NSArray *images = [NSArray arrayWithContentsOfFile:manifestPath];
   if (images == nil) {
     return YES;
   }
   NSString *bundleRoot = bundlePath.stringByStandardizingPath;
-  AppBoxLooseGuestImages = [NSMutableArray arrayWithCapacity:images.count];
+  TempMailLooseGuestImages = [NSMutableArray arrayWithCapacity:images.count];
   for (id candidate in images) {
     if (![candidate isKindOfClass:NSString.class] ||
         [candidate hasPrefix:@"/"]) {
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME loose_preload_failed reason=bad_path");
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME loose_preload_failed reason=bad_path");
       return NO;
     }
     NSString *imagePath =
@@ -1579,57 +1579,57 @@ static BOOL AppBoxPreloadLooseGuestImages(NSString *bundlePath) {
         ![NSFileManager.defaultManager fileExistsAtPath:standardized] ||
         ![NSFileManager.defaultManager
             fileExistsAtPath:[standardized stringByAppendingString:@".fuel"]]) {
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME loose_preload_failed image=%@ "
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME loose_preload_failed image=%@ "
             "reason=artifact_missing", candidate);
       return NO;
     }
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME loose_preload image=%@", candidate);
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME loose_preload image=%@", candidate);
     void *handle =
-        AppBoxAdversarysOpenLoose(standardized.fileSystemRepresentation);
+        TempMailAdversarysOpenLoose(standardized.fileSystemRepresentation);
     if (handle == NULL) {
-      const char *error = AppBoxAdversarysError();
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME loose_preload_failed image=%@ error=%s",
+      const char *error = TempMailAdversarysError();
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME loose_preload_failed image=%@ error=%s",
             candidate, error == NULL ? "unknown" : error);
       return NO;
     }
-    [AppBoxLooseGuestImages addObject:[NSValue valueWithPointer:handle]];
+    [TempMailLooseGuestImages addObject:[NSValue valueWithPointer:handle]];
   }
-  NSLog(@"APPBOX_PLAYBOX_RUNTIME loose_preload_ready count=%lu",
-        (unsigned long)AppBoxLooseGuestImages.count);
+  NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME loose_preload_ready count=%lu",
+        (unsigned long)TempMailLooseGuestImages.count);
   return YES;
 }
 
-static void AppBoxSampleAdversarysThreads(void);
-static void AppBoxStartDiagnosticFileBurst(NSString *reason);
-static void AppBoxStartDiagnosticFocusedBurst(void);
+static void TempMailSampleAdversarysThreads(void);
+static void TempMailStartDiagnosticFileBurst(NSString *reason);
+static void TempMailStartDiagnosticFocusedBurst(void);
 
-static void AppBoxStartDiagnosticBurst(NSString *reason) {
+static void TempMailStartDiagnosticBurst(NSString *reason) {
   if (![NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-diagnostic-result-burst"] ||
-      !__sync_bool_compare_and_swap(&AppBoxDiagnosticBurstStarted, 0, 1)) {
+          containsObject:@"--tempmail-diagnostic-result-burst"] ||
+      !__sync_bool_compare_and_swap(&TempMailDiagnosticBurstStarted, 0, 1)) {
     return;
   }
-  NSLog(@"APPBOX_DIAGNOSTIC_BURST start reason=%@", reason);
+  NSLog(@"TEMPMAIL_DIAGNOSTIC_BURST start reason=%@", reason);
   dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
     for (NSUInteger index = 0;
          index < 6000 &&
-             AppBoxDiagnosticSampleCount < AppBoxDiagnosticSampleLimit;
+             TempMailDiagnosticSampleCount < TempMailDiagnosticSampleLimit;
          index += 1) {
-      AppBoxSampleAdversarysThreads();
+      TempMailSampleAdversarysThreads();
       usleep(500);
     }
-    NSLog(@"APPBOX_DIAGNOSTIC_BURST end samples=%d",
-          AppBoxDiagnosticSampleCount);
+    NSLog(@"TEMPMAIL_DIAGNOSTIC_BURST end samples=%d",
+          TempMailDiagnosticSampleCount);
   });
 }
 
-static void AppBoxProbeLocalProxy(NSString *host, NSString *port) {
+static void TempMailProbeLocalProxy(NSString *host, NSString *port) {
   NSString *hostCopy = [host copy];
   NSString *portCopy = [port copy];
   dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0), ^{
     int descriptor = socket(AF_INET, SOCK_STREAM, 0);
     if (descriptor < 0) {
-      NSLog(@"APPBOX_NATIVE_YUNCENG probe_socket_failed errno=%d", errno);
+      NSLog(@"TEMPMAIL_NATIVE_YUNCENG probe_socket_failed errno=%d", errno);
       return;
     }
     int flags = fcntl(descriptor, F_GETFL, 0);
@@ -1661,15 +1661,15 @@ static void AppBoxProbeLocalProxy(NSString *host, NSString *port) {
         connectError = selected == 0 ? ETIMEDOUT : errno;
       }
     }
-    NSLog(@"APPBOX_NATIVE_YUNCENG probe target=%@:%@ errno=%d", hostCopy,
+    NSLog(@"TEMPMAIL_NATIVE_YUNCENG probe target=%@:%@ errno=%d", hostCopy,
           portCopy, connectError);
     close(descriptor);
   });
 }
 
-typedef int (*AppBoxKiwiInitWithListenerFunction)(id, SEL, const char *, id);
+typedef int (*TempMailKiwiInitWithListenerFunction)(id, SEL, const char *, id);
 
-static int AppBoxObservedConnect(int descriptor,
+static int TempMailObservedConnect(int descriptor,
                                  const struct sockaddr *address,
                                  socklen_t addressLength) {
   static int (*systemConnect)(int, const struct sockaddr *, socklen_t);
@@ -1683,7 +1683,7 @@ static int AppBoxObservedConnect(int descriptor,
   int savedError = result == 0 ? 0 : errno;
   if (address != NULL && address->sa_family == AF_INET &&
       [NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-observe-connect"]) {
+          containsObject:@"--tempmail-observe-connect"]) {
     const struct sockaddr_in *ipv4 = (const struct sockaddr_in *)address;
     char target[INET_ADDRSTRLEN] = {0};
     inet_ntop(AF_INET, &ipv4->sin_addr, target, sizeof(target));
@@ -1694,7 +1694,7 @@ static int AppBoxObservedConnect(int descriptor,
         ? @"unknown"
         : [NSString stringWithUTF8String:callerInfo.dli_fname]
               .lastPathComponent;
-    NSLog(@"APPBOX_CONNECT target=%s:%u result=%d errno=%d caller=%@ offset=%#lx",
+    NSLog(@"TEMPMAIL_CONNECT target=%s:%u result=%d errno=%d caller=%@ offset=%#lx",
           target, ntohs(ipv4->sin_port), result, savedError, callerImage,
           callerInfo.dli_fbase == NULL
               ? 0UL
@@ -1705,7 +1705,7 @@ static int AppBoxObservedConnect(int descriptor,
   return result;
 }
 
-static int AppBoxObservedKill(pid_t process, int signalNumber) {
+static int TempMailObservedKill(pid_t process, int signalNumber) {
   static int (*systemKill)(pid_t, int);
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
@@ -1714,46 +1714,46 @@ static int AppBoxObservedKill(pid_t process, int signalNumber) {
   void *frames[48] = {0};
   int count = backtrace(frames, (int)(sizeof(frames) / sizeof(frames[0])));
   dprintf(STDERR_FILENO,
-          "APPBOX_DIAGNOSTIC_KILL pid=%d signal=%d frames=%d\n",
+          "TEMPMAIL_DIAGNOSTIC_KILL pid=%d signal=%d frames=%d\n",
           process, signalNumber, count);
   backtrace_symbols_fd(frames, count, STDERR_FILENO);
   if (signalNumber == SIGKILL &&
       [NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-ignore-runtime-sigkill"]) {
-    dprintf(STDERR_FILENO, "APPBOX_DIAGNOSTIC_KILL ignored\n");
+          containsObject:@"--tempmail-ignore-runtime-sigkill"]) {
+    dprintf(STDERR_FILENO, "TEMPMAIL_DIAGNOSTIC_KILL ignored\n");
     return 0;
   }
   return systemKill == NULL ? -1 : systemKill(process, signalNumber);
 }
 
-#define APPBOX_DYLD_INTERPOSE(_replacement, _replacee)                       \
+#define TEMPMAIL_DYLD_INTERPOSE(_replacement, _replacee)                       \
   __attribute__((used)) static struct {                                      \
     const void *replacement;                                                 \
     const void *replacee;                                                    \
-  } _appbox_interpose_##_replacee __attribute__((section("__DATA,__interpose"))) = { \
+  } _tempmail_interpose_##_replacee __attribute__((section("__DATA,__interpose"))) = { \
       (const void *)(unsigned long)&_replacement,                            \
       (const void *)(unsigned long)&_replacee};
 
-typedef void (*AppBoxDispatchOnceFunction)(void *);
-typedef void (*AppBoxDispatchOnceFFunction)(dispatch_once_t *, void *,
-                                            AppBoxDispatchOnceFunction);
-typedef void *(*AppBoxDlsymFunction)(void *, const char *);
-typedef void *(*AppBoxGuestCallbackBuilderFunction)(
+typedef void (*TempMailDispatchOnceFunction)(void *);
+typedef void (*TempMailDispatchOnceFFunction)(dispatch_once_t *, void *,
+                                            TempMailDispatchOnceFunction);
+typedef void *(*TempMailDlsymFunction)(void *, const char *);
+typedef void *(*TempMailGuestCallbackBuilderFunction)(
     void *, uint32_t, void *, uintptr_t, uintptr_t);
-static AppBoxDispatchOnceFFunction AppBoxSystemDispatchOnceF;
-static AppBoxDlsymFunction AppBoxSystemDlsym;
-static uintptr_t AppBoxLastGuestCallbackAddress;
-static AppBoxDispatchOnceFunction AppBoxLastGuestCallbackTrampoline;
+static TempMailDispatchOnceFFunction TempMailSystemDispatchOnceF;
+static TempMailDlsymFunction TempMailSystemDlsym;
+static uintptr_t TempMailLastGuestCallbackAddress;
+static TempMailDispatchOnceFunction TempMailLastGuestCallbackTrampoline;
 
-static AppBoxDispatchOnceFunction
-AppBoxGuestCallbackTrampoline(uintptr_t guestAddress) {
+static TempMailDispatchOnceFunction
+TempMailGuestCallbackTrampoline(uintptr_t guestAddress) {
   uintptr_t cachedAddress = __atomic_load_n(
-      &AppBoxLastGuestCallbackAddress, __ATOMIC_ACQUIRE);
+      &TempMailLastGuestCallbackAddress, __ATOMIC_ACQUIRE);
   if (cachedAddress == guestAddress) {
     return __atomic_load_n(
-        &AppBoxLastGuestCallbackTrampoline, __ATOMIC_RELAXED);
+        &TempMailLastGuestCallbackTrampoline, __ATOMIC_RELAXED);
   }
-  if (AppBoxDiagnosticAdversarysBase == 0 || guestAddress == 0) {
+  if (TempMailDiagnosticAdversarysBase == 0 || guestAddress == 0) {
     return NULL;
   }
 
@@ -1761,7 +1761,7 @@ AppBoxGuestCallbackTrampoline(uintptr_t guestAddress) {
   // Its stock symbol resolver uses these same fields before calling the
   // signed callback-thunk builder at +0x7dc8. Reuse that mechanism for guest
   // function pointers passed as arguments to native APIs.
-  void *runtime = *(void **)(AppBoxDiagnosticAdversarysBase + 0x062DE770);
+  void *runtime = *(void **)(TempMailDiagnosticAdversarysBase + 0x062DE770);
   if (runtime == NULL) {
     return NULL;
   }
@@ -1799,7 +1799,7 @@ AppBoxGuestCallbackTrampoline(uintptr_t guestAddress) {
     char buffer[256] = {0};
     int length = snprintf(
         buffer, sizeof(buffer),
-        "APPBOX_DIAGNOSTIC_GUEST_CALLBACK_MISS guest=%#lx "
+        "TEMPMAIL_DIAGNOSTIC_GUEST_CALLBACK_MISS guest=%#lx "
         "vector_start=%#lx vector_end=%#lx\n",
         (unsigned long)guestAddress,
         (unsigned long)*(uintptr_t *)((uintptr_t)runtime + 0x80),
@@ -1807,9 +1807,9 @@ AppBoxGuestCallbackTrampoline(uintptr_t guestAddress) {
     if (length > 0) {
       size_t writeLength = (size_t)MIN(length, (int)sizeof(buffer) - 1);
       write(STDERR_FILENO, buffer, writeLength);
-      if (AppBoxDiagnosticSignalFile >= 0) {
-        write(AppBoxDiagnosticSignalFile, buffer, writeLength);
-        fsync(AppBoxDiagnosticSignalFile);
+      if (TempMailDiagnosticSignalFile >= 0) {
+        write(TempMailDiagnosticSignalFile, buffer, writeLength);
+        fsync(TempMailDiagnosticSignalFile);
       }
     }
     return NULL;
@@ -1818,7 +1818,7 @@ AppBoxGuestCallbackTrampoline(uintptr_t guestAddress) {
   char matchBuffer[320] = {0};
   int matchLength = snprintf(
       matchBuffer, sizeof(matchBuffer),
-      "APPBOX_DIAGNOSTIC_GUEST_CALLBACK_MATCH guest=%#lx image=%p "
+      "TEMPMAIL_DIAGNOSTIC_GUEST_CALLBACK_MATCH guest=%#lx image=%p "
       "index=%lu start=%#lx end=%#lx offset=%#lx\n",
       (unsigned long)guestAddress, guestImage,
       (unsigned long)matchedImageIndex, (unsigned long)matchedImageStart,
@@ -1828,24 +1828,24 @@ AppBoxGuestCallbackTrampoline(uintptr_t guestAddress) {
     size_t writeLength =
         (size_t)MIN(matchLength, (int)sizeof(matchBuffer) - 1);
     write(STDERR_FILENO, matchBuffer, writeLength);
-    if (AppBoxDiagnosticSignalFile >= 0) {
-      write(AppBoxDiagnosticSignalFile, matchBuffer, writeLength);
-      fsync(AppBoxDiagnosticSignalFile);
+    if (TempMailDiagnosticSignalFile >= 0) {
+      write(TempMailDiagnosticSignalFile, matchBuffer, writeLength);
+      fsync(TempMailDiagnosticSignalFile);
     }
   }
 
-  AppBoxGuestCallbackBuilderFunction builder =
-      (AppBoxGuestCallbackBuilderFunction)(
-          AppBoxDiagnosticAdversarysBase + 0x00007DC8);
-  AppBoxDispatchOnceFunction trampoline =
-      (AppBoxDispatchOnceFunction)builder(
+  TempMailGuestCallbackBuilderFunction builder =
+      (TempMailGuestCallbackBuilderFunction)(
+          TempMailDiagnosticAdversarysBase + 0x00007DC8);
+  TempMailDispatchOnceFunction trampoline =
+      (TempMailDispatchOnceFunction)builder(
           runtime, 6, guestImage, guestAddress, 0);
   if (trampoline != NULL) {
     __atomic_store_n(
-        &AppBoxLastGuestCallbackTrampoline, trampoline, __ATOMIC_RELAXED);
+        &TempMailLastGuestCallbackTrampoline, trampoline, __ATOMIC_RELAXED);
     __atomic_store_n(
-        &AppBoxLastGuestCallbackAddress, guestAddress, __ATOMIC_RELEASE);
-    NSLog(@"APPBOX_GUEST_CALLBACK resolved guest=%#lx trampoline=%p image=%p",
+        &TempMailLastGuestCallbackAddress, guestAddress, __ATOMIC_RELEASE);
+    NSLog(@"TEMPMAIL_GUEST_CALLBACK resolved guest=%#lx trampoline=%p image=%p",
           (unsigned long)guestAddress, trampoline, guestImage);
   }
   return trampoline;
@@ -1855,22 +1855,22 @@ AppBoxGuestCallbackTrampoline(uintptr_t guestAddress) {
 // forwarding ordinary native callbacks unchanged.  Rebinding adversarys'
 // general dlsym import also intercepts unrelated Dart VM symbol discovery.
 __attribute__((used, noinline)) static void
-AppBoxDispatchOnceBoundary(dispatch_once_t *predicate, void *context,
+TempMailDispatchOnceBoundary(dispatch_once_t *predicate, void *context,
                            dispatch_function_t function) {
-  if (AppBoxSystemDispatchOnceF == NULL) {
-    AppBoxSystemDispatchOnceF =
-        (AppBoxDispatchOnceFFunction)dlsym(RTLD_NEXT, "dispatch_once_f");
+  if (TempMailSystemDispatchOnceF == NULL) {
+    TempMailSystemDispatchOnceF =
+        (TempMailDispatchOnceFFunction)dlsym(RTLD_NEXT, "dispatch_once_f");
   }
-  AppBoxDispatchOnceFunction translated =
-      AppBoxGuestCallbackTrampoline((uintptr_t)function);
+  TempMailDispatchOnceFunction translated =
+      TempMailGuestCallbackTrampoline((uintptr_t)function);
   if (translated != NULL) {
-    NSLog(@"APPBOX_GUEST_CALLBACK dispatch_once guest=%p trampoline=%p",
+    NSLog(@"TEMPMAIL_GUEST_CALLBACK dispatch_once guest=%p trampoline=%p",
           function, translated);
   }
-  if (AppBoxSystemDispatchOnceF != NULL) {
-    AppBoxSystemDispatchOnceF(
+  if (TempMailSystemDispatchOnceF != NULL) {
+    TempMailSystemDispatchOnceF(
         predicate, context,
-        translated == NULL ? (AppBoxDispatchOnceFunction)function : translated);
+        translated == NULL ? (TempMailDispatchOnceFunction)function : translated);
   }
 }
 
@@ -1878,17 +1878,17 @@ AppBoxDispatchOnceBoundary(dispatch_once_t *predicate, void *context,
 // pointer adversarys caches internally.  The boundary itself only changes a
 // callback that belongs to a loaded guest image.
 __attribute__((used, noinline)) static void
-AppBoxObservedDispatchOnceFImpl(dispatch_once_t *predicate, void *context,
-                                AppBoxDispatchOnceFunction function,
+TempMailObservedDispatchOnceFImpl(dispatch_once_t *predicate, void *context,
+                                TempMailDispatchOnceFunction function,
                                 uintptr_t guestState) {
-  if (AppBoxDiagnosticDispatchOnceArmed) {
+  if (TempMailDiagnosticDispatchOnceArmed) {
     uintptr_t guestPC = *(const uintptr_t *)(guestState + 0x140);
     const uintptr_t *guestRegisters =
         (const uintptr_t *)(guestState + 0x40);
     char buffer[1024] = {0};
     int length = snprintf(
         buffer, sizeof(buffer),
-        "APPBOX_DIAGNOSTIC_DISPATCH_ONCE function=%#lx predicate=%#lx "
+        "TEMPMAIL_DIAGNOSTIC_DISPATCH_ONCE function=%#lx predicate=%#lx "
         "context=%#lx state=%#lx state_pc=%#lx x0=%#lx x1=%#lx x2=%#lx "
         "x8=%#lx x19=%#lx x20=%#lx x25=%#lx x27=%#lx x28=%#lx "
         "sp=%#lx\n",
@@ -1904,25 +1904,25 @@ AppBoxObservedDispatchOnceFImpl(dispatch_once_t *predicate, void *context,
       size_t writeLength =
           (size_t)MIN(length, (int)sizeof(buffer) - 1);
       write(STDERR_FILENO, buffer, writeLength);
-      if (AppBoxDiagnosticSignalFile >= 0) {
-        write(AppBoxDiagnosticSignalFile, buffer, writeLength);
-        fsync(AppBoxDiagnosticSignalFile);
+      if (TempMailDiagnosticSignalFile >= 0) {
+        write(TempMailDiagnosticSignalFile, buffer, writeLength);
+        fsync(TempMailDiagnosticSignalFile);
       }
     }
   }
-  if (AppBoxSystemDispatchOnceF != NULL) {
-    AppBoxDispatchOnceFunction translated =
-        AppBoxGuestCallbackTrampoline((uintptr_t)function);
-    AppBoxSystemDispatchOnceF(
+  if (TempMailSystemDispatchOnceF != NULL) {
+    TempMailDispatchOnceFunction translated =
+        TempMailGuestCallbackTrampoline((uintptr_t)function);
+    TempMailSystemDispatchOnceF(
         predicate, context, translated == NULL ? function : translated);
   }
 }
 
 __attribute__((used, naked)) static void
-AppBoxObservedDispatchOnceF(dispatch_once_t *predicate, void *context,
-                            AppBoxDispatchOnceFunction function) {
+TempMailObservedDispatchOnceF(dispatch_once_t *predicate, void *context,
+                            TempMailDispatchOnceFunction function) {
   __asm__("mov x3, x14\n"
-          "b _AppBoxObservedDispatchOnceFImpl\n");
+          "b _TempMailObservedDispatchOnceFImpl\n");
 }
 
 // Keep non-target dlsym calls ABI-identical to adversarys' original path: the
@@ -1930,7 +1930,7 @@ AppBoxObservedDispatchOnceF(dispatch_once_t *predicate, void *context,
 // branches to dyld for every other symbol without adding a C frame or changing
 // LR, SP or the guest-state register in X14.
 __attribute__((used, naked)) static void *
-AppBoxObservedDlsym(void *handle, const char *symbol) {
+TempMailObservedDlsym(void *handle, const char *symbol) {
   __asm__("cbz x1, 2f\n"
           "ldp x2, x3, [x1]\n"
           "movz x4, #0x6964\n"
@@ -1945,12 +1945,12 @@ AppBoxObservedDlsym(void *handle, const char *symbol) {
           "movk x5, #0x0066, lsl #48\n"
           "cmp x3, x5\n"
           "b.ne 2f\n"
-          "adrp x0, _AppBoxObservedDispatchOnceF@PAGE\n"
-          "add x0, x0, _AppBoxObservedDispatchOnceF@PAGEOFF\n"
+          "adrp x0, _TempMailObservedDispatchOnceF@PAGE\n"
+          "add x0, x0, _TempMailObservedDispatchOnceF@PAGEOFF\n"
           "ret\n"
           "2:\n"
-          "adrp x9, _AppBoxSystemDlsym@PAGE\n"
-          "ldr x9, [x9, _AppBoxSystemDlsym@PAGEOFF]\n"
+          "adrp x9, _TempMailSystemDlsym@PAGE\n"
+          "ldr x9, [x9, _TempMailSystemDlsym@PAGEOFF]\n"
           "cbz x9, 3f\n"
           "br x9\n"
           "3:\n"
@@ -1958,10 +1958,10 @@ AppBoxObservedDlsym(void *handle, const char *symbol) {
           "ret\n");
 }
 
-APPBOX_DYLD_INTERPOSE(AppBoxObservedConnect, connect)
-APPBOX_DYLD_INTERPOSE(AppBoxObservedKill, kill)
+TEMPMAIL_DYLD_INTERPOSE(TempMailObservedConnect, connect)
+TEMPMAIL_DYLD_INTERPOSE(TempMailObservedKill, kill)
 
-static void AppBoxRebindObservedSymbolsInImage(
+static void TempMailRebindObservedSymbolsInImage(
     const struct mach_header *rawHeader, intptr_t slide) {
   if (rawHeader == NULL || rawHeader->magic != MH_MAGIC_64) {
     return;
@@ -1975,13 +1975,13 @@ static void AppBoxRebindObservedSymbolsInImage(
       strstr(imageInfo.dli_fname, "/adversarys.framework/adversarys") != NULL;
   BOOL bridgeGuestDlsym =
       [NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-bridge-guest-callbacks"];
+          containsObject:@"--tempmail-bridge-guest-callbacks"];
   BOOL bridgeDispatchOnceImport =
       [NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-bridge-dispatch-once-import"];
+          containsObject:@"--tempmail-bridge-dispatch-once-import"];
   BOOL observeConnect =
       [NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-observe-connect"];
+          containsObject:@"--tempmail-observe-connect"];
   const struct symtab_command *symbolTableCommand = NULL;
   const struct dysymtab_command *dynamicSymbolTableCommand = NULL;
   const struct segment_command_64 *linkeditSegment = NULL;
@@ -2064,32 +2064,32 @@ static void AppBoxRebindObservedSymbolsInImage(
               mach_task_self(), page, vm_page_size, false,
               VM_PROT_READ | VM_PROT_WRITE | VM_PROT_COPY);
           if (protection != KERN_SUCCESS) {
-            NSLog(@"APPBOX_CONNECT rebind_protect_failed code=%d", protection);
+            NSLog(@"TEMPMAIL_CONNECT rebind_protect_failed code=%d", protection);
             continue;
           }
           if (rebindDlsym) {
-            if (AppBoxSystemDlsym == NULL) {
-              AppBoxSystemDlsym =
-                  (AppBoxDlsymFunction)bindings[bindingIndex];
+            if (TempMailSystemDlsym == NULL) {
+              TempMailSystemDlsym =
+                  (TempMailDlsymFunction)bindings[bindingIndex];
             }
-            bindings[bindingIndex] = (uintptr_t)&AppBoxObservedDlsym;
-            NSLog(@"APPBOX_DIAGNOSTIC_DISPATCH_ONCE dlsym_rebound "
+            bindings[bindingIndex] = (uintptr_t)&TempMailObservedDlsym;
+            NSLog(@"TEMPMAIL_DIAGNOSTIC_DISPATCH_ONCE dlsym_rebound "
                   "image=%s section=%s",
                   imageInfo.dli_fname ?: "unknown", section->sectname);
           } else if (rebindDispatchOnce) {
-            if (AppBoxSystemDispatchOnceF == NULL) {
-              AppBoxSystemDispatchOnceF =
-                  (AppBoxDispatchOnceFFunction)bindings[bindingIndex];
+            if (TempMailSystemDispatchOnceF == NULL) {
+              TempMailSystemDispatchOnceF =
+                  (TempMailDispatchOnceFFunction)bindings[bindingIndex];
             }
             bindings[bindingIndex] =
-                (uintptr_t)&AppBoxDispatchOnceBoundary;
-            NSLog(@"APPBOX_GUEST_CALLBACK dispatch_once_import_rebound "
+                (uintptr_t)&TempMailDispatchOnceBoundary;
+            NSLog(@"TEMPMAIL_GUEST_CALLBACK dispatch_once_import_rebound "
                   "image=%s section=%s original=%p",
                   imageInfo.dli_fname ?: "unknown", section->sectname,
-                  AppBoxSystemDispatchOnceF);
+                  TempMailSystemDispatchOnceF);
           } else {
-            bindings[bindingIndex] = (uintptr_t)&AppBoxObservedConnect;
-            NSLog(@"APPBOX_CONNECT rebound image=%s section=%s",
+            bindings[bindingIndex] = (uintptr_t)&TempMailObservedConnect;
+            NSLog(@"TEMPMAIL_CONNECT rebound image=%s section=%s",
                   imageInfo.dli_fname ?: "unknown", section->sectname);
           }
         }
@@ -2099,44 +2099,44 @@ static void AppBoxRebindObservedSymbolsInImage(
   }
 }
 
-static void AppBoxInstallConnectObservation(void) {
+static void TempMailInstallConnectObservation(void) {
   uint32_t count = _dyld_image_count();
   for (uint32_t index = 0; index < count; index += 1) {
-    AppBoxRebindObservedSymbolsInImage(
+    TempMailRebindObservedSymbolsInImage(
         _dyld_get_image_header(index),
         _dyld_get_image_vmaddr_slide(index));
   }
-  _dyld_register_func_for_add_image(AppBoxRebindObservedSymbolsInImage);
-  NSLog(@"APPBOX_CONNECT observation_installed images=%u", count);
+  _dyld_register_func_for_add_image(TempMailRebindObservedSymbolsInImage);
+  NSLog(@"TEMPMAIL_CONNECT observation_installed images=%u", count);
 }
 
-static void AppBoxInstallGuestCallbackBridges(void) {
+static void TempMailInstallGuestCallbackBridges(void) {
   uint32_t count = _dyld_image_count();
   for (uint32_t index = 0; index < count; index += 1) {
-    AppBoxRebindObservedSymbolsInImage(
+    TempMailRebindObservedSymbolsInImage(
         _dyld_get_image_header(index),
         _dyld_get_image_vmaddr_slide(index));
   }
-  if (AppBoxSystemDispatchOnceF == NULL && AppBoxSystemDlsym != NULL) {
-    AppBoxSystemDispatchOnceF = (AppBoxDispatchOnceFFunction)
-        AppBoxSystemDlsym(RTLD_DEFAULT, "dispatch_once_f");
+  if (TempMailSystemDispatchOnceF == NULL && TempMailSystemDlsym != NULL) {
+    TempMailSystemDispatchOnceF = (TempMailDispatchOnceFFunction)
+        TempMailSystemDlsym(RTLD_DEFAULT, "dispatch_once_f");
   }
-  NSLog(@"APPBOX_GUEST_CALLBACK bridges_installed images=%u "
+  NSLog(@"TEMPMAIL_GUEST_CALLBACK bridges_installed images=%u "
         "dlsym=%p dispatch_once_f=%p",
-        count, AppBoxSystemDlsym, AppBoxSystemDispatchOnceF);
+        count, TempMailSystemDlsym, TempMailSystemDispatchOnceF);
 }
 
-static int AppBoxDyzbGuestKiwiInitBridge(id receiver, SEL selector,
+static int TempMailDyzbGuestKiwiInitBridge(id receiver, SEL selector,
                                          const char *configuration) {
   (void)receiver;
-  NSLog(@"APPBOX_KIWI_CLASS init_start main=%d", NSThread.isMainThread);
-  int result = ((int (*)(id, SEL, const char *))AppBoxNativeKiwiInit)(
-      AppBoxNativeKiwiClass, selector, configuration);
-  NSLog(@"APPBOX_KIWI_CLASS init_return result=%d", result);
+  NSLog(@"TEMPMAIL_KIWI_CLASS init_start main=%d", NSThread.isMainThread);
+  int result = ((int (*)(id, SEL, const char *))TempMailNativeKiwiInit)(
+      TempMailNativeKiwiClass, selector, configuration);
+  NSLog(@"TEMPMAIL_KIWI_CLASS init_return result=%d", result);
   return result;
 }
 
-static NSString *AppBoxImageForAddress(const void *address) {
+static NSString *TempMailImageForAddress(const void *address) {
   Dl_info imageInfo = {0};
   if (address == NULL || dladdr(address, &imageInfo) == 0 ||
       imageInfo.dli_fname == NULL) {
@@ -2149,58 +2149,58 @@ static NSString *AppBoxImageForAddress(const void *address) {
 // NSOperationQueue.  A translated guest block may only be safely entered from
 // the main thread, so keep the real network initialization and bridge just its
 // completion back to the main queue.
-static int AppBoxKiwiInitWithListenerBridge(id receiver, SEL selector,
+static int TempMailKiwiInitWithListenerBridge(id receiver, SEL selector,
                                              const char *configuration,
                                              id listener) {
   const void *guestInvoke = NULL;
   if (listener != nil) {
     guestInvoke = ((const void *const *)(__bridge const void *)listener)[2];
   }
-  NSLog(@"APPBOX_KIWI_BRIDGE start listener=%p invoke=%p image=%@ main=%d",
+  NSLog(@"TEMPMAIL_KIWI_BRIDGE start listener=%p invoke=%p image=%@ main=%d",
         (__bridge void *)listener, guestInvoke,
-        AppBoxImageForAddress(guestInvoke), NSThread.isMainThread);
+        TempMailImageForAddress(guestInvoke), NSThread.isMainThread);
 
   id guestListener = [listener copy];
   void (^hostListener)(int) = ^(int result) {
-    NSLog(@"APPBOX_KIWI_BRIDGE native_complete result=%d main=%d", result,
+    NSLog(@"TEMPMAIL_KIWI_BRIDGE native_complete result=%d main=%d", result,
           NSThread.isMainThread);
     dispatch_async(dispatch_get_main_queue(), ^{
-      NSLog(@"APPBOX_KIWI_BRIDGE guest_callback result=%d invoke=%p image=%@",
-            result, guestInvoke, AppBoxImageForAddress(guestInvoke));
+      NSLog(@"TEMPMAIL_KIWI_BRIDGE guest_callback result=%d invoke=%p image=%@",
+            result, guestInvoke, TempMailImageForAddress(guestInvoke));
       if (guestListener != nil) {
         ((void (^)(int))guestListener)(result);
       }
-      NSLog(@"APPBOX_KIWI_BRIDGE guest_callback_returned result=%d", result);
+      NSLog(@"TEMPMAIL_KIWI_BRIDGE guest_callback_returned result=%d", result);
     });
   };
-  return ((AppBoxKiwiInitWithListenerFunction)
-      AppBoxOriginalKiwiInitWithListener)(receiver, selector, configuration,
+  return ((TempMailKiwiInitWithListenerFunction)
+      TempMailOriginalKiwiInitWithListener)(receiver, selector, configuration,
                                           hostListener);
 }
 
-static BOOL AppBoxInstallKiwiListenerBridge(void) {
+static BOOL TempMailInstallKiwiListenerBridge(void) {
   Class kiwiClass = NSClassFromString(@"Kiwi");
   SEL selector = NSSelectorFromString(@"InitWithListener::");
   Method method = kiwiClass == Nil
       ? NULL
       : class_getClassMethod(kiwiClass, selector);
   if (method == NULL) {
-    NSLog(@"APPBOX_KIWI_BRIDGE install_failed class=%@",
+    NSLog(@"TEMPMAIL_KIWI_BRIDGE install_failed class=%@",
           NSStringFromClass(kiwiClass));
     return NO;
   }
-  AppBoxNativeKiwiClass = kiwiClass;
+  TempMailNativeKiwiClass = kiwiClass;
   IMP current = method_getImplementation(method);
-  if (current != (IMP)AppBoxKiwiInitWithListenerBridge) {
-    AppBoxOriginalKiwiInitWithListener = current;
-    method_setImplementation(method, (IMP)AppBoxKiwiInitWithListenerBridge);
+  if (current != (IMP)TempMailKiwiInitWithListenerBridge) {
+    TempMailOriginalKiwiInitWithListener = current;
+    method_setImplementation(method, (IMP)TempMailKiwiInitWithListenerBridge);
   }
-  NSLog(@"APPBOX_KIWI_BRIDGE installed original=%p image=%@", current,
-        AppBoxImageForAddress((const void *)current));
+  NSLog(@"TEMPMAIL_KIWI_BRIDGE installed original=%p image=%@", current,
+        TempMailImageForAddress((const void *)current));
   return YES;
 }
 
-static id AppBoxFlutterCallArguments(id call) {
+static id TempMailFlutterCallArguments(id call) {
   SEL selector = NSSelectorFromString(@"arguments");
   if (call == nil || ![call respondsToSelector:selector]) {
     return nil;
@@ -2208,14 +2208,14 @@ static id AppBoxFlutterCallArguments(id call) {
   return ((id (*)(id, SEL))objc_msgSend)(call, selector);
 }
 
-static void AppBoxNativeYunCengHandleMethodCall(id plugin, SEL selector,
+static void TempMailNativeYunCengHandleMethodCall(id plugin, SEL selector,
                                                 id call, id resultCallback) {
   (void)selector;
   SEL methodSelector = NSSelectorFromString(@"method");
   NSString *method = [call respondsToSelector:methodSelector]
       ? ((id (*)(id, SEL))objc_msgSend)(call, methodSelector)
       : nil;
-  NSDictionary *arguments = AppBoxFlutterCallArguments(call);
+  NSDictionary *arguments = TempMailFlutterCallArguments(call);
   const uintptr_t *resultWords = resultCallback == nil
       ? NULL
       : (const uintptr_t *)(__bridge const void *)resultCallback;
@@ -2228,19 +2228,19 @@ static void AppBoxNativeYunCengHandleMethodCall(id plugin, SEL selector,
   const void *binaryReplyInvoke = binaryReply == nil
       ? NULL
       : ((const void *const *)(__bridge const void *)binaryReply)[2];
-  NSLog(@"APPBOX_NATIVE_YUNCENG call method=%@ result_image=%@ "
+  NSLog(@"TEMPMAIL_NATIVE_YUNCENG call method=%@ result_image=%@ "
          "codec=%@/%s binary_reply_image=%@",
         method,
         resultCallback == nil
             ? @"none"
-            : AppBoxImageForAddress(
+            : TempMailImageForAddress(
                   ((const void *const *)(__bridge const void *)
                       resultCallback)[2]),
         NSStringFromClass([resultCodec class]),
         resultCodec == nil
             ? "none"
             : (class_getImageName([resultCodec class]) ?: "unknown"),
-        AppBoxImageForAddress(binaryReplyInvoke));
+        TempMailImageForAddress(binaryReplyInvoke));
 
   int code = -1;
   BOOL focusInstallResult = NO;
@@ -2254,10 +2254,10 @@ static void AppBoxNativeYunCengHandleMethodCall(id plugin, SEL selector,
         : nil;
     if ([token isKindOfClass:NSString.class]) {
       objc_setAssociatedObject(plugin,
-                               &AppBoxNativeYunCengTokenAssociationKey,
+                               &TempMailNativeYunCengTokenAssociationKey,
                                token, OBJC_ASSOCIATION_COPY_NONATOMIC);
     }
-    Class kiwiClass = AppBoxNativeKiwiClass ?: NSClassFromString(@"Kiwi");
+    Class kiwiClass = TempMailNativeKiwiClass ?: NSClassFromString(@"Kiwi");
     SEL initSelector = NSSelectorFromString(@"Init:");
     Method initMethod = kiwiClass == Nil
         ? NULL
@@ -2269,7 +2269,7 @@ static void AppBoxNativeYunCengHandleMethodCall(id plugin, SEL selector,
     }
     resultValue = @(code);
   } else if ([method isEqualToString:@"restartAllServer"]) {
-    Class kiwiClass = AppBoxNativeKiwiClass ?: NSClassFromString(@"Kiwi");
+    Class kiwiClass = TempMailNativeKiwiClass ?: NSClassFromString(@"Kiwi");
     SEL restartSelector = NSSelectorFromString(@"RestartAllServer");
     Method restartMethod = kiwiClass == Nil
         ? NULL
@@ -2292,7 +2292,7 @@ static void AppBoxNativeYunCengHandleMethodCall(id plugin, SEL selector,
     focusInstallResult = [groupName isEqualToString:@"kiwi_install"];
     char targetIP[128] = {0};
     char targetPort[40] = {0};
-    Class kiwiClass = AppBoxNativeKiwiClass ?: NSClassFromString(@"Kiwi");
+    Class kiwiClass = TempMailNativeKiwiClass ?: NSClassFromString(@"Kiwi");
     SEL proxySelector = NSSelectorFromString(@"ServerToLocal:::::");
     Method proxyMethod = kiwiClass == Nil
         ? NULL
@@ -2314,73 +2314,73 @@ static void AppBoxNativeYunCengHandleMethodCall(id plugin, SEL selector,
     [proxyResult setObject:targetIPString forKey:@"target_ip"];
     [proxyResult setObject:targetPortString forKey:@"target_port"];
     resultValue = proxyResult;
-    NSLog(@"APPBOX_NATIVE_YUNCENG proxy group=%@ direct=%@:%@ code=%d "
+    NSLog(@"TEMPMAIL_NATIVE_YUNCENG proxy group=%@ direct=%@:%@ code=%d "
            "target=%@:%@ main=%d",
           groupName, directDomain, directPort, code, targetIPString,
           targetPortString, NSThread.isMainThread);
     if (code == 0 && targetIPString.length > 0 &&
         targetPortString.integerValue > 0 &&
         [NSProcessInfo.processInfo.arguments
-            containsObject:@"--appbox-probe-local-proxy"]) {
-      AppBoxProbeLocalProxy(targetIPString, targetPortString);
+            containsObject:@"--tempmail-probe-local-proxy"]) {
+      TempMailProbeLocalProxy(targetIPString, targetPortString);
     }
   }
-  NSLog(@"APPBOX_NATIVE_YUNCENG result method=%@ code=%d", method, code);
+  NSLog(@"TEMPMAIL_NATIVE_YUNCENG result method=%@ code=%d", method, code);
   if (resultCallback != nil) {
     if ([method isEqualToString:@"initEx"] &&
         [NSProcessInfo.processInfo.arguments
-            containsObject:@"--appbox-debug-delay-kiwi-result"]) {
+            containsObject:@"--tempmail-debug-delay-kiwi-result"]) {
       id delayedCallback = [resultCallback copy];
       id delayedValue = resultValue ?: @(code);
-      NSLog(@"APPBOX_NATIVE_YUNCENG delaying_init_result seconds=15");
+      NSLog(@"TEMPMAIL_NATIVE_YUNCENG delaying_init_result seconds=15");
       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 15 * NSEC_PER_SEC),
                      dispatch_get_main_queue(), ^{
-        NSLog(@"APPBOX_NATIVE_YUNCENG delivering_delayed_init_result");
+        NSLog(@"TEMPMAIL_NATIVE_YUNCENG delivering_delayed_init_result");
         ((void (^)(id))delayedCallback)(delayedValue);
       });
       return;
     }
     if ([method isEqualToString:@"getProxyTcpByDomain"]) {
-      AppBoxStartDiagnosticBurst(method);
-      AppBoxStartDiagnosticFileBurst(method);
+      TempMailStartDiagnosticBurst(method);
+      TempMailStartDiagnosticFileBurst(method);
     }
     if (focusInstallResult &&
         [NSProcessInfo.processInfo.arguments
-            containsObject:@"--appbox-diagnostic-focused-result"]) {
-      AppBoxStartDiagnosticFocusedBurst();
+            containsObject:@"--tempmail-diagnostic-focused-result"]) {
+      TempMailStartDiagnosticFocusedBurst();
     }
     if (focusInstallResult &&
         [NSProcessInfo.processInfo.arguments
-            containsObject:@"--appbox-async-kiwi-install-result"]) {
+            containsObject:@"--tempmail-async-kiwi-install-result"]) {
       id delayedCallback = [resultCallback copy];
       id delayedValue = resultValue ?: @(code);
-      NSLog(@"APPBOX_NATIVE_YUNCENG scheduling_async_install_result");
+      NSLog(@"TEMPMAIL_NATIVE_YUNCENG scheduling_async_install_result");
       dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"APPBOX_NATIVE_YUNCENG delivering_async_install_result");
+        NSLog(@"TEMPMAIL_NATIVE_YUNCENG delivering_async_install_result");
         ((void (^)(id))delayedCallback)(delayedValue);
-        NSLog(@"APPBOX_NATIVE_YUNCENG async_install_result_returned");
+        NSLog(@"TEMPMAIL_NATIVE_YUNCENG async_install_result_returned");
       });
       return;
     }
     ((void (^)(id))resultCallback)(resultValue ?: @(code));
-    NSLog(@"APPBOX_NATIVE_YUNCENG result_returned method=%@ code=%d", method,
+    NSLog(@"TEMPMAIL_NATIVE_YUNCENG result_returned method=%@ code=%d", method,
           code);
   }
 }
 
-static void AppBoxNativeYunCengRegister(id pluginClass, SEL selector,
+static void TempMailNativeYunCengRegister(id pluginClass, SEL selector,
                                         id registrar) {
   (void)selector;
   id existingPlugin = objc_getAssociatedObject(
-      registrar, &AppBoxNativeYunCengPluginAssociationKey);
+      registrar, &TempMailNativeYunCengPluginAssociationKey);
   if (existingPlugin != nil) {
-    NSLog(@"APPBOX_NATIVE_YUNCENG register_skipped reason=already_registered");
+    NSLog(@"TEMPMAIL_NATIVE_YUNCENG register_skipped reason=already_registered");
     return;
   }
   SEL messengerSelector = NSSelectorFromString(@"messenger");
   id messenger = ((id (*)(id, SEL))objc_msgSend)(registrar,
                                                   messengerSelector);
-  Class channelClass = AppBoxNativeFlutterMethodChannelClass ?:
+  Class channelClass = TempMailNativeFlutterMethodChannelClass ?:
       NSClassFromString(@"FlutterMethodChannel");
   SEL channelSelector =
       NSSelectorFromString(@"methodChannelWithName:binaryMessenger:");
@@ -2398,82 +2398,82 @@ static void AppBoxNativeYunCengRegister(id pluginClass, SEL selector,
   // process-wide native FlutterMethodChannel instead.  That keeps decoding,
   // the result callback, envelope encoding, and binary reply in Flutter.framework.
   id handler = [^(id call, id resultCallback) {
-    AppBoxNativeYunCengHandleMethodCall(
+    TempMailNativeYunCengHandleMethodCall(
         plugin, NSSelectorFromString(@"handleMethodCall:result:"), call,
         resultCallback);
   } copy];
   SEL handlerSelector = NSSelectorFromString(@"setMethodCallHandler:");
   ((void (*)(id, SEL, id))objc_msgSend)(channel, handlerSelector, handler);
   objc_setAssociatedObject(registrar,
-                           &AppBoxNativeYunCengPluginAssociationKey,
+                           &TempMailNativeYunCengPluginAssociationKey,
                            plugin, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
   objc_setAssociatedObject(plugin,
-                           &AppBoxNativeYunCengChannelAssociationKey,
+                           &TempMailNativeYunCengChannelAssociationKey,
                            channel, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
   objc_setAssociatedObject(plugin,
-                           &AppBoxNativeYunCengHandlerAssociationKey,
+                           &TempMailNativeYunCengHandlerAssociationKey,
                            handler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
   Method handlerMethod = channelClass == Nil
       ? NULL
       : class_getInstanceMethod(channelClass, handlerSelector);
-  NSLog(@"APPBOX_NATIVE_YUNCENG registered class=%@ registrar=%@/%s "
+  NSLog(@"TEMPMAIL_NATIVE_YUNCENG registered class=%@ registrar=%@/%s "
          "messenger=%@/%s channel=%@/%s factory_image=%@ handler_image=%@",
         NSStringFromClass(pluginClass), NSStringFromClass([registrar class]),
         class_getImageName([registrar class]) ?: "unknown",
         NSStringFromClass([messenger class]),
         class_getImageName([messenger class]) ?: "unknown", channel,
         class_getImageName([channel class]) ?: "unknown",
-        AppBoxImageForAddress(channelFactory == NULL
+        TempMailImageForAddress(channelFactory == NULL
                                   ? NULL
                                   : (const void *)method_getImplementation(
                                         channelFactory)),
-        AppBoxImageForAddress(handlerMethod == NULL
+        TempMailImageForAddress(handlerMethod == NULL
                                   ? NULL
                                   : (const void *)method_getImplementation(
                                         handlerMethod)));
 }
 
-static BOOL AppBoxInstallNativeYunCengPluginClass(void) {
+static BOOL TempMailInstallNativeYunCengPluginClass(void) {
   // Capture this before adversarys opens the guest Flutter.framework.  After
   // that point NSClassFromString resolves the translated duplicate instead of
   // the already-loaded native Flutter.framework class.
-  AppBoxNativeFlutterMethodChannelClass =
+  TempMailNativeFlutterMethodChannelClass =
       NSClassFromString(@"FlutterMethodChannel");
-  NSLog(@"APPBOX_NATIVE_YUNCENG native_channel_class=%p image=%s",
-        AppBoxNativeFlutterMethodChannelClass,
-        AppBoxNativeFlutterMethodChannelClass == Nil
+  NSLog(@"TEMPMAIL_NATIVE_YUNCENG native_channel_class=%p image=%s",
+        TempMailNativeFlutterMethodChannelClass,
+        TempMailNativeFlutterMethodChannelClass == Nil
             ? "missing"
-            : (class_getImageName(AppBoxNativeFlutterMethodChannelClass) ?:
+            : (class_getImageName(TempMailNativeFlutterMethodChannelClass) ?:
                "unknown"));
   Class existing = NSClassFromString(@"FlutterYunCengKiwiPlugin");
   if (existing != Nil) {
-    AppBoxNativeYunCengPluginClass = existing;
+    TempMailNativeYunCengPluginClass = existing;
     return YES;
   }
   Class pluginClass = objc_allocateClassPair(
       NSObject.class, "FlutterYunCengKiwiPlugin", 0);
   if (pluginClass == Nil) {
-    NSLog(@"APPBOX_NATIVE_YUNCENG class_allocate_failed");
+    NSLog(@"TEMPMAIL_NATIVE_YUNCENG class_allocate_failed");
     return NO;
   }
   class_addMethod(pluginClass,
                   NSSelectorFromString(@"handleMethodCall:result:"),
-                  (IMP)AppBoxNativeYunCengHandleMethodCall,
+                  (IMP)TempMailNativeYunCengHandleMethodCall,
                   "v32@0:8@16@?24");
   class_addMethod(object_getClass(pluginClass),
                   NSSelectorFromString(@"registerWithRegistrar:"),
-                  (IMP)AppBoxNativeYunCengRegister,
+                  (IMP)TempMailNativeYunCengRegister,
                   "v24@0:8@16");
   objc_registerClassPair(pluginClass);
-  AppBoxNativeYunCengPluginClass = pluginClass;
-  NSLog(@"APPBOX_NATIVE_YUNCENG class_ready class=%p", pluginClass);
+  TempMailNativeYunCengPluginClass = pluginClass;
+  NSLog(@"TEMPMAIL_NATIVE_YUNCENG class_ready class=%p", pluginClass);
   return YES;
 }
 
-static void AppBoxDyzbKiwiInitExBridge(id plugin, SEL selector, id call,
+static void TempMailDyzbKiwiInitExBridge(id plugin, SEL selector, id call,
                                         id resultCallback) {
   (void)selector;
-  NSDictionary *arguments = AppBoxFlutterCallArguments(call);
+  NSDictionary *arguments = TempMailFlutterCallArguments(call);
   NSString *token = [arguments isKindOfClass:NSDictionary.class]
       ? arguments[@"token"]
       : nil;
@@ -2485,12 +2485,12 @@ static void AppBoxDyzbKiwiInitExBridge(id plugin, SEL selector, id call,
     object_setIvar(plugin, tokenIvar, token);
   }
 
-  Class kiwiClass = AppBoxNativeKiwiClass ?: NSClassFromString(@"Kiwi");
+  Class kiwiClass = TempMailNativeKiwiClass ?: NSClassFromString(@"Kiwi");
   SEL initSelector = NSSelectorFromString(@"Init:");
   Method initMethod = kiwiClass == Nil
       ? NULL
       : class_getClassMethod(kiwiClass, initSelector);
-  NSLog(@"APPBOX_KIWI_PLUGIN init_start class=%@ app_key_length=%lu main=%d",
+  NSLog(@"TEMPMAIL_KIWI_PLUGIN init_start class=%@ app_key_length=%lu main=%d",
         NSStringFromClass(kiwiClass), (unsigned long)appKey.length,
         NSThread.isMainThread);
   int code = -1;
@@ -2499,47 +2499,47 @@ static void AppBoxDyzbKiwiInitExBridge(id plugin, SEL selector, id call,
         (int (*)(id, SEL, const char *))method_getImplementation(initMethod);
     code = initFunction(kiwiClass, initSelector, appKey.UTF8String);
   }
-  NSLog(@"APPBOX_KIWI_PLUGIN init_return code=%d", code);
+  NSLog(@"TEMPMAIL_KIWI_PLUGIN init_return code=%d", code);
   if (resultCallback != nil) {
     id copiedResultCallback = [resultCallback copy];
     const void *resultInvoke =
         ((const void *const *)(__bridge const void *)copiedResultCallback)[2];
-    NSLog(@"APPBOX_KIWI_PLUGIN result_scheduled block=%p invoke=%p image=%@",
+    NSLog(@"TEMPMAIL_KIWI_PLUGIN result_scheduled block=%p invoke=%p image=%@",
           (__bridge void *)resultCallback, resultInvoke,
-          AppBoxImageForAddress(resultInvoke));
+          TempMailImageForAddress(resultInvoke));
     dispatch_async(dispatch_get_main_queue(), ^{
-      NSLog(@"APPBOX_KIWI_PLUGIN result_start code=%d", code);
+      NSLog(@"TEMPMAIL_KIWI_PLUGIN result_start code=%d", code);
       ((void (^)(id))copiedResultCallback)(@(code));
-      NSLog(@"APPBOX_KIWI_PLUGIN result_returned code=%d", code);
+      NSLog(@"TEMPMAIL_KIWI_PLUGIN result_returned code=%d", code);
     });
   }
 }
 
-static BOOL AppBoxInstallDyzbKiwiPluginBridge(void) {
+static BOOL TempMailInstallDyzbKiwiPluginBridge(void) {
   Class pluginClass = NSClassFromString(@"FlutterYunCengKiwiPlugin");
   SEL selector = NSSelectorFromString(@"initEx:result:");
   Method method = pluginClass == Nil
       ? NULL
       : class_getInstanceMethod(pluginClass, selector);
   if (method == NULL) {
-    NSLog(@"APPBOX_KIWI_PLUGIN install_failed class=%@",
+    NSLog(@"TEMPMAIL_KIWI_PLUGIN install_failed class=%@",
           NSStringFromClass(pluginClass));
     return NO;
   }
   IMP original = method_getImplementation(method);
-  method_setImplementation(method, (IMP)AppBoxDyzbKiwiInitExBridge);
-  NSLog(@"APPBOX_KIWI_PLUGIN installed original=%p image=%@", original,
-        AppBoxImageForAddress((const void *)original));
+  method_setImplementation(method, (IMP)TempMailDyzbKiwiInitExBridge);
+  NSLog(@"TEMPMAIL_KIWI_PLUGIN installed original=%p image=%@", original,
+        TempMailImageForAddress((const void *)original));
   return YES;
 }
 
-static void AppBoxPrepareDyzbKiwiThenRunGuest(id plugin, SEL selector, id call,
+static void TempMailPrepareDyzbKiwiThenRunGuest(id plugin, SEL selector, id call,
                                                id resultCallback) {
-  NSDictionary *arguments = AppBoxFlutterCallArguments(call);
+  NSDictionary *arguments = TempMailFlutterCallArguments(call);
   NSString *appKey = [arguments isKindOfClass:NSDictionary.class]
       ? arguments[@"appKey"]
       : nil;
-  Class kiwiClass = AppBoxNativeKiwiClass ?: NSClassFromString(@"Kiwi");
+  Class kiwiClass = TempMailNativeKiwiClass ?: NSClassFromString(@"Kiwi");
   SEL initSelector = NSSelectorFromString(@"Init:");
   Method initMethod = kiwiClass == Nil
       ? NULL
@@ -2548,50 +2548,50 @@ static void AppBoxPrepareDyzbKiwiThenRunGuest(id plugin, SEL selector, id call,
   if (initMethod != NULL && [appKey isKindOfClass:NSString.class]) {
     int (*initFunction)(id, SEL, const char *) =
         (int (*)(id, SEL, const char *))method_getImplementation(initMethod);
-    NSLog(@"APPBOX_KIWI_PREPARE native_start app_key_length=%lu",
+    NSLog(@"TEMPMAIL_KIWI_PREPARE native_start app_key_length=%lu",
           (unsigned long)appKey.length);
     code = initFunction(kiwiClass, initSelector, appKey.UTF8String);
-    NSLog(@"APPBOX_KIWI_PREPARE native_return code=%d", code);
+    NSLog(@"TEMPMAIL_KIWI_PREPARE native_return code=%d", code);
   }
-  NSLog(@"APPBOX_KIWI_PREPARE guest_enter imp=%p image=%@",
-        AppBoxOriginalDyzbKiwiInitEx,
-        AppBoxImageForAddress((const void *)AppBoxOriginalDyzbKiwiInitEx));
+  NSLog(@"TEMPMAIL_KIWI_PREPARE guest_enter imp=%p image=%@",
+        TempMailOriginalDyzbKiwiInitEx,
+        TempMailImageForAddress((const void *)TempMailOriginalDyzbKiwiInitEx));
   Method method = class_getInstanceMethod([plugin class], selector);
   if (method != NULL) {
-    method_setImplementation(method, AppBoxOriginalDyzbKiwiInitEx);
+    method_setImplementation(method, TempMailOriginalDyzbKiwiInitEx);
   }
   ((void (*)(id, SEL, id, id))objc_msgSend)(plugin, selector, call,
                                             resultCallback);
-  NSLog(@"APPBOX_KIWI_PREPARE guest_returned");
+  NSLog(@"TEMPMAIL_KIWI_PREPARE guest_returned");
 }
 
-static BOOL AppBoxInstallDyzbKiwiPrepareBridge(void) {
+static BOOL TempMailInstallDyzbKiwiPrepareBridge(void) {
   Class pluginClass = NSClassFromString(@"FlutterYunCengKiwiPlugin");
   SEL selector = NSSelectorFromString(@"initEx:result:");
   Method method = pluginClass == Nil
       ? NULL
       : class_getInstanceMethod(pluginClass, selector);
   if (method == NULL) {
-    NSLog(@"APPBOX_KIWI_PREPARE install_failed class=%@",
+    NSLog(@"TEMPMAIL_KIWI_PREPARE install_failed class=%@",
           NSStringFromClass(pluginClass));
     return NO;
   }
-  AppBoxOriginalDyzbKiwiInitEx = method_getImplementation(method);
-  method_setImplementation(method, (IMP)AppBoxPrepareDyzbKiwiThenRunGuest);
-  NSLog(@"APPBOX_KIWI_PREPARE installed original=%p image=%@",
-        AppBoxOriginalDyzbKiwiInitEx,
-        AppBoxImageForAddress((const void *)AppBoxOriginalDyzbKiwiInitEx));
+  TempMailOriginalDyzbKiwiInitEx = method_getImplementation(method);
+  method_setImplementation(method, (IMP)TempMailPrepareDyzbKiwiThenRunGuest);
+  NSLog(@"TEMPMAIL_KIWI_PREPARE installed original=%p image=%@",
+        TempMailOriginalDyzbKiwiInitEx,
+        TempMailImageForAddress((const void *)TempMailOriginalDyzbKiwiInitEx));
   return YES;
 }
 
-static BOOL AppBoxInstallDyzbKiwiClassBridge(void) {
-  if (AppBoxNativeKiwiClass == Nil) {
-    NSLog(@"APPBOX_KIWI_CLASS install_failed reason=native_class_missing");
+static BOOL TempMailInstallDyzbKiwiClassBridge(void) {
+  if (TempMailNativeKiwiClass == Nil) {
+    NSLog(@"TEMPMAIL_KIWI_CLASS install_failed reason=native_class_missing");
     return NO;
   }
   int classCount = objc_getClassList(NULL, 0);
   if (classCount <= 0) {
-    NSLog(@"APPBOX_KIWI_CLASS install_failed reason=empty_class_list");
+    NSLog(@"TEMPMAIL_KIWI_CLASS install_failed reason=empty_class_list");
     return NO;
   }
   __unsafe_unretained Class *classes =
@@ -2600,7 +2600,7 @@ static BOOL AppBoxInstallDyzbKiwiClassBridge(void) {
   Class guestKiwiClass = Nil;
   for (int index = 0; index < classCount; index += 1) {
     Class candidate = classes[index];
-    if (candidate == AppBoxNativeKiwiClass ||
+    if (candidate == TempMailNativeKiwiClass ||
         strcmp(class_getName(candidate), "Kiwi") != 0) {
       continue;
     }
@@ -2609,7 +2609,7 @@ static BOOL AppBoxInstallDyzbKiwiClassBridge(void) {
   }
   free(classes);
   if (guestKiwiClass == Nil) {
-    NSLog(@"APPBOX_KIWI_CLASS install_failed reason=guest_class_missing ");
+    NSLog(@"TEMPMAIL_KIWI_CLASS install_failed reason=guest_class_missing ");
     return NO;
   }
 
@@ -2620,7 +2620,7 @@ static BOOL AppBoxInstallDyzbKiwiClassBridge(void) {
   for (unsigned int index = 0; index < methodCount; index += 1) {
     Method guestMethod = guestMethods[index];
     SEL selector = method_getName(guestMethod);
-    Method nativeMethod = class_getClassMethod(AppBoxNativeKiwiClass, selector);
+    Method nativeMethod = class_getClassMethod(TempMailNativeKiwiClass, selector);
     if (nativeMethod == NULL ||
         strcmp(method_getTypeEncoding(guestMethod),
                method_getTypeEncoding(nativeMethod)) != 0) {
@@ -2630,31 +2630,31 @@ static BOOL AppBoxInstallDyzbKiwiClassBridge(void) {
     IMP nativeIMP = method_getImplementation(nativeMethod);
     IMP replacement = nativeIMP;
     if (strcmp(sel_getName(selector), "Init:") == 0) {
-      AppBoxNativeKiwiInit = nativeIMP;
-      replacement = (IMP)AppBoxDyzbGuestKiwiInitBridge;
+      TempMailNativeKiwiInit = nativeIMP;
+      replacement = (IMP)TempMailDyzbGuestKiwiInitBridge;
     }
     method_setImplementation(guestMethod, replacement);
     replaced += 1;
-    NSLog(@"APPBOX_KIWI_CLASS replaced selector=%@ guest_imp=%p guest_image=%@ "
+    NSLog(@"TEMPMAIL_KIWI_CLASS replaced selector=%@ guest_imp=%p guest_image=%@ "
           "native_imp=%p native_image=%@",
           NSStringFromSelector(selector), guestIMP,
-          AppBoxImageForAddress((const void *)guestIMP), nativeIMP,
-          AppBoxImageForAddress((const void *)nativeIMP));
+          TempMailImageForAddress((const void *)guestIMP), nativeIMP,
+          TempMailImageForAddress((const void *)nativeIMP));
   }
   free(guestMethods);
-  NSLog(@"APPBOX_KIWI_CLASS installed guest=%p native=%p methods=%u",
-        guestKiwiClass, AppBoxNativeKiwiClass, replaced);
+  NSLog(@"TEMPMAIL_KIWI_CLASS installed guest=%p native=%p methods=%u",
+        guestKiwiClass, TempMailNativeKiwiClass, replaced);
   return replaced > 0;
 }
 
-static char *AppBoxAppendSignalText(char *cursor, const char *text) {
+static char *TempMailAppendSignalText(char *cursor, const char *text) {
   while (*text != '\0') {
     *cursor++ = *text++;
   }
   return cursor;
 }
 
-static char *AppBoxAppendSignalHex(char *cursor, uintptr_t value) {
+static char *TempMailAppendSignalHex(char *cursor, uintptr_t value) {
   static const char digits[] = "0123456789abcdef";
   *cursor++ = '0';
   *cursor++ = 'x';
@@ -2669,19 +2669,19 @@ static char *AppBoxAppendSignalHex(char *cursor, uintptr_t value) {
   return cursor;
 }
 
-static void AppBoxDiagnosticSignalHandler(int signalNumber,
+static void TempMailDiagnosticSignalHandler(int signalNumber,
                                           siginfo_t *signalInfo,
                                           void *rawContext) {
   ucontext_t *context = (ucontext_t *)rawContext;
   uintptr_t pc = context->uc_mcontext->__ss.__pc;
   uintptr_t lr = context->uc_mcontext->__ss.__lr;
-  uintptr_t adversarysOffset = pc - AppBoxDiagnosticAdversarysBase;
-  if (adversarysOffset == 0x0088BC30 && !AppBoxDiagnosticWatchArmed) {
+  uintptr_t adversarysOffset = pc - TempMailDiagnosticAdversarysBase;
+  if (adversarysOffset == 0x0088BC30 && !TempMailDiagnosticWatchArmed) {
     uintptr_t guestState = context->uc_mcontext->__ss.__x[14];
-    AppBoxDiagnosticWatchGuestState = guestState;
+    TempMailDiagnosticWatchGuestState = guestState;
     const uintptr_t *guestRegisters =
         (const uintptr_t *)(guestState + 0x40);
-    AppBoxDiagnosticWatchAddress = guestRegisters[31] + 0x10;
+    TempMailDiagnosticWatchAddress = guestRegisters[31] + 0x10;
     arm_debug_state64_t debugState = {0};
     mach_msg_type_number_t debugStateCount = ARM_DEBUG_STATE64_COUNT;
     thread_t currentThread = mach_thread_self();
@@ -2690,7 +2690,7 @@ static void AppBoxDiagnosticSignalHandler(int signalNumber,
         &debugStateCount);
     kern_return_t setResult = KERN_FAILURE;
     if (getResult == KERN_SUCCESS) {
-      debugState.__wvr[0] = AppBoxDiagnosticWatchAddress;
+      debugState.__wvr[0] = TempMailDiagnosticWatchAddress;
       debugState.__wcr[0] = 0x1FF5;
       setResult = thread_set_state(
           currentThread, ARM_DEBUG_STATE64, (thread_state_t)&debugState,
@@ -2698,37 +2698,37 @@ static void AppBoxDiagnosticSignalHandler(int signalNumber,
     }
     mach_port_deallocate(mach_task_self(), currentThread);
     char setupBuffer[256];
-    char *setupCursor = AppBoxAppendSignalText(
-        setupBuffer, "APPBOX_DIAGNOSTIC_WATCH_SETUP address=");
-    setupCursor = AppBoxAppendSignalHex(
-        setupCursor, AppBoxDiagnosticWatchAddress);
-    setupCursor = AppBoxAppendSignalText(setupCursor, " get=");
-    setupCursor = AppBoxAppendSignalHex(setupCursor, (uintptr_t)getResult);
-    setupCursor = AppBoxAppendSignalText(setupCursor, " set=");
-    setupCursor = AppBoxAppendSignalHex(setupCursor, (uintptr_t)setResult);
+    char *setupCursor = TempMailAppendSignalText(
+        setupBuffer, "TEMPMAIL_DIAGNOSTIC_WATCH_SETUP address=");
+    setupCursor = TempMailAppendSignalHex(
+        setupCursor, TempMailDiagnosticWatchAddress);
+    setupCursor = TempMailAppendSignalText(setupCursor, " get=");
+    setupCursor = TempMailAppendSignalHex(setupCursor, (uintptr_t)getResult);
+    setupCursor = TempMailAppendSignalText(setupCursor, " set=");
+    setupCursor = TempMailAppendSignalHex(setupCursor, (uintptr_t)setResult);
     *setupCursor++ = '\n';
     write(STDERR_FILENO, setupBuffer, (size_t)(setupCursor - setupBuffer));
     if (setResult == KERN_SUCCESS) {
-      AppBoxDiagnosticWatchArmed = 1;
+      TempMailDiagnosticWatchArmed = 1;
       context->uc_mcontext->__ss.__pc += 4;
       return;
     }
   }
   char buffer[2048];
-  char *cursor = AppBoxAppendSignalText(buffer, "APPBOX_DIAGNOSTIC_SIGNAL signal=");
+  char *cursor = TempMailAppendSignalText(buffer, "TEMPMAIL_DIAGNOSTIC_SIGNAL signal=");
   *cursor++ = (char)('0' + signalNumber / 10);
   *cursor++ = (char)('0' + signalNumber % 10);
-  cursor = AppBoxAppendSignalText(cursor, " fault=");
-  cursor = AppBoxAppendSignalHex(
+  cursor = TempMailAppendSignalText(cursor, " fault=");
+  cursor = TempMailAppendSignalHex(
       cursor, (uintptr_t)(signalInfo == NULL ? NULL : signalInfo->si_addr));
-  cursor = AppBoxAppendSignalText(cursor, " pc=");
-  cursor = AppBoxAppendSignalHex(cursor, pc);
-  cursor = AppBoxAppendSignalText(cursor, " adversarys_offset=");
-  cursor = AppBoxAppendSignalHex(cursor, pc - AppBoxDiagnosticAdversarysBase);
-  cursor = AppBoxAppendSignalText(cursor, " lr=");
-  cursor = AppBoxAppendSignalHex(cursor, lr);
-  cursor = AppBoxAppendSignalText(cursor, " sp=");
-  cursor = AppBoxAppendSignalHex(cursor, context->uc_mcontext->__ss.__sp);
+  cursor = TempMailAppendSignalText(cursor, " pc=");
+  cursor = TempMailAppendSignalHex(cursor, pc);
+  cursor = TempMailAppendSignalText(cursor, " adversarys_offset=");
+  cursor = TempMailAppendSignalHex(cursor, pc - TempMailDiagnosticAdversarysBase);
+  cursor = TempMailAppendSignalText(cursor, " lr=");
+  cursor = TempMailAppendSignalHex(cursor, lr);
+  cursor = TempMailAppendSignalText(cursor, " sp=");
+  cursor = TempMailAppendSignalHex(cursor, context->uc_mcontext->__ss.__sp);
   static const unsigned diagnosticRegisters[] = {
       0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
       12, 13, 17, 19, 20, 21, 22, 23, 24,
@@ -2737,100 +2737,100 @@ static void AppBoxDiagnosticSignalHandler(int signalNumber,
        index < sizeof(diagnosticRegisters) / sizeof(diagnosticRegisters[0]);
        index += 1) {
     unsigned registerIndex = diagnosticRegisters[index];
-    cursor = AppBoxAppendSignalText(cursor, " x");
+    cursor = TempMailAppendSignalText(cursor, " x");
     if (registerIndex >= 10) {
       *cursor++ = (char)('0' + registerIndex / 10);
     }
     *cursor++ = (char)('0' + registerIndex % 10);
     *cursor++ = '=';
-    cursor = AppBoxAppendSignalHex(
+    cursor = TempMailAppendSignalHex(
         cursor, context->uc_mcontext->__ss.__x[registerIndex]);
   }
-  cursor = AppBoxAppendSignalText(cursor, " x25=");
-  cursor = AppBoxAppendSignalHex(cursor, context->uc_mcontext->__ss.__x[25]);
-  cursor = AppBoxAppendSignalText(cursor, " x26=");
-  cursor = AppBoxAppendSignalHex(cursor, context->uc_mcontext->__ss.__x[26]);
-  cursor = AppBoxAppendSignalText(cursor, " x27=");
-  cursor = AppBoxAppendSignalHex(cursor, context->uc_mcontext->__ss.__x[27]);
-  cursor = AppBoxAppendSignalText(cursor, " x28=");
-  cursor = AppBoxAppendSignalHex(cursor, context->uc_mcontext->__ss.__x[28]);
-  if (AppBoxDiagnosticWatchArmed && AppBoxDiagnosticWatchGuestState != 0) {
+  cursor = TempMailAppendSignalText(cursor, " x25=");
+  cursor = TempMailAppendSignalHex(cursor, context->uc_mcontext->__ss.__x[25]);
+  cursor = TempMailAppendSignalText(cursor, " x26=");
+  cursor = TempMailAppendSignalHex(cursor, context->uc_mcontext->__ss.__x[26]);
+  cursor = TempMailAppendSignalText(cursor, " x27=");
+  cursor = TempMailAppendSignalHex(cursor, context->uc_mcontext->__ss.__x[27]);
+  cursor = TempMailAppendSignalText(cursor, " x28=");
+  cursor = TempMailAppendSignalHex(cursor, context->uc_mcontext->__ss.__x[28]);
+  if (TempMailDiagnosticWatchArmed && TempMailDiagnosticWatchGuestState != 0) {
     const uintptr_t *watchedGuestRegisters =
-        (const uintptr_t *)(AppBoxDiagnosticWatchGuestState + 0x40);
-    cursor = AppBoxAppendSignalText(cursor, " watch_address=");
-    cursor = AppBoxAppendSignalHex(cursor, AppBoxDiagnosticWatchAddress);
+        (const uintptr_t *)(TempMailDiagnosticWatchGuestState + 0x40);
+    cursor = TempMailAppendSignalText(cursor, " watch_address=");
+    cursor = TempMailAppendSignalHex(cursor, TempMailDiagnosticWatchAddress);
     for (unsigned guestIndex = 0; guestIndex < 8; guestIndex += 1) {
-      cursor = AppBoxAppendSignalText(cursor, " watch_guest_x");
+      cursor = TempMailAppendSignalText(cursor, " watch_guest_x");
       *cursor++ = (char)('0' + guestIndex);
       *cursor++ = '=';
-      cursor = AppBoxAppendSignalHex(
+      cursor = TempMailAppendSignalHex(
           cursor, watchedGuestRegisters[guestIndex]);
     }
-    cursor = AppBoxAppendSignalText(cursor, " watch_guest_x30=");
-    cursor = AppBoxAppendSignalHex(cursor, watchedGuestRegisters[30]);
-    cursor = AppBoxAppendSignalText(cursor, " watch_guest_sp=");
-    cursor = AppBoxAppendSignalHex(cursor, watchedGuestRegisters[31]);
-    cursor = AppBoxAppendSignalText(cursor, " watch_guest_pc=");
-    cursor = AppBoxAppendSignalHex(cursor, watchedGuestRegisters[32]);
+    cursor = TempMailAppendSignalText(cursor, " watch_guest_x30=");
+    cursor = TempMailAppendSignalHex(cursor, watchedGuestRegisters[30]);
+    cursor = TempMailAppendSignalText(cursor, " watch_guest_sp=");
+    cursor = TempMailAppendSignalHex(cursor, watchedGuestRegisters[31]);
+    cursor = TempMailAppendSignalText(cursor, " watch_guest_pc=");
+    cursor = TempMailAppendSignalHex(cursor, watchedGuestRegisters[32]);
   }
   if (adversarysOffset == 0x0088BC18 ||
       adversarysOffset == 0x0088BC70) {
     uintptr_t guestState = context->uc_mcontext->__ss.__x[14];
     const uintptr_t *guestRegisters =
         (const uintptr_t *)(guestState + 0x40);
-    cursor = AppBoxAppendSignalText(cursor, " state=");
-    cursor = AppBoxAppendSignalHex(cursor, guestState);
-    cursor = AppBoxAppendSignalText(cursor, " guest_x0=");
-    cursor = AppBoxAppendSignalHex(cursor, guestRegisters[0]);
-    cursor = AppBoxAppendSignalText(cursor, " guest_x28=");
-    cursor = AppBoxAppendSignalHex(cursor, guestRegisters[28]);
-    cursor = AppBoxAppendSignalText(cursor, " guest_x29=");
-    cursor = AppBoxAppendSignalHex(cursor, guestRegisters[29]);
-    cursor = AppBoxAppendSignalText(cursor, " guest_x30=");
-    cursor = AppBoxAppendSignalHex(cursor, guestRegisters[30]);
-    cursor = AppBoxAppendSignalText(cursor, " guest_138=");
-    cursor = AppBoxAppendSignalHex(cursor, guestRegisters[31]);
-    cursor = AppBoxAppendSignalText(cursor, " guest_sp=");
-    cursor = AppBoxAppendSignalHex(cursor, guestRegisters[32]);
+    cursor = TempMailAppendSignalText(cursor, " state=");
+    cursor = TempMailAppendSignalHex(cursor, guestState);
+    cursor = TempMailAppendSignalText(cursor, " guest_x0=");
+    cursor = TempMailAppendSignalHex(cursor, guestRegisters[0]);
+    cursor = TempMailAppendSignalText(cursor, " guest_x28=");
+    cursor = TempMailAppendSignalHex(cursor, guestRegisters[28]);
+    cursor = TempMailAppendSignalText(cursor, " guest_x29=");
+    cursor = TempMailAppendSignalHex(cursor, guestRegisters[29]);
+    cursor = TempMailAppendSignalText(cursor, " guest_x30=");
+    cursor = TempMailAppendSignalHex(cursor, guestRegisters[30]);
+    cursor = TempMailAppendSignalText(cursor, " guest_138=");
+    cursor = TempMailAppendSignalHex(cursor, guestRegisters[31]);
+    cursor = TempMailAppendSignalText(cursor, " guest_sp=");
+    cursor = TempMailAppendSignalHex(cursor, guestRegisters[32]);
     uintptr_t guestStack = guestRegisters[31];
-    cursor = AppBoxAppendSignalText(cursor, " stack_word=");
-    cursor = AppBoxAppendSignalHex(cursor, *(const uintptr_t *)guestStack);
+    cursor = TempMailAppendSignalText(cursor, " stack_word=");
+    cursor = TempMailAppendSignalHex(cursor, *(const uintptr_t *)guestStack);
   }
   if (adversarysOffset == 0x0088BC00) {
     const uintptr_t *guestRegisters =
         (const uintptr_t *)context->uc_mcontext->__ss.__x[11];
-    cursor = AppBoxAppendSignalText(cursor, " guest_x0=");
-    cursor = AppBoxAppendSignalHex(cursor, guestRegisters[0]);
-    cursor = AppBoxAppendSignalText(cursor, " guest_x1=");
-    cursor = AppBoxAppendSignalHex(cursor, guestRegisters[1]);
-    cursor = AppBoxAppendSignalText(cursor, " guest_x28=");
-    cursor = AppBoxAppendSignalHex(cursor, guestRegisters[28]);
-    cursor = AppBoxAppendSignalText(cursor, " guest_x29=");
-    cursor = AppBoxAppendSignalHex(cursor, guestRegisters[29]);
-    cursor = AppBoxAppendSignalText(cursor, " guest_x30=");
-    cursor = AppBoxAppendSignalHex(cursor, guestRegisters[30]);
-    cursor = AppBoxAppendSignalText(cursor, " guest_sp=");
-    cursor = AppBoxAppendSignalHex(cursor, guestRegisters[31]);
-    cursor = AppBoxAppendSignalText(cursor, " guest_pc=");
-    cursor = AppBoxAppendSignalHex(cursor, guestRegisters[32]);
+    cursor = TempMailAppendSignalText(cursor, " guest_x0=");
+    cursor = TempMailAppendSignalHex(cursor, guestRegisters[0]);
+    cursor = TempMailAppendSignalText(cursor, " guest_x1=");
+    cursor = TempMailAppendSignalHex(cursor, guestRegisters[1]);
+    cursor = TempMailAppendSignalText(cursor, " guest_x28=");
+    cursor = TempMailAppendSignalHex(cursor, guestRegisters[28]);
+    cursor = TempMailAppendSignalText(cursor, " guest_x29=");
+    cursor = TempMailAppendSignalHex(cursor, guestRegisters[29]);
+    cursor = TempMailAppendSignalText(cursor, " guest_x30=");
+    cursor = TempMailAppendSignalHex(cursor, guestRegisters[30]);
+    cursor = TempMailAppendSignalText(cursor, " guest_sp=");
+    cursor = TempMailAppendSignalHex(cursor, guestRegisters[31]);
+    cursor = TempMailAppendSignalText(cursor, " guest_pc=");
+    cursor = TempMailAppendSignalHex(cursor, guestRegisters[32]);
   }
   uintptr_t runtimeObject = context->uc_mcontext->__ss.__x[0];
-  if (pc == AppBoxDiagnosticAdversarysBase + 0x00008D38 &&
+  if (pc == TempMailDiagnosticAdversarysBase + 0x00008D38 &&
       runtimeObject != 0) {
     const uintptr_t *imageFields =
         (const uintptr_t *)(runtimeObject + 0xE0);
-    cursor = AppBoxAppendSignalText(cursor, " image_e0=");
-    cursor = AppBoxAppendSignalHex(cursor, imageFields[0]);
-    cursor = AppBoxAppendSignalText(cursor, " image_e8=");
-    cursor = AppBoxAppendSignalHex(cursor, imageFields[1]);
-    cursor = AppBoxAppendSignalText(cursor, " image_f0=");
-    cursor = AppBoxAppendSignalHex(cursor, imageFields[2]);
-    cursor = AppBoxAppendSignalText(cursor, " image_f8=");
-    cursor = AppBoxAppendSignalHex(cursor, imageFields[3]);
+    cursor = TempMailAppendSignalText(cursor, " image_e0=");
+    cursor = TempMailAppendSignalHex(cursor, imageFields[0]);
+    cursor = TempMailAppendSignalText(cursor, " image_e8=");
+    cursor = TempMailAppendSignalHex(cursor, imageFields[1]);
+    cursor = TempMailAppendSignalText(cursor, " image_f0=");
+    cursor = TempMailAppendSignalHex(cursor, imageFields[2]);
+    cursor = TempMailAppendSignalText(cursor, " image_f8=");
+    cursor = TempMailAppendSignalHex(cursor, imageFields[3]);
   }
   uintptr_t framePointer = context->uc_mcontext->__ss.__fp;
-  cursor = AppBoxAppendSignalText(cursor, " x29=");
-  cursor = AppBoxAppendSignalHex(cursor, framePointer);
+  cursor = TempMailAppendSignalText(cursor, " x29=");
+  cursor = TempMailAppendSignalHex(cursor, framePointer);
   uintptr_t stackPointer = context->uc_mcontext->__ss.__sp;
   for (unsigned frameIndex = 0; frameIndex < 16; frameIndex += 1) {
     if (
@@ -2844,54 +2844,54 @@ static void AppBoxDiagnosticSignalHandler(int signalNumber,
     const uintptr_t *frame = (const uintptr_t *)framePointer;
     uintptr_t previousFrame = frame[0];
     uintptr_t returnAddress = frame[1];
-    cursor = AppBoxAppendSignalText(cursor, " frame");
+    cursor = TempMailAppendSignalText(cursor, " frame");
     if (frameIndex >= 10) {
       *cursor++ = (char)('0' + frameIndex / 10);
     }
     *cursor++ = (char)('0' + frameIndex % 10);
     *cursor++ = '=';
-    cursor = AppBoxAppendSignalHex(cursor, returnAddress);
+    cursor = TempMailAppendSignalHex(cursor, returnAddress);
     if (previousFrame <= framePointer) {
       break;
     }
     framePointer = previousFrame;
   }
-  cursor = AppBoxAppendSignalText(cursor, " nivm_base=");
+  cursor = TempMailAppendSignalText(cursor, " nivm_base=");
   uintptr_t nivmBase = 0;
-  if (AppBoxDiagnosticAdversarysBase != 0) {
-    nivmBase = *(const uintptr_t *)(AppBoxDiagnosticAdversarysBase + 0x62DE748);
+  if (TempMailDiagnosticAdversarysBase != 0) {
+    nivmBase = *(const uintptr_t *)(TempMailDiagnosticAdversarysBase + 0x62DE748);
   }
-  cursor = AppBoxAppendSignalHex(cursor, nivmBase);
+  cursor = TempMailAppendSignalHex(cursor, nivmBase);
   *cursor++ = '\n';
   size_t length = (size_t)(cursor - buffer);
   write(STDERR_FILENO, buffer, length);
-  if (AppBoxDiagnosticSignalFile >= 0) {
-    write(AppBoxDiagnosticSignalFile, buffer, length);
+  if (TempMailDiagnosticSignalFile >= 0) {
+    write(TempMailDiagnosticSignalFile, buffer, length);
   }
   _exit(128 + signalNumber);
 }
 
-static void AppBoxInstallDiagnosticSignalHandler(void) {
+static void TempMailInstallDiagnosticSignalHandler(void) {
   Dl_info imageInfo = {0};
-  if (AppBoxAdversarysOpen != NULL &&
-      dladdr((void *)AppBoxAdversarysOpen, &imageInfo) != 0) {
-    AppBoxDiagnosticAdversarysBase = (uintptr_t)imageInfo.dli_fbase;
+  if (TempMailAdversarysOpen != NULL &&
+      dladdr((void *)TempMailAdversarysOpen, &imageInfo) != 0) {
+    TempMailDiagnosticAdversarysBase = (uintptr_t)imageInfo.dli_fbase;
   }
-  AppBoxDiagnosticDispatchOnceArmed =
+  TempMailDiagnosticDispatchOnceArmed =
       [NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-diagnostic-dispatch-once"];
+          containsObject:@"--tempmail-diagnostic-dispatch-once"];
   NSURL *documentsURL = [NSFileManager.defaultManager
       URLsForDirectory:NSDocumentDirectory
       inDomains:NSUserDomainMask].lastObject;
   NSURL *signalURL =
-      [documentsURL URLByAppendingPathComponent:@"appbox-runtime-signal.log"];
-  if (AppBoxDiagnosticSignalFile >= 0) {
-    close(AppBoxDiagnosticSignalFile);
+      [documentsURL URLByAppendingPathComponent:@"tempmail-runtime-signal.log"];
+  if (TempMailDiagnosticSignalFile >= 0) {
+    close(TempMailDiagnosticSignalFile);
   }
-  AppBoxDiagnosticSignalFile = open(signalURL.fileSystemRepresentation,
+  TempMailDiagnosticSignalFile = open(signalURL.fileSystemRepresentation,
                                     O_CREAT | O_WRONLY | O_TRUNC, 0600);
   struct sigaction action = {0};
-  action.sa_sigaction = AppBoxDiagnosticSignalHandler;
+  action.sa_sigaction = TempMailDiagnosticSignalHandler;
   action.sa_flags = SA_SIGINFO;
   sigemptyset(&action.sa_mask);
   sigaction(SIGILL, &action, NULL);
@@ -2900,12 +2900,12 @@ static void AppBoxInstallDiagnosticSignalHandler(void) {
   sigaction(SIGBUS, &action, NULL);
 }
 
-static void AppBoxLogDiagnosticMemory(NSString *stage) {
+static void TempMailLogDiagnosticMemory(NSString *stage) {
   task_vm_info_data_t info = {0};
   mach_msg_type_number_t count = TASK_VM_INFO_COUNT;
   kern_return_t result = task_info(
       mach_task_self(), TASK_VM_INFO, (task_info_t)&info, &count);
-  NSLog(@"APPBOX_DIAGNOSTIC_MEMORY stage=%@ kr=%d footprint=%llu "
+  NSLog(@"TEMPMAIL_DIAGNOSTIC_MEMORY stage=%@ kr=%d footprint=%llu "
          "resident=%llu virtual=%llu peak=%llu",
         stage, result, (unsigned long long)info.phys_footprint,
         (unsigned long long)info.resident_size,
@@ -2913,44 +2913,44 @@ static void AppBoxLogDiagnosticMemory(NSString *stage) {
         (unsigned long long)info.resident_size_peak);
 }
 
-static void AppBoxDiagnosticSampleHandler(int signalNumber,
+static void TempMailDiagnosticSampleHandler(int signalNumber,
                                           siginfo_t *signalInfo,
                                           void *rawContext) {
   (void)signalNumber;
   (void)signalInfo;
   ucontext_t *context = (ucontext_t *)rawContext;
   uintptr_t pc = context->uc_mcontext->__ss.__pc;
-  uintptr_t runtimeOffset = pc - AppBoxDiagnosticAdversarysBase;
+  uintptr_t runtimeOffset = pc - TempMailDiagnosticAdversarysBase;
   uintptr_t fuelCursor = context->uc_mcontext->__ss.__x[28];
-  if (AppBoxDiagnosticSampleCount >= AppBoxDiagnosticSampleLimit ||
-      AppBoxDiagnosticAdversarysBase == 0 ||
+  if (TempMailDiagnosticSampleCount >= TempMailDiagnosticSampleLimit ||
+      TempMailDiagnosticAdversarysBase == 0 ||
       runtimeOffset < 0x20000 || runtimeOffset >= 0x6258000 ||
       fuelCursor < 0x100000000) {
     return;
   }
-  AppBoxDiagnosticSampleCount += 1;
+  TempMailDiagnosticSampleCount += 1;
   const uintptr_t *fuel = (const uintptr_t *)fuelCursor;
   char buffer[1024];
-  char *cursor = AppBoxAppendSignalText(
-      buffer, "APPBOX_DIAGNOSTIC_SAMPLE handler=");
-  cursor = AppBoxAppendSignalHex(cursor, runtimeOffset);
-  cursor = AppBoxAppendSignalText(cursor, " fuel_cursor=");
-  cursor = AppBoxAppendSignalHex(cursor, fuelCursor);
-  cursor = AppBoxAppendSignalText(cursor, " q-2=");
-  cursor = AppBoxAppendSignalHex(cursor, fuel[-2]);
-  cursor = AppBoxAppendSignalText(cursor, " q-1=");
-  cursor = AppBoxAppendSignalHex(cursor, fuel[-1]);
-  cursor = AppBoxAppendSignalText(cursor, " q0=");
-  cursor = AppBoxAppendSignalHex(cursor, fuel[0]);
-  cursor = AppBoxAppendSignalText(cursor, " q1=");
-  cursor = AppBoxAppendSignalHex(cursor, fuel[1]);
+  char *cursor = TempMailAppendSignalText(
+      buffer, "TEMPMAIL_DIAGNOSTIC_SAMPLE handler=");
+  cursor = TempMailAppendSignalHex(cursor, runtimeOffset);
+  cursor = TempMailAppendSignalText(cursor, " fuel_cursor=");
+  cursor = TempMailAppendSignalHex(cursor, fuelCursor);
+  cursor = TempMailAppendSignalText(cursor, " q-2=");
+  cursor = TempMailAppendSignalHex(cursor, fuel[-2]);
+  cursor = TempMailAppendSignalText(cursor, " q-1=");
+  cursor = TempMailAppendSignalHex(cursor, fuel[-1]);
+  cursor = TempMailAppendSignalText(cursor, " q0=");
+  cursor = TempMailAppendSignalHex(cursor, fuel[0]);
+  cursor = TempMailAppendSignalText(cursor, " q1=");
+  cursor = TempMailAppendSignalHex(cursor, fuel[1]);
   *cursor++ = '\n';
   write(STDERR_FILENO, buffer, (size_t)(cursor - buffer));
 }
 
-static void AppBoxInstallDiagnosticSampler(void) {
+static void TempMailInstallDiagnosticSampler(void) {
   struct sigaction action = {0};
-  action.sa_sigaction = AppBoxDiagnosticSampleHandler;
+  action.sa_sigaction = TempMailDiagnosticSampleHandler;
   action.sa_flags = SA_SIGINFO | SA_RESTART;
   sigemptyset(&action.sa_mask);
   sigaction(SIGPROF, &action, NULL);
@@ -2960,7 +2960,7 @@ static void AppBoxInstallDiagnosticSampler(void) {
   setitimer(ITIMER_PROF, &timer, NULL);
 }
 
-static void AppBoxSampleAdversarysThreads(void) {
+static void TempMailSampleAdversarysThreads(void) {
   thread_act_array_t threads = NULL;
   mach_msg_type_number_t threadCount = 0;
   if (task_threads(mach_task_self(), &threads, &threadCount) != KERN_SUCCESS) {
@@ -2969,7 +2969,7 @@ static void AppBoxSampleAdversarysThreads(void) {
   mach_port_t samplerThread = mach_thread_self();
   for (mach_msg_type_number_t index = 0;
        index < threadCount &&
-           AppBoxDiagnosticSampleCount < AppBoxDiagnosticSampleLimit;
+           TempMailDiagnosticSampleCount < TempMailDiagnosticSampleLimit;
        index += 1) {
     thread_t thread = threads[index];
     if (thread == samplerThread || thread_suspend(thread) != KERN_SUCCESS) {
@@ -2981,7 +2981,7 @@ static void AppBoxSampleAdversarysThreads(void) {
         thread, ARM_THREAD_STATE64, (thread_state_t)&state, &stateCount);
     uintptr_t pc = result == KERN_SUCCESS ? arm_thread_state64_get_pc(state) : 0;
     uintptr_t lr = result == KERN_SUCCESS ? arm_thread_state64_get_lr(state) : 0;
-    uintptr_t runtimeOffset = pc - AppBoxDiagnosticAdversarysBase;
+    uintptr_t runtimeOffset = pc - TempMailDiagnosticAdversarysBase;
     uintptr_t fuelCursor = result == KERN_SUCCESS
         ? state.__x[28]
         : 0;
@@ -2993,8 +2993,8 @@ static void AppBoxSampleAdversarysThreads(void) {
     uintptr_t qZero = 0;
     uintptr_t qOne = 0;
     BOOL shouldLog = result == KERN_SUCCESS &&
-        AppBoxDiagnosticAdversarysBase != 0 &&
-        runtimeRegister == AppBoxDiagnosticAdversarysBase &&
+        TempMailDiagnosticAdversarysBase != 0 &&
+        runtimeRegister == TempMailDiagnosticAdversarysBase &&
         fuelCursor >= 0x100000000;
     if (shouldLog) {
       const uintptr_t *fuel = (const uintptr_t *)fuelCursor;
@@ -3007,25 +3007,25 @@ static void AppBoxSampleAdversarysThreads(void) {
     if (!shouldLog) {
       continue;
     }
-    AppBoxDiagnosticSampleCount += 1;
+    TempMailDiagnosticSampleCount += 1;
     char buffer[1024];
-    char *cursor = AppBoxAppendSignalText(
-        buffer, "APPBOX_DIAGNOSTIC_THREAD_SAMPLE pc=");
-    cursor = AppBoxAppendSignalHex(cursor, pc);
-    cursor = AppBoxAppendSignalText(cursor, " lr=");
-    cursor = AppBoxAppendSignalHex(cursor, lr);
-    cursor = AppBoxAppendSignalText(cursor, " handler=");
-    cursor = AppBoxAppendSignalHex(cursor, runtimeOffset);
-    cursor = AppBoxAppendSignalText(cursor, " fuel_cursor=");
-    cursor = AppBoxAppendSignalHex(cursor, fuelCursor);
-    cursor = AppBoxAppendSignalText(cursor, " q-2=");
-    cursor = AppBoxAppendSignalHex(cursor, qMinus2);
-    cursor = AppBoxAppendSignalText(cursor, " q-1=");
-    cursor = AppBoxAppendSignalHex(cursor, qMinus1);
-    cursor = AppBoxAppendSignalText(cursor, " q0=");
-    cursor = AppBoxAppendSignalHex(cursor, qZero);
-    cursor = AppBoxAppendSignalText(cursor, " q1=");
-    cursor = AppBoxAppendSignalHex(cursor, qOne);
+    char *cursor = TempMailAppendSignalText(
+        buffer, "TEMPMAIL_DIAGNOSTIC_THREAD_SAMPLE pc=");
+    cursor = TempMailAppendSignalHex(cursor, pc);
+    cursor = TempMailAppendSignalText(cursor, " lr=");
+    cursor = TempMailAppendSignalHex(cursor, lr);
+    cursor = TempMailAppendSignalText(cursor, " handler=");
+    cursor = TempMailAppendSignalHex(cursor, runtimeOffset);
+    cursor = TempMailAppendSignalText(cursor, " fuel_cursor=");
+    cursor = TempMailAppendSignalHex(cursor, fuelCursor);
+    cursor = TempMailAppendSignalText(cursor, " q-2=");
+    cursor = TempMailAppendSignalHex(cursor, qMinus2);
+    cursor = TempMailAppendSignalText(cursor, " q-1=");
+    cursor = TempMailAppendSignalHex(cursor, qMinus1);
+    cursor = TempMailAppendSignalText(cursor, " q0=");
+    cursor = TempMailAppendSignalHex(cursor, qZero);
+    cursor = TempMailAppendSignalText(cursor, " q1=");
+    cursor = TempMailAppendSignalHex(cursor, qOne);
     *cursor++ = '\n';
     write(STDERR_FILENO, buffer, (size_t)(cursor - buffer));
   }
@@ -3034,7 +3034,7 @@ static void AppBoxSampleAdversarysThreads(void) {
                 threadCount * sizeof(thread_t));
 }
 
-static unsigned int AppBoxSampleAdversarysThreadsToFile(FILE *output,
+static unsigned int TempMailSampleAdversarysThreadsToFile(FILE *output,
                                                          unsigned int ordinal) {
   thread_act_array_t threads = NULL;
   mach_msg_type_number_t threadCount = 0;
@@ -3067,8 +3067,8 @@ static unsigned int AppBoxSampleAdversarysThreadsToFile(FILE *output,
     uint64_t flutterConstProbe[2] = {0, 0};
     vm_size_t flutterConstProbeSize = 0;
     kern_return_t flutterConstProbeResult = KERN_INVALID_ADDRESS;
-    if (AppBoxDiagnosticAdversarysBase == 0 ||
-        runtimeRegister != AppBoxDiagnosticAdversarysBase ||
+    if (TempMailDiagnosticAdversarysBase == 0 ||
+        runtimeRegister != TempMailDiagnosticAdversarysBase ||
         fuelCursor < 0x100000000) {
       continue;
     }
@@ -3114,10 +3114,10 @@ static unsigned int AppBoxSampleAdversarysThreadsToFile(FILE *output,
   return hits;
 }
 
-static void AppBoxStartDiagnosticFileBurst(NSString *reason) {
+static void TempMailStartDiagnosticFileBurst(NSString *reason) {
   if (![NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-diagnostic-result-file-burst"] ||
-      !__sync_bool_compare_and_swap(&AppBoxDiagnosticFileBurstStarted, 0, 1)) {
+          containsObject:@"--tempmail-diagnostic-result-file-burst"] ||
+      !__sync_bool_compare_and_swap(&TempMailDiagnosticFileBurstStarted, 0, 1)) {
     return;
   }
   NSString *reasonCopy = [reason copy];
@@ -3127,10 +3127,10 @@ static void AppBoxStartDiagnosticFileBurst(NSString *reason) {
           URLsForDirectory:NSDocumentDirectory
           inDomains:NSUserDomainMask].lastObject;
       NSURL *outputURL =
-          [documentsURL URLByAppendingPathComponent:@"appbox-runtime-fuel.log"];
+          [documentsURL URLByAppendingPathComponent:@"tempmail-runtime-fuel.log"];
       FILE *output = fopen(outputURL.fileSystemRepresentation, "w");
       if (output == NULL) {
-        NSLog(@"APPBOX_DIAGNOSTIC_FILE_BURST open_failed path=%@ errno=%d",
+        NSLog(@"TEMPMAIL_DIAGNOSTIC_FILE_BURST open_failed path=%@ errno=%d",
               outputURL.path, errno);
         return;
       }
@@ -3139,23 +3139,23 @@ static void AppBoxStartDiagnosticFileBurst(NSString *reason) {
       // collected so the last translated block remains available afterward.
       setvbuf(output, NULL, _IONBF, 0);
       fprintf(output, "ADVERSARYS_BASE 0x%llx REASON %s\n",
-              (unsigned long long)AppBoxDiagnosticAdversarysBase,
+              (unsigned long long)TempMailDiagnosticAdversarysBase,
               reasonCopy.UTF8String ?: "");
       unsigned int hits = 0;
       for (unsigned int ordinal = 0; ordinal < 14000; ordinal += 1) {
-        hits += AppBoxSampleAdversarysThreadsToFile(output, ordinal);
+        hits += TempMailSampleAdversarysThreadsToFile(output, ordinal);
         usleep(500);
       }
       fprintf(output, "DONE samples=14000 hits=%u\n", hits);
       fclose(output);
-      NSLog(@"APPBOX_DIAGNOSTIC_FILE_BURST end hits=%u path=%@", hits,
+      NSLog(@"TEMPMAIL_DIAGNOSTIC_FILE_BURST end hits=%u path=%@", hits,
             outputURL.path);
     }
   });
 }
 
-static void AppBoxStartDiagnosticFocusedBurst(void) {
-  if (!__sync_bool_compare_and_swap(&AppBoxDiagnosticFocusedBurstStarted,
+static void TempMailStartDiagnosticFocusedBurst(void) {
+  if (!__sync_bool_compare_and_swap(&TempMailDiagnosticFocusedBurstStarted,
                                     0, 1)) {
     return;
   }
@@ -3167,7 +3167,7 @@ static void AppBoxStartDiagnosticFocusedBurst(void) {
           URLsForDirectory:NSDocumentDirectory
           inDomains:NSUserDomainMask].lastObject;
       NSURL *outputURL = [documentsURL
-          URLByAppendingPathComponent:@"appbox-runtime-focused.log"];
+          URLByAppendingPathComponent:@"tempmail-runtime-focused.log"];
       FILE *output = fopen(outputURL.fileSystemRepresentation, "w");
       if (output == NULL) {
         dispatch_semaphore_signal(ready);
@@ -3176,7 +3176,7 @@ static void AppBoxStartDiagnosticFocusedBurst(void) {
       }
       setvbuf(output, NULL, _IONBF, 0);
       fprintf(output, "ADVERSARYS_BASE 0x%llx THREAD %u\n",
-              (unsigned long long)AppBoxDiagnosticAdversarysBase,
+              (unsigned long long)TempMailDiagnosticAdversarysBase,
               targetThread);
       dispatch_semaphore_signal(ready);
       // Tianya can terminate during the first translated instructions after
@@ -3202,14 +3202,14 @@ static void AppBoxStartDiagnosticFocusedBurst(void) {
         uintptr_t pc = arm_thread_state64_get_pc(state);
         uintptr_t runtimeRegister = state.__x[26];
         uintptr_t fuelCursor = state.__x[28];
-        if (AppBoxDiagnosticAdversarysBase == 0 ||
-            runtimeRegister != AppBoxDiagnosticAdversarysBase ||
+        if (TempMailDiagnosticAdversarysBase == 0 ||
+            runtimeRegister != TempMailDiagnosticAdversarysBase ||
             fuelCursor < 0x100000000) {
           usleep(50);
           continue;
         }
         uintptr_t nivmBase = *(const uintptr_t *)(
-            AppBoxDiagnosticAdversarysBase + 0x62DE748);
+            TempMailDiagnosticAdversarysBase + 0x62DE748);
         fprintf(output,
                 "%u pc=0x%llx fuel_cursor=0x%llx nivm_base=0x%llx\n",
                 ordinal, (unsigned long long)pc,
@@ -3221,7 +3221,7 @@ static void AppBoxStartDiagnosticFocusedBurst(void) {
       fprintf(output, "DONE attempts=600000 hits=%u\n", hits);
       fclose(output);
       mach_port_deallocate(mach_task_self(), targetThread);
-      NSLog(@"APPBOX_DIAGNOSTIC_FOCUSED end hits=%u path=%@", hits,
+      NSLog(@"TEMPMAIL_DIAGNOSTIC_FOCUSED end hits=%u path=%@", hits,
             outputURL.path);
     }
   });
@@ -3229,7 +3229,7 @@ static void AppBoxStartDiagnosticFocusedBurst(void) {
                           dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC));
 }
 
-static void AppBoxScheduleDiagnosticThreadSampler(void) {
+static void TempMailScheduleDiagnosticThreadSampler(void) {
   dispatch_queue_t queue = dispatch_get_global_queue(QOS_CLASS_UTILITY, 0);
   dispatch_source_t timer = dispatch_source_create(
       DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
@@ -3237,34 +3237,34 @@ static void AppBoxScheduleDiagnosticThreadSampler(void) {
       timer, dispatch_time(DISPATCH_TIME_NOW, 500 * NSEC_PER_MSEC),
       10 * NSEC_PER_MSEC, 2 * NSEC_PER_MSEC);
   dispatch_source_set_event_handler(timer, ^{
-    AppBoxSampleAdversarysThreads();
-    if (AppBoxDiagnosticSampleCount >= AppBoxDiagnosticSampleLimit) {
+    TempMailSampleAdversarysThreads();
+    if (TempMailDiagnosticSampleCount >= TempMailDiagnosticSampleLimit) {
       dispatch_source_cancel(timer);
     }
   });
   dispatch_resume(timer);
 }
 
-static NSString *const AppBoxGuestModeKey = @"AppBoxPlayBoxGuestMode";
-static NSString *const AppBoxGuestLaunchTokenKey = @"AppBoxPlayBoxGuestLaunchToken";
-static NSString *const AppBoxGuestBundleKey = @"AppBoxPlayBoxGuestBundle";
-static NSString *const AppBoxGuestExecutableKey = @"AppBoxPlayBoxGuestExecutable";
-static NSString *const AppBoxGuestNIVMKey = @"AppBoxPlayBoxGuestNIVM";
-static NSString *const AppBoxRuntimeKindKey = @"AppBoxGuestRuntimeKind";
-static NSString *const AppBoxRuntimeLaunchTokenKey = @"AppBoxGuestLaunchToken";
-static NSString *const AppBoxPlayBoxContinuationMarker =
-    @"AppBoxTest/playbox-relaunch-continuation";
+static NSString *const TempMailGuestModeKey = @"TempMailPlayBoxGuestMode";
+static NSString *const TempMailGuestLaunchTokenKey = @"TempMailPlayBoxGuestLaunchToken";
+static NSString *const TempMailGuestBundleKey = @"TempMailPlayBoxGuestBundle";
+static NSString *const TempMailGuestExecutableKey = @"TempMailPlayBoxGuestExecutable";
+static NSString *const TempMailGuestNIVMKey = @"TempMailPlayBoxGuestNIVM";
+static NSString *const TempMailRuntimeKindKey = @"TempMailGuestRuntimeKind";
+static NSString *const TempMailRuntimeLaunchTokenKey = @"TempMailGuestLaunchToken";
+static NSString *const TempMailPlayBoxContinuationMarker =
+    @"TempMailTest/playbox-relaunch-continuation";
 
-static NSURL *AppBoxPlayBoxContinuationMarkerURL(void) {
+static NSURL *TempMailPlayBoxContinuationMarkerURL(void) {
   NSURL *documentsURL = [NSFileManager.defaultManager
       URLsForDirectory:NSDocumentDirectory
       inDomains:NSUserDomainMask].lastObject;
   return [documentsURL URLByAppendingPathComponent:
-      AppBoxPlayBoxContinuationMarker];
+      TempMailPlayBoxContinuationMarker];
 }
 
-static BOOL AppBoxConsumeFreshPlayBoxContinuationMarker(void) {
-  NSURL *markerURL = AppBoxPlayBoxContinuationMarkerURL();
+static BOOL TempMailConsumeFreshPlayBoxContinuationMarker(void) {
+  NSURL *markerURL = TempMailPlayBoxContinuationMarkerURL();
   NSDictionary<NSFileAttributeKey, id> *attributes =
       [NSFileManager.defaultManager attributesOfItemAtPath:markerURL.path
                                                     error:nil];
@@ -3275,45 +3275,45 @@ static BOOL AppBoxConsumeFreshPlayBoxContinuationMarker(void) {
   NSTimeInterval age = -modified.timeIntervalSinceNow;
   [NSFileManager.defaultManager removeItemAtURL:markerURL error:nil];
   if (age < 0 || age > 180) {
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME continuation_ignored age=%.1f", age);
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME continuation_ignored age=%.1f", age);
     return NO;
   }
-  NSLog(@"APPBOX_PLAYBOX_RUNTIME continuation_consumed age=%.1f", age);
+  NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME continuation_consumed age=%.1f", age);
   return YES;
 }
 
-@class AppBoxGuestFloatingControl;
+@class TempMailGuestFloatingControl;
 
-@interface AppBoxFloatingMenuView : UIView
+@interface TempMailFloatingMenuView : UIView
 @property(nonatomic, strong) UIView *coverView;
 @property(nonatomic, strong) UIControl *actionButton;
 @property(nonatomic, strong) UIImageView *actionIconView;
 @property(nonatomic, strong) UILabel *actionTitleLabel;
-@property(nonatomic, weak) AppBoxGuestFloatingControl *sourceControl;
-- (void)displayFromControl:(AppBoxGuestFloatingControl *)control
+@property(nonatomic, weak) TempMailGuestFloatingControl *sourceControl;
+- (void)displayFromControl:(TempMailGuestFloatingControl *)control
                     inView:(UIView *)container
                   animated:(BOOL)animated;
 - (void)hideAnimated:(BOOL)animated;
 @end
 
-@interface AppBoxGuestFloatingControl : UIControl
+@interface TempMailGuestFloatingControl : UIControl
 @property(nonatomic, strong) UIImageView *iconView;
 @property(nonatomic) CGPoint dragStartCenter;
 - (void)showMenuAnimated:(BOOL)animated;
 @end
 
-static AppBoxGuestFloatingControl *AppBoxGuestFloatingView;
-static AppBoxFloatingMenuView *AppBoxGuestFloatingMenuView;
-static BOOL AppBoxFloatingReturnInFlight;
-static BOOL AppBoxFloatingHasStoredPosition;
-static BOOL AppBoxFloatingDockedToLeft;
-static CGFloat AppBoxFloatingStoredYRatio = 0.5;
-static const CGFloat AppBoxFloatingActionSize = 82;
+static TempMailGuestFloatingControl *TempMailGuestFloatingView;
+static TempMailFloatingMenuView *TempMailGuestFloatingMenuView;
+static BOOL TempMailFloatingReturnInFlight;
+static BOOL TempMailFloatingHasStoredPosition;
+static BOOL TempMailFloatingDockedToLeft;
+static CGFloat TempMailFloatingStoredYRatio = 0.5;
+static const CGFloat TempMailFloatingActionSize = 82;
 
-static NSBundle *AppBoxPlayBoxFloatingBundle(void) {
-  NSBundle *hostBundle = AppBoxHostBundle;
+static NSBundle *TempMailPlayBoxFloatingBundle(void) {
+  NSBundle *hostBundle = TempMailHostBundle;
   if (hostBundle == nil) {
-    hostBundle = [NSBundle bundleForClass:AppBoxGuestFloatingControl.class];
+    hostBundle = [NSBundle bundleForClass:TempMailGuestFloatingControl.class];
   }
   NSString *path = [hostBundle.bundlePath
       stringByAppendingPathComponent:
@@ -3321,42 +3321,42 @@ static NSBundle *AppBoxPlayBoxFloatingBundle(void) {
   return [NSBundle bundleWithPath:path];
 }
 
-static UIImage *AppBoxFloatingImage(NSString *name) {
+static UIImage *TempMailFloatingImage(NSString *name) {
   return [UIImage imageNamed:name
-                    inBundle:AppBoxPlayBoxFloatingBundle()
+                    inBundle:TempMailPlayBoxFloatingBundle()
        compatibleWithTraitCollection:nil];
 }
 
-static NSString *AppBoxFloatingLocalizedString(NSString *key,
+static NSString *TempMailFloatingLocalizedString(NSString *key,
                                                 NSString *fallback) {
-  NSBundle *bundle = AppBoxPlayBoxFloatingBundle();
+  NSBundle *bundle = TempMailPlayBoxFloatingBundle();
   NSString *value = [bundle localizedStringForKey:key
                                              value:fallback
                                              table:@"PBPlayerFramework"];
   return value.length > 0 ? value : fallback;
 }
 
-static void AppBoxReturnToSandbox(void) {
-  if (AppBoxFloatingReturnInFlight) {
+static void TempMailReturnToSandbox(void) {
+  if (TempMailFloatingReturnInFlight) {
     return;
   }
-  AppBoxFloatingReturnInFlight = YES;
+  TempMailFloatingReturnInFlight = YES;
   NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
-  [defaults removeObjectForKey:AppBoxRuntimeLaunchTokenKey];
-  [defaults removeObjectForKey:AppBoxGuestLaunchTokenKey];
-  [defaults removeObjectForKey:AppBoxGuestModeKey];
+  [defaults removeObjectForKey:TempMailRuntimeLaunchTokenKey];
+  [defaults removeObjectForKey:TempMailGuestLaunchTokenKey];
+  [defaults removeObjectForKey:TempMailGuestModeKey];
   [defaults synchronize];
   [NSFileManager.defaultManager
-      removeItemAtURL:AppBoxPlayBoxContinuationMarkerURL()
+      removeItemAtURL:TempMailPlayBoxContinuationMarkerURL()
                 error:nil];
 
   NSURL *relaunchURL = [NSURL URLWithString:
-      @"quietform://sandbox.relaunch"];
-  NSLog(@"APPBOX_FLOATING_RETURN requested url=%@", relaunchURL);
+      @"tempmail://sandbox.relaunch"];
+  NSLog(@"TEMPMAIL_FLOATING_RETURN requested url=%@", relaunchURL);
   void (^completion)(BOOL) = ^(BOOL accepted) {
-    NSLog(@"APPBOX_FLOATING_RETURN accepted=%d", accepted);
+    NSLog(@"TEMPMAIL_FLOATING_RETURN accepted=%d", accepted);
     if (!accepted) {
-      AppBoxFloatingReturnInFlight = NO;
+      TempMailFloatingReturnInFlight = NO;
       return;
     }
     exit(0);
@@ -3369,7 +3369,7 @@ static void AppBoxReturnToSandbox(void) {
                          completionHandler:completion];
 }
 
-@implementation AppBoxFloatingMenuView
+@implementation TempMailFloatingMenuView
 
 - (instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
@@ -3390,10 +3390,10 @@ static void AppBoxReturnToSandbox(void) {
   [self addSubview:_coverView];
 
   _actionButton = [[UIControl alloc]
-      initWithFrame:CGRectMake(0, 0, AppBoxFloatingActionSize,
-                               AppBoxFloatingActionSize)];
-  _actionButton.accessibilityIdentifier = @"appbox.return-to-sandbox.action";
-  _actionButton.accessibilityLabel = AppBoxFloatingLocalizedString(
+      initWithFrame:CGRectMake(0, 0, TempMailFloatingActionSize,
+                               TempMailFloatingActionSize)];
+  _actionButton.accessibilityIdentifier = @"tempmail.return-to-mailbox.action";
+  _actionButton.accessibilityLabel = TempMailFloatingLocalizedString(
       @"floating_back_app_title", @"返回沙盒");
   _actionButton.backgroundColor =
       [UIColor.blackColor colorWithAlphaComponent:0.84];
@@ -3407,13 +3407,13 @@ static void AppBoxReturnToSandbox(void) {
   [self addSubview:_actionButton];
 
   _actionIconView = [[UIImageView alloc] initWithImage:
-      AppBoxFloatingImage(@"cscb_floating_back_icon")];
+      TempMailFloatingImage(@"cscb_floating_back_icon")];
   _actionIconView.contentMode = UIViewContentModeScaleAspectFit;
   _actionIconView.userInteractionEnabled = NO;
   [_actionButton addSubview:_actionIconView];
 
   _actionTitleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-  _actionTitleLabel.text = AppBoxFloatingLocalizedString(
+  _actionTitleLabel.text = TempMailFloatingLocalizedString(
       @"floating_back_app_title", @"返回沙盒");
   _actionTitleLabel.textColor = UIColor.whiteColor;
   _actionTitleLabel.font = [UIFont systemFontOfSize:12
@@ -3431,19 +3431,19 @@ static void AppBoxReturnToSandbox(void) {
   self.actionTitleLabel.frame = CGRectMake(4, 46, 74, 17);
 }
 
-- (CGRect)targetFrameForControl:(AppBoxGuestFloatingControl *)control
+- (CGRect)targetFrameForControl:(TempMailGuestFloatingControl *)control
                       container:(UIView *)container {
   CGRect sourceFrame = [control.superview convertRect:control.frame
                                                 toView:container];
-  CGFloat x = CGRectGetMidX(sourceFrame) - AppBoxFloatingActionSize / 2.0;
-  CGFloat y = CGRectGetMidY(sourceFrame) - AppBoxFloatingActionSize / 2.0;
+  CGFloat x = CGRectGetMidX(sourceFrame) - TempMailFloatingActionSize / 2.0;
+  CGFloat y = CGRectGetMidY(sourceFrame) - TempMailFloatingActionSize / 2.0;
   x = MIN(MAX(x, 16), CGRectGetWidth(container.bounds) -
-                              AppBoxFloatingActionSize - 16);
-  return CGRectMake(x, y, AppBoxFloatingActionSize,
-                    AppBoxFloatingActionSize);
+                              TempMailFloatingActionSize - 16);
+  return CGRectMake(x, y, TempMailFloatingActionSize,
+                    TempMailFloatingActionSize);
 }
 
-- (void)displayFromControl:(AppBoxGuestFloatingControl *)control
+- (void)displayFromControl:(TempMailGuestFloatingControl *)control
                     inView:(UIView *)container
                   animated:(BOOL)animated {
   self.sourceControl = control;
@@ -3478,10 +3478,10 @@ static void AppBoxReturnToSandbox(void) {
 }
 
 - (void)hideAnimated:(BOOL)animated {
-  AppBoxGuestFloatingControl *control = self.sourceControl;
+  TempMailGuestFloatingControl *control = self.sourceControl;
   if (!animated || control.superview == nil) {
     [self removeFromSuperview];
-    AppBoxGuestFloatingMenuView = nil;
+    TempMailGuestFloatingMenuView = nil;
     return;
   }
   CGRect sourceFrame = [control.superview convertRect:control.frame
@@ -3499,7 +3499,7 @@ static void AppBoxReturnToSandbox(void) {
                    animations:^{ self.actionButton.transform = transform; }
                    completion:^(__unused BOOL finished) {
     [self removeFromSuperview];
-    AppBoxGuestFloatingMenuView = nil;
+    TempMailGuestFloatingMenuView = nil;
   }];
 }
 
@@ -3508,27 +3508,27 @@ static void AppBoxReturnToSandbox(void) {
 }
 
 - (void)handleActionTap {
-  AppBoxReturnToSandbox();
+  TempMailReturnToSandbox();
 }
 
 @end
 
-@implementation AppBoxGuestFloatingControl
+@implementation TempMailGuestFloatingControl
 
 - (instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self == nil) {
     return nil;
   }
-  self.accessibilityIdentifier = @"appbox.return-to-sandbox";
-  self.accessibilityLabel = AppBoxFloatingLocalizedString(
+  self.accessibilityIdentifier = @"tempmail.return-to-mailbox";
+  self.accessibilityLabel = TempMailFloatingLocalizedString(
       @"floating_back_app_title", @"返回沙盒");
 
   _iconView = [[UIImageView alloc] initWithFrame:CGRectZero];
   _iconView.contentMode = UIViewContentModeScaleAspectFit;
-  _iconView.image = AppBoxFloatingImage(@"cscb_floating_icon");
+  _iconView.image = TempMailFloatingImage(@"cscb_floating_icon");
   _iconView.highlightedImage =
-      AppBoxFloatingImage(@"cscb_floating_icon_highlight");
+      TempMailFloatingImage(@"cscb_floating_icon_highlight");
   if (_iconView.image == nil) {
     _iconView.image = [UIImage systemImageNamed:@"shippingbox.fill"];
     _iconView.tintColor = UIColor.whiteColor;
@@ -3576,12 +3576,12 @@ static void AppBoxReturnToSandbox(void) {
 
 - (void)showMenuAnimated:(BOOL)animated {
   UIView *container = self.superview;
-  if (container == nil || AppBoxGuestFloatingMenuView.superview != nil) {
+  if (container == nil || TempMailGuestFloatingMenuView.superview != nil) {
     return;
   }
-  AppBoxFloatingMenuView *menu = [[AppBoxFloatingMenuView alloc]
+  TempMailFloatingMenuView *menu = [[TempMailFloatingMenuView alloc]
       initWithFrame:container.bounds];
-  AppBoxGuestFloatingMenuView = menu;
+  TempMailGuestFloatingMenuView = menu;
   [menu displayFromControl:self inView:container animated:animated];
 }
 
@@ -3630,13 +3630,13 @@ static void AppBoxReturnToSandbox(void) {
     target.x += velocity.x * 0.10;
     target.y += velocity.y * 0.10;
   }
-  AppBoxFloatingDockedToLeft = target.x < CGRectGetMidX(container.bounds);
-  target.x = AppBoxFloatingDockedToLeft ? left : right;
+  TempMailFloatingDockedToLeft = target.x < CGRectGetMidX(container.bounds);
+  target.x = TempMailFloatingDockedToLeft ? left : right;
   target.y = MIN(MAX(target.y, top), bottom);
-  AppBoxFloatingStoredYRatio = bottom > top
+  TempMailFloatingStoredYRatio = bottom > top
       ? (target.y - top) / (bottom - top)
       : 0.5;
-  AppBoxFloatingHasStoredPosition = YES;
+  TempMailFloatingHasStoredPosition = YES;
   self.highlighted = NO;
   [UIView animateWithDuration:0.28
                         delay:0
@@ -3653,13 +3653,13 @@ static void AppBoxReturnToSandbox(void) {
 
 @end
 
-static void AppBoxInstallGuestFloatingControl(UIWindow *window) {
+static void TempMailInstallGuestFloatingControl(UIWindow *window) {
   if (window == nil) {
     return;
   }
-  [AppBoxGuestFloatingMenuView removeFromSuperview];
-  AppBoxGuestFloatingMenuView = nil;
-  [AppBoxGuestFloatingView removeFromSuperview];
+  [TempMailGuestFloatingMenuView removeFromSuperview];
+  TempMailGuestFloatingMenuView = nil;
+  [TempMailGuestFloatingView removeFromSuperview];
   CGFloat size = 60;
   UIEdgeInsets safe = window.safeAreaInsets;
   CGFloat halfSize = size / 2.0;
@@ -3667,26 +3667,26 @@ static void AppBoxInstallGuestFloatingControl(UIWindow *window) {
   CGFloat right = MAX(left, CGRectGetWidth(window.bounds) - safe.right - 8 - halfSize);
   CGFloat top = safe.top + 18 + halfSize;
   CGFloat bottom = MAX(top, CGRectGetHeight(window.bounds) - safe.bottom - 18 - halfSize);
-  CGFloat x = AppBoxFloatingHasStoredPosition
-      ? (AppBoxFloatingDockedToLeft ? left : right)
+  CGFloat x = TempMailFloatingHasStoredPosition
+      ? (TempMailFloatingDockedToLeft ? left : right)
       : right;
   CGFloat defaultY = MAX(safe.top + 82 + halfSize,
                          CGRectGetHeight(window.bounds) * 0.48 + halfSize);
-  CGFloat y = AppBoxFloatingHasStoredPosition
-      ? top + AppBoxFloatingStoredYRatio * (bottom - top)
+  CGFloat y = TempMailFloatingHasStoredPosition
+      ? top + TempMailFloatingStoredYRatio * (bottom - top)
       : MIN(defaultY, bottom);
-  AppBoxGuestFloatingControl *control =
-      [[AppBoxGuestFloatingControl alloc]
+  TempMailGuestFloatingControl *control =
+      [[TempMailGuestFloatingControl alloc]
           initWithFrame:CGRectMake(x - halfSize, y - halfSize, size, size)];
   control.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |
       UIViewAutoresizingFlexibleTopMargin;
   [window addSubview:control];
   [window bringSubviewToFront:control];
-  AppBoxGuestFloatingView = control;
-  NSLog(@"APPBOX_FLOATING_RETURN installed window=%@ asset=%d",
+  TempMailGuestFloatingView = control;
+  NSLog(@"TEMPMAIL_FLOATING_RETURN installed window=%@ asset=%d",
         NSStringFromClass(window.class), control.iconView.image != nil);
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-test-floating-return"]) {
+          containsObject:@"--tempmail-test-floating-return"]) {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
                                  (int64_t)(2.5 * NSEC_PER_SEC)),
                    dispatch_get_main_queue(), ^{
@@ -3694,66 +3694,66 @@ static void AppBoxInstallGuestFloatingControl(UIWindow *window) {
       dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
                                    (int64_t)(4.0 * NSEC_PER_SEC)),
                      dispatch_get_main_queue(), ^{
-        AppBoxReturnToSandbox();
+        TempMailReturnToSandbox();
       });
     });
   }
 }
 
-static void *AppBoxLoadFramework(NSString *name) {
+static void *TempMailLoadFramework(NSString *name) {
   NSString *path = [NSBundle.mainBundle.privateFrameworksPath
       stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.framework/%@", name, name]];
   void *handle = dlopen(path.fileSystemRepresentation, RTLD_NOW | RTLD_GLOBAL);
   if (handle == NULL) {
-    NSLog(@"APPBOX_RUNTIME framework_load_failed name=%@ error=%s", name, dlerror());
+    NSLog(@"TEMPMAIL_RUNTIME framework_load_failed name=%@ error=%s", name, dlerror());
   } else {
-    NSLog(@"APPBOX_RUNTIME framework_loaded name=%@", name);
+    NSLog(@"TEMPMAIL_RUNTIME framework_loaded name=%@", name);
   }
   return handle;
 }
 
-static BOOL AppBoxLoadPlayBoxRuntime(void) {
-  void *player = AppBoxLoadFramework(@"PBPlayerKit");
-  void *runtime = AppBoxLoadFramework(@"adversarys");
+static BOOL TempMailLoadPlayBoxRuntime(void) {
+  void *player = TempMailLoadFramework(@"PBPlayerKit");
+  void *runtime = TempMailLoadFramework(@"adversarys");
   if (player == NULL || runtime == NULL) {
     return NO;
   }
   // Save the host Kiwi class before a guest with its own statically linked
   // class is loaded and Objective-C reports a duplicate name.
-  AppBoxNativeKiwiClass = NSClassFromString(@"Kiwi");
+  TempMailNativeKiwiClass = NSClassFromString(@"Kiwi");
 
-  AppBoxNUDGuestHooksInit = dlsym(player, "NUDGuestHooksInit");
-  AppBoxPBPlayerSetupApp = dlsym(
+  TempMailNUDGuestHooksInit = dlsym(player, "NUDGuestHooksInit");
+  TempMailPBPlayerSetupApp = dlsym(
       player, "_$s11PBPlayerKit0aB3BoxV8setupAppyyFZ");
-  AppBoxAdversarysOpen = dlsym(runtime, "adversarys_0_ex");
-  AppBoxAdversarysOpenLoose = dlsym(runtime, "adversarys_0");
-  AppBoxAdversarysSymbol = dlsym(runtime, "adversarys_1");
-  AppBoxAdversarysError = dlsym(runtime, "adversarys_2");
-  AppBoxAdversarysClass = dlsym(runtime, "adversarys_4");
-  AppBoxAdversarysAbort = dlsym(runtime, "adversarys_b");
-  AppBoxAdversarysHandler = dlsym(runtime, "adversarys_d");
+  TempMailAdversarysOpen = dlsym(runtime, "adversarys_0_ex");
+  TempMailAdversarysOpenLoose = dlsym(runtime, "adversarys_0");
+  TempMailAdversarysSymbol = dlsym(runtime, "adversarys_1");
+  TempMailAdversarysError = dlsym(runtime, "adversarys_2");
+  TempMailAdversarysClass = dlsym(runtime, "adversarys_4");
+  TempMailAdversarysAbort = dlsym(runtime, "adversarys_b");
+  TempMailAdversarysHandler = dlsym(runtime, "adversarys_d");
   Dl_info runtimeInfo = {0};
-  if (AppBoxAdversarysOpen != NULL &&
-      dladdr((void *)AppBoxAdversarysOpen, &runtimeInfo) != 0) {
-    AppBoxDiagnosticAdversarysBase = (uintptr_t)runtimeInfo.dli_fbase;
+  if (TempMailAdversarysOpen != NULL &&
+      dladdr((void *)TempMailAdversarysOpen, &runtimeInfo) != 0) {
+    TempMailDiagnosticAdversarysBase = (uintptr_t)runtimeInfo.dli_fbase;
   }
-  void *defaultMainLoop = dlsym(RTLD_DEFAULT, "AppBoxEnterGuestMainLoop");
-  void *mainOnlyMainLoop = dlsym(RTLD_MAIN_ONLY, "AppBoxEnterGuestMainLoop");
-  NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_main_loop_symbol default=%p main=%p",
+  void *defaultMainLoop = dlsym(RTLD_DEFAULT, "TempMailEnterGuestMainLoop");
+  void *mainOnlyMainLoop = dlsym(RTLD_MAIN_ONLY, "TempMailEnterGuestMainLoop");
+  NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_main_loop_symbol default=%p main=%p",
         defaultMainLoop, mainOnlyMainLoop);
-  return AppBoxNUDGuestHooksInit != NULL && AppBoxAdversarysOpen != NULL &&
-      AppBoxAdversarysOpenLoose != NULL &&
-      AppBoxAdversarysSymbol != NULL && AppBoxAdversarysError != NULL &&
-      AppBoxAdversarysClass != NULL && AppBoxAdversarysAbort != NULL &&
-      AppBoxAdversarysHandler != NULL;
+  return TempMailNUDGuestHooksInit != NULL && TempMailAdversarysOpen != NULL &&
+      TempMailAdversarysOpenLoose != NULL &&
+      TempMailAdversarysSymbol != NULL && TempMailAdversarysError != NULL &&
+      TempMailAdversarysClass != NULL && TempMailAdversarysAbort != NULL &&
+      TempMailAdversarysHandler != NULL;
 }
 
-static UITableView *AppBoxFindTableView(UIView *view) {
+static UITableView *TempMailFindTableView(UIView *view) {
   if ([view isKindOfClass:UITableView.class]) {
     return (UITableView *)view;
   }
   for (UIView *subview in view.subviews) {
-    UITableView *tableView = AppBoxFindTableView(subview);
+    UITableView *tableView = TempMailFindTableView(subview);
     if (tableView != nil) {
       return tableView;
     }
@@ -3761,7 +3761,7 @@ static UITableView *AppBoxFindTableView(UIView *view) {
   return nil;
 }
 
-static void AppBoxCollectViewText(UIView *view,
+static void TempMailCollectViewText(UIView *view,
                                   NSMutableArray<NSString *> *texts) {
   if ([view isKindOfClass:UILabel.class]) {
     NSString *text = ((UILabel *)view).text;
@@ -3770,23 +3770,23 @@ static void AppBoxCollectViewText(UIView *view,
     }
   }
   for (UIView *subview in view.subviews) {
-    AppBoxCollectViewText(subview, texts);
+    TempMailCollectViewText(subview, texts);
   }
 }
 
-@interface AppBoxPlayBoxDeveloperDelegate : UIResponder <UIApplicationDelegate>
+@interface TempMailPlayBoxDeveloperDelegate : UIResponder <UIApplicationDelegate>
 @property(nonatomic, strong) UIWindow *window;
 @end
 
-@implementation AppBoxPlayBoxDeveloperDelegate
+@implementation TempMailPlayBoxDeveloperDelegate
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  if (!AppBoxLoadPlayBoxRuntime()) {
-    NSLog(@"APPBOX_PLAYBOX_DEVELOPER boot_failed reason=runtime_load");
+  if (!TempMailLoadPlayBoxRuntime()) {
+    NSLog(@"TEMPMAIL_PLAYBOX_DEVELOPER boot_failed reason=runtime_load");
     return NO;
   }
-  if (AppBoxPBPlayerSetupApp != NULL) {
-    AppBoxPBPlayerSetupApp();
+  if (TempMailPBPlayerSetupApp != NULL) {
+    TempMailPBPlayerSetupApp();
   }
 
   Class controllerClass =
@@ -3796,7 +3796,7 @@ static void AppBoxCollectViewText(UIView *view,
         @"_TtC11PBPlayerKit19DeveloperController");
   }
   if (controllerClass == Nil) {
-    NSLog(@"APPBOX_PLAYBOX_DEVELOPER boot_failed reason=controller_missing");
+    NSLog(@"TEMPMAIL_PLAYBOX_DEVELOPER boot_failed reason=controller_missing");
     return NO;
   }
 
@@ -3806,19 +3806,19 @@ static void AppBoxCollectViewText(UIView *view,
   self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
   self.window.rootViewController = navigation;
   [self.window makeKeyAndVisible];
-  NSLog(@"APPBOX_PLAYBOX_DEVELOPER ready controller=%@",
+  NSLog(@"TEMPMAIL_PLAYBOX_DEVELOPER ready controller=%@",
         NSStringFromClass(controllerClass));
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC),
                  dispatch_get_main_queue(), ^{
     [controller loadViewIfNeeded];
-    UITableView *tableView = AppBoxFindTableView(controller.view);
+    UITableView *tableView = TempMailFindTableView(controller.view);
     if (tableView == nil) {
-      NSLog(@"APPBOX_PLAYBOX_DEVELOPER table_missing");
+      NSLog(@"TEMPMAIL_PLAYBOX_DEVELOPER table_missing");
       return;
     }
     NSInteger sectionCount = [tableView.dataSource
         numberOfSectionsInTableView:tableView];
-    NSLog(@"APPBOX_PLAYBOX_DEVELOPER table sections=%ld",
+    NSLog(@"TEMPMAIL_PLAYBOX_DEVELOPER table sections=%ld",
           (long)sectionCount);
     for (NSInteger section = 0; section < sectionCount; section++) {
       NSInteger rowCount = [tableView.dataSource tableView:tableView
@@ -3829,14 +3829,14 @@ static void AppBoxCollectViewText(UIView *view,
         UITableViewCell *cell = [tableView.dataSource tableView:tableView
                                          cellForRowAtIndexPath:indexPath];
         NSMutableArray<NSString *> *texts = NSMutableArray.array;
-        AppBoxCollectViewText(cell, texts);
-        NSLog(@"APPBOX_PLAYBOX_DEVELOPER row section=%ld row=%ld text=%@",
+        TempMailCollectViewText(cell, texts);
+        NSLog(@"TEMPMAIL_PLAYBOX_DEVELOPER row section=%ld row=%ld text=%@",
               (long)section, (long)row,
               [texts componentsJoinedByString:@" | "]);
       }
     }
     if ([NSProcessInfo.processInfo.arguments
-            containsObject:@"--appbox-playbox-open-local-picker"]) {
+            containsObject:@"--tempmail-playbox-open-local-picker"]) {
       NSIndexPath *localAppRow = [NSIndexPath indexPathForRow:2 inSection:0];
       [tableView.delegate tableView:tableView
            didSelectRowAtIndexPath:localAppRow];
@@ -3846,7 +3846,7 @@ static void AppBoxCollectViewText(UIView *view,
         if (presented == nil) {
           presented = controller.presentedViewController;
         }
-        NSLog(@"APPBOX_PLAYBOX_DEVELOPER local_picker presented=%@ delegate=%@",
+        NSLog(@"TEMPMAIL_PLAYBOX_DEVELOPER local_picker presented=%@ delegate=%@",
               NSStringFromClass(presented.class),
               NSStringFromClass(((UIDocumentPickerViewController *)presented)
                                     .delegate.class));
@@ -3857,10 +3857,10 @@ static void AppBoxCollectViewText(UIView *view,
 }
 @end
 
-static void AppBoxRegisterFlutterPlugin(id engine, NSString *framework,
+static void TempMailRegisterFlutterPlugin(id engine, NSString *framework,
                                         NSString *className,
                                         NSString *pluginKey) {
-  if (AppBoxLoadFramework(framework) == NULL) {
+  if (TempMailLoadFramework(framework) == NULL) {
     return;
   }
   Class pluginClass = NSClassFromString(className);
@@ -3872,7 +3872,7 @@ static void AppBoxRegisterFlutterPlugin(id engine, NSString *framework,
   SEL registrarSelector = NSSelectorFromString(@"registrarForPlugin:");
   if (pluginClass == Nil || ![pluginClass respondsToSelector:registerSelector] ||
       ![engine respondsToSelector:registrarSelector]) {
-    NSLog(@"APPBOX_FLUTTER_RUNTIME plugin_missing framework=%@ class=%@",
+    NSLog(@"TEMPMAIL_FLUTTER_RUNTIME plugin_missing framework=%@ class=%@",
           framework, className);
     return;
   }
@@ -3880,25 +3880,25 @@ static void AppBoxRegisterFlutterPlugin(id engine, NSString *framework,
       engine, registrarSelector, pluginKey);
   ((void (*)(id, SEL, id))objc_msgSend)(
       pluginClass, registerSelector, registrar);
-  NSLog(@"APPBOX_FLUTTER_RUNTIME plugin_registered key=%@ class=%@",
+  NSLog(@"TEMPMAIL_FLUTTER_RUNTIME plugin_registered key=%@ class=%@",
         pluginKey, NSStringFromClass(pluginClass));
 }
 
-@interface NSProcessInfo (AppBoxPrivate)
+@interface NSProcessInfo (TempMailPrivate)
 - (void)setArguments:(NSArray<NSString *> *)arguments;
 @end
 
-static void AppBoxScheduleGuestScreenshot(NSTimeInterval delay,
+static void TempMailScheduleGuestScreenshot(NSTimeInterval delay,
                                           NSString *fileName);
 
-static uint64_t AppBoxAArch64TBNZTarget(uint32_t instruction, uint64_t pc) {
+static uint64_t TempMailAArch64TBNZTarget(uint32_t instruction, uint64_t pc) {
   if ((instruction & 0xFF000000) != 0x37000000) {
     return 0;
   }
   return (((instruction >> 5) & 0xFFFF) * 4) + pc;
 }
 
-static uint64_t AppBoxAArch64ADRP(uint32_t instruction, uint64_t pc) {
+static uint64_t TempMailAArch64ADRP(uint32_t instruction, uint64_t pc) {
   if ((instruction & 0x9F000000) != 0x90000000) {
     return 0;
   }
@@ -3911,10 +3911,10 @@ static uint64_t AppBoxAArch64ADRP(uint32_t instruction, uint64_t pc) {
   return (pc & ~(0xFFFULL)) + ((int64_t)immediate << 12);
 }
 
-static uint64_t AppBoxAArch64ADRPAdd(uint32_t adrpInstruction,
+static uint64_t TempMailAArch64ADRPAdd(uint32_t adrpInstruction,
                                      uint32_t addInstruction,
                                      uint64_t pc) {
-  uint64_t page = AppBoxAArch64ADRP(adrpInstruction, pc);
+  uint64_t page = TempMailAArch64ADRP(adrpInstruction, pc);
   if (page == 0 || (addInstruction & 0xFF000000) != 0x91000000) {
     return 0;
   }
@@ -3934,10 +3934,10 @@ static uint64_t AppBoxAArch64ADRPAdd(uint32_t adrpInstruction,
   return page + immediate;
 }
 
-static uint64_t AppBoxAArch64ADRPLoad(uint32_t adrpInstruction,
+static uint64_t TempMailAArch64ADRPLoad(uint32_t adrpInstruction,
                                       uint32_t loadInstruction,
                                       uint64_t pc) {
-  uint64_t page = AppBoxAArch64ADRP(adrpInstruction, pc);
+  uint64_t page = TempMailAArch64ADRP(adrpInstruction, pc);
   if (page == 0 ||
       (adrpInstruction & 0x1F) != ((loadInstruction >> 5) & 0x1F) ||
       (loadInstruction & 0xFFC00000) != 0xF9400000) {
@@ -3946,7 +3946,7 @@ static uint64_t AppBoxAArch64ADRPLoad(uint32_t adrpInstruction,
   return page + (((loadInstruction >> 10) & 0xFFF) << 3);
 }
 
-static BOOL AppBoxOverwriteMainNSBundle(NSBundle *newBundle) {
+static BOOL TempMailOverwriteMainNSBundle(NSBundle *newBundle) {
 #if defined(__arm64__)
   NSBundle *oldBundle = NSBundle.mainBundle;
   uint32_t *implementation = (uint32_t *)method_getImplementation(
@@ -3954,7 +3954,7 @@ static BOOL AppBoxOverwriteMainNSBundle(NSBundle *newBundle) {
   BOOL replaced = NO;
 
   for (int instructionIndex = 0; instructionIndex < 20; instructionIndex++) {
-    void **mergedGlobals = (void **)AppBoxAArch64ADRPAdd(
+    void **mergedGlobals = (void **)TempMailAArch64ADRPAdd(
         implementation[instructionIndex], implementation[instructionIndex + 1],
         (uint64_t)&implementation[instructionIndex]);
     if (mergedGlobals == NULL) {
@@ -3980,7 +3980,7 @@ static BOOL AppBoxOverwriteMainNSBundle(NSBundle *newBundle) {
 #endif
 }
 
-static BOOL AppBoxOverwriteMainCFBundle(NSBundle *newBundle) {
+static BOOL TempMailOverwriteMainCFBundle(NSBundle *newBundle) {
 #if defined(__arm64__)
   uint32_t *instruction = (uint32_t *)CFBundleGetMainBundle;
   void **mainBundleAddress = NULL;
@@ -3988,7 +3988,7 @@ static BOOL AppBoxOverwriteMainCFBundle(NSBundle *newBundle) {
   if (@available(iOS 27.0, *)) {
     for (int index = 0; index < 100; index++, instruction++) {
       if ((*instruction & 0x7F000000) == 0x36000000) {
-        mainBundleAddress = (void **)AppBoxAArch64ADRPLoad(
+        mainBundleAddress = (void **)TempMailAArch64ADRPLoad(
             *(instruction - 1), *(instruction + 1),
             (uint64_t)(instruction - 1));
         break;
@@ -3997,9 +3997,9 @@ static BOOL AppBoxOverwriteMainCFBundle(NSBundle *newBundle) {
   } else {
     for (int index = 0; index < 100; index++, instruction++) {
       uint64_t jumpAddress =
-          AppBoxAArch64TBNZTarget(*instruction, (uint64_t)instruction);
+          TempMailAArch64TBNZTarget(*instruction, (uint64_t)instruction);
       if (jumpAddress != 0) {
-        mainBundleAddress = (void **)AppBoxAArch64ADRPLoad(
+        mainBundleAddress = (void **)TempMailAArch64ADRPLoad(
             *(instruction - 1), *(uint32_t *)jumpAddress,
             (uint64_t)(instruction - 1));
         break;
@@ -4019,7 +4019,7 @@ static BOOL AppBoxOverwriteMainCFBundle(NSBundle *newBundle) {
   if (guestCFBundle == NULL) {
     return NO;
   }
-  AppBoxGuestMainCFBundle = guestCFBundle;
+  TempMailGuestMainCFBundle = guestCFBundle;
   *mainBundleAddress = (void *)guestCFBundle;
   return CFBundleGetMainBundle() == guestCFBundle;
 #else
@@ -4027,17 +4027,17 @@ static BOOL AppBoxOverwriteMainCFBundle(NSBundle *newBundle) {
 #endif
 }
 
-static BOOL AppBoxInstallGuestProcessIdentity(NSString *bundlePath,
+static BOOL TempMailInstallGuestProcessIdentity(NSString *bundlePath,
                                                NSString *executablePath) {
   NSBundle *guestBundle = [[NSBundle alloc] initWithPath:bundlePath];
   if (guestBundle == nil) {
     return NO;
   }
 
-  AppBoxGuestMainBundle = guestBundle;
-  BOOL nsBundleReplaced = AppBoxOverwriteMainNSBundle(guestBundle);
+  TempMailGuestMainBundle = guestBundle;
+  BOOL nsBundleReplaced = TempMailOverwriteMainNSBundle(guestBundle);
   BOOL cfBundleReplaced =
-      nsBundleReplaced && AppBoxOverwriteMainCFBundle(guestBundle);
+      nsBundleReplaced && TempMailOverwriteMainCFBundle(guestBundle);
 
   NSMutableArray<NSString *> *arguments =
       NSProcessInfo.processInfo.arguments.mutableCopy;
@@ -4060,19 +4060,19 @@ static BOOL AppBoxInstallGuestProcessIdentity(NSString *bundlePath,
     setprogname(processName.UTF8String);
   }
 
-  NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_identity nsbundle=%d cfbundle=%d path=%@ identifier=%@ executable=%@",
+  NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_identity nsbundle=%d cfbundle=%d path=%@ identifier=%@ executable=%@",
         nsBundleReplaced, cfBundleReplaced, NSBundle.mainBundle.bundlePath,
         NSBundle.mainBundle.bundleIdentifier,
         NSProcessInfo.processInfo.arguments.firstObject);
   return nsBundleReplaced && cfBundleReplaced;
 }
 
-@interface AppBoxFlutterGuestDelegate : UIResponder <UIApplicationDelegate>
+@interface TempMailFlutterGuestDelegate : UIResponder <UIApplicationDelegate>
 @property(nonatomic, strong) UIWindow *window;
 @property(nonatomic, strong) id guestEngine;
 @end
 
-@implementation AppBoxFlutterGuestDelegate
+@implementation TempMailFlutterGuestDelegate
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   NSURL *documentsURL = [NSFileManager.defaultManager
@@ -4084,7 +4084,7 @@ static BOOL AppBoxInstallGuestProcessIdentity(NSString *bundlePath,
   if (guestBundle == nil ||
       ![NSFileManager.defaultManager fileExistsAtPath:
           [guestBundlePath stringByAppendingPathComponent:@"flutter_assets/kernel_blob.bin"]]) {
-    NSLog(@"APPBOX_FLUTTER_RUNTIME guest_boot_failed reason=artifact_missing path=%@",
+    NSLog(@"TEMPMAIL_FLUTTER_RUNTIME guest_boot_failed reason=artifact_missing path=%@",
           guestBundlePath);
     return NO;
   }
@@ -4093,7 +4093,7 @@ static BOOL AppBoxInstallGuestProcessIdentity(NSString *bundlePath,
   Class engineClass = NSClassFromString(@"FlutterEngine");
   Class controllerClass = NSClassFromString(@"FlutterViewController");
   if (projectClass == Nil || engineClass == Nil || controllerClass == Nil) {
-    NSLog(@"APPBOX_FLUTTER_RUNTIME guest_boot_failed reason=flutter_classes_missing");
+    NSLog(@"TEMPMAIL_FLUTTER_RUNTIME guest_boot_failed reason=flutter_classes_missing");
     return NO;
   }
 
@@ -4103,37 +4103,37 @@ static BOOL AppBoxInstallGuestProcessIdentity(NSString *bundlePath,
   id engine = ((id (*)(id, SEL, id, id, BOOL))objc_msgSend)(
       [engineClass alloc],
       NSSelectorFromString(@"initWithName:project:allowHeadlessExecution:"),
-      @"appbox.pornhub", project, YES);
+      @"tempmail.guest", project, YES);
   BOOL started = ((BOOL (*)(id, SEL, id))objc_msgSend)(
       engine, NSSelectorFromString(@"runWithEntrypoint:"), nil);
   if (!started) {
-    NSLog(@"APPBOX_FLUTTER_RUNTIME guest_boot_failed reason=engine_start");
+    NSLog(@"TEMPMAIL_FLUTTER_RUNTIME guest_boot_failed reason=engine_start");
     return NO;
   }
   self.guestEngine = engine;
 
   // These plugins are required by the startup/account path. They are copied
   // from the exact approved IPA and loaded only in the Flutter guest process.
-  AppBoxRegisterFlutterPlugin(engine, @"shared_preferences_foundation",
+  TempMailRegisterFlutterPlugin(engine, @"shared_preferences_foundation",
                               @"SharedPreferencesPlugin",
                               @"SharedPreferencesPlugin");
-  AppBoxRegisterFlutterPlugin(engine, @"device_info_plus",
+  TempMailRegisterFlutterPlugin(engine, @"device_info_plus",
                               @"FPPDeviceInfoPlusPlugin",
                               @"FPPDeviceInfoPlusPlugin");
-  AppBoxRegisterFlutterPlugin(engine, @"package_info_plus",
+  TempMailRegisterFlutterPlugin(engine, @"package_info_plus",
                               @"FPPPackageInfoPlusPlugin",
                               @"FPPPackageInfoPlusPlugin");
-  AppBoxRegisterFlutterPlugin(engine, @"connectivity_plus",
+  TempMailRegisterFlutterPlugin(engine, @"connectivity_plus",
                               @"ConnectivityPlusPlugin",
                               @"ConnectivityPlusPlugin");
-  AppBoxRegisterFlutterPlugin(engine, @"flutter_secure_storage",
+  TempMailRegisterFlutterPlugin(engine, @"flutter_secure_storage",
                               @"FlutterSecureStoragePlugin",
                               @"FlutterSecureStoragePlugin");
-  AppBoxLoadFramework(@"JNKeychain");
-  AppBoxRegisterFlutterPlugin(engine, @"mobile_device_identifier",
+  TempMailLoadFramework(@"JNKeychain");
+  TempMailRegisterFlutterPlugin(engine, @"mobile_device_identifier",
                               @"SwiftMobileDeviceIdentifierPlugin",
                               @"SwiftMobileDeviceIdentifierPlugin");
-  AppBoxRegisterFlutterPlugin(engine, @"path_provider_foundation",
+  TempMailRegisterFlutterPlugin(engine, @"path_provider_foundation",
                               @"PathProviderPlugin",
                               @"PathProviderPlugin");
 
@@ -4142,10 +4142,10 @@ static BOOL AppBoxInstallGuestProcessIdentity(NSString *bundlePath,
       engine, nil, nil);
   if ([controller respondsToSelector:NSSelectorFromString(@"setFlutterViewDidRenderCallback:")]) {
     void (^firstFrame)(void) = ^{
-      NSLog(@"APPBOX_FLUTTER_RUNTIME guest_first_frame");
-      AppBoxScheduleGuestScreenshot(1, @"flutter-guest-screen.png");
-      AppBoxScheduleGuestScreenshot(15, @"flutter-guest-screen-15.png");
-      AppBoxScheduleGuestScreenshot(30, @"flutter-guest-screen-30.png");
+      NSLog(@"TEMPMAIL_FLUTTER_RUNTIME guest_first_frame");
+      TempMailScheduleGuestScreenshot(1, @"flutter-guest-screen.png");
+      TempMailScheduleGuestScreenshot(15, @"flutter-guest-screen-15.png");
+      TempMailScheduleGuestScreenshot(30, @"flutter-guest-screen-30.png");
     };
     ((void (*)(id, SEL, id))objc_msgSend)(
         controller, NSSelectorFromString(@"setFlutterViewDidRenderCallback:"),
@@ -4155,64 +4155,64 @@ static BOOL AppBoxInstallGuestProcessIdentity(NSString *bundlePath,
   self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
   self.window.rootViewController = controller;
   [self.window makeKeyAndVisible];
-  AppBoxInstallGuestFloatingControl(self.window);
-  NSLog(@"APPBOX_FLUTTER_RUNTIME guest_engine_started runtime=flutter_debug_arm64_simulator bundle=app.nqyqstm6mu.tianya");
+  TempMailInstallGuestFloatingControl(self.window);
+  NSLog(@"TEMPMAIL_FLUTTER_RUNTIME guest_engine_started runtime=flutter_debug_arm64_simulator bundle=app.nqyqstm6mu.tianya");
   return YES;
 }
 @end
 
-static int AppBoxRunFlutterGuest(int argc, char *argv[]) {
-  if (AppBoxLoadFramework(@"Flutter") == NULL) {
+static int TempMailRunFlutterGuest(int argc, char *argv[]) {
+  if (TempMailLoadFramework(@"Flutter") == NULL) {
     return -1;
   }
-  NSLog(@"APPBOX_FLUTTER_RUNTIME guest_boot");
+  NSLog(@"TEMPMAIL_FLUTTER_RUNTIME guest_boot");
   return UIApplicationMain(argc, argv, nil,
-                           NSStringFromClass(AppBoxFlutterGuestDelegate.class));
+                           NSStringFromClass(TempMailFlutterGuestDelegate.class));
 }
 
 // PBPlayerKit's public NUDGuestHooksInit entry point expects this compatibility
 // selector to be supplied by the PlayBox host executable. It uses the value as
 // the guest's isolated NSUserDefaults domain identifier.
-@interface NSUserDefaults (AppBoxPlayBoxCompatibility)
+@interface NSUserDefaults (TempMailPlayBoxCompatibility)
 + (NSUserDefaults *)mainDefaults;
 + (NSString *)runGuestAppBid;
 @end
 
-@implementation NSUserDefaults (AppBoxPlayBoxCompatibility)
+@implementation NSUserDefaults (TempMailPlayBoxCompatibility)
 + (NSUserDefaults *)mainDefaults {
   return NSUserDefaults.standardUserDefaults;
 }
 
 + (NSString *)runGuestAppBid {
   NSString *bundleIdentifier = [NSUserDefaults.standardUserDefaults
-      stringForKey:@"AppBoxPlayBoxGuestBundleIdentifier"];
+      stringForKey:@"TempMailPlayBoxGuestBundleIdentifier"];
   return bundleIdentifier.length > 0
       ? bundleIdentifier
       : @"com.amk2ns2n9j.alan2is71";
 }
 @end
 
-@interface UNUserNotificationCenter (AppBoxPlayBoxCompatibility)
+@interface UNUserNotificationCenter (TempMailPlayBoxCompatibility)
 + (UNUserNotificationCenter *)mainCenter;
 @end
 
-@implementation UNUserNotificationCenter (AppBoxPlayBoxCompatibility)
+@implementation UNUserNotificationCenter (TempMailPlayBoxCompatibility)
 + (UNUserNotificationCenter *)mainCenter {
   return UNUserNotificationCenter.currentNotificationCenter;
 }
 @end
 
-static char AppBoxGuestCrashBuffer[2048];
-static volatile sig_atomic_t AppBoxGuestCrashBufferLength = 0;
+static char TempMailGuestCrashBuffer[2048];
+static volatile sig_atomic_t TempMailGuestCrashBufferLength = 0;
 
-static void AppBoxGuestCrashHandler(const char *message) {
+static void TempMailGuestCrashHandler(const char *message) {
   static volatile sig_atomic_t handlingGuestCrash = 0;
   if (handlingGuestCrash != 0) {
-    const sig_atomic_t bufferedLength = AppBoxGuestCrashBufferLength;
+    const sig_atomic_t bufferedLength = TempMailGuestCrashBufferLength;
     if (bufferedLength > 0) {
-      write(STDERR_FILENO, AppBoxGuestCrashBuffer, (size_t)bufferedLength);
-      if (AppBoxDiagnosticSignalFile >= 0) {
-        write(AppBoxDiagnosticSignalFile, AppBoxGuestCrashBuffer,
+      write(STDERR_FILENO, TempMailGuestCrashBuffer, (size_t)bufferedLength);
+      if (TempMailDiagnosticSignalFile >= 0) {
+        write(TempMailDiagnosticSignalFile, TempMailGuestCrashBuffer,
               (size_t)bufferedLength);
       }
     }
@@ -4222,50 +4222,50 @@ static void AppBoxGuestCrashHandler(const char *message) {
 
   const char *safe_message =
       message == NULL ? "unknown guest runtime failure" : message;
-  char *buffer = AppBoxGuestCrashBuffer;
-  AppBoxGuestCrashBufferLength = 0;
-  const char prefix[] = "APPBOX_GUEST_CRASH_RAW error=";
+  char *buffer = TempMailGuestCrashBuffer;
+  TempMailGuestCrashBufferLength = 0;
+  const char prefix[] = "TEMPMAIL_GUEST_CRASH_RAW error=";
   size_t cursor = 0;
   for (size_t index = 0;
        index < sizeof(prefix) - 1 &&
-       cursor < sizeof(AppBoxGuestCrashBuffer) - 1;
+       cursor < sizeof(TempMailGuestCrashBuffer) - 1;
        index += 1) {
     buffer[cursor++] = prefix[index];
-    AppBoxGuestCrashBufferLength = (sig_atomic_t)cursor;
+    TempMailGuestCrashBufferLength = (sig_atomic_t)cursor;
   }
   for (size_t index = 0;
        safe_message[index] != '\0' &&
-       cursor < sizeof(AppBoxGuestCrashBuffer) - 2;
+       cursor < sizeof(TempMailGuestCrashBuffer) - 2;
        index += 1) {
     buffer[cursor++] = safe_message[index];
-    AppBoxGuestCrashBufferLength = (sig_atomic_t)cursor;
+    TempMailGuestCrashBufferLength = (sig_atomic_t)cursor;
   }
   buffer[cursor++] = '\n';
-  AppBoxGuestCrashBufferLength = (sig_atomic_t)cursor;
+  TempMailGuestCrashBufferLength = (sig_atomic_t)cursor;
   write(STDERR_FILENO, buffer, cursor);
-  if (AppBoxDiagnosticSignalFile >= 0) {
-    write(AppBoxDiagnosticSignalFile, buffer, cursor);
+  if (TempMailDiagnosticSignalFile >= 0) {
+    write(TempMailDiagnosticSignalFile, buffer, cursor);
   }
-  NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_crash error=%s", safe_message);
+  NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_crash error=%s", safe_message);
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-diagnostic-signals"]) {
+          containsObject:@"--tempmail-diagnostic-signals"]) {
     _exit(190);
   }
-  if (AppBoxAdversarysAbort != NULL) {
-    AppBoxAdversarysAbort(-1);
+  if (TempMailAdversarysAbort != NULL) {
+    TempMailAdversarysAbort(-1);
   }
   handlingGuestCrash = 0;
 }
 
-static void AppBoxScheduleGuestScreenshot(NSTimeInterval delay,
+static void TempMailScheduleGuestScreenshot(NSTimeInterval delay,
                                           NSString *fileName) {
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
                                (int64_t)(delay * NSEC_PER_SEC)),
                  dispatch_get_main_queue(), ^{
     UIWindow *targetWindow =
-        AppBoxCurrentForegroundWindow(UIApplication.sharedApplication);
+        TempMailCurrentForegroundWindow(UIApplication.sharedApplication);
     if (targetWindow == nil) {
-    NSLog(@"APPBOX_RUNTIME guest_screenshot_failed reason=no_window");
+    NSLog(@"TEMPMAIL_RUNTIME guest_screenshot_failed reason=no_window");
       return;
     }
 
@@ -4280,7 +4280,7 @@ static void AppBoxScheduleGuestScreenshot(NSTimeInterval delay,
         URLsForDirectory:NSDocumentDirectory
         inDomains:NSUserDomainMask].lastObject;
     NSURL *diagnosticsDirectory = [documentsURL
-        URLByAppendingPathComponent:@"AppBoxTest" isDirectory:YES];
+        URLByAppendingPathComponent:@"TempMailTest" isDirectory:YES];
     [NSFileManager.defaultManager createDirectoryAtURL:diagnosticsDirectory
                             withIntermediateDirectories:YES
                                              attributes:nil
@@ -4288,13 +4288,13 @@ static void AppBoxScheduleGuestScreenshot(NSTimeInterval delay,
     NSURL *screenshotURL = [diagnosticsDirectory
         URLByAppendingPathComponent:fileName];
     BOOL written = [png writeToURL:screenshotURL atomically:YES];
-    NSLog(@"APPBOX_RUNTIME guest_screenshot file=%@ rendered=%d written=%d bytes=%lu root=%@",
+    NSLog(@"TEMPMAIL_RUNTIME guest_screenshot file=%@ rendered=%d written=%d bytes=%lu root=%@",
           fileName, rendered, written, (unsigned long)png.length,
           NSStringFromClass(targetWindow.rootViewController.class));
   });
 }
 
-static NSString *AppBoxImageForImplementation(IMP implementation) {
+static NSString *TempMailImageForImplementation(IMP implementation) {
   if (implementation == NULL) {
     return @"missing";
   }
@@ -4306,7 +4306,7 @@ static NSString *AppBoxImageForImplementation(IMP implementation) {
   return [NSString stringWithUTF8String:info.dli_fname].lastPathComponent;
 }
 
-static void AppBoxInspectGuestRegistration(NSTimeInterval delay) {
+static void TempMailInspectGuestRegistration(NSTimeInterval delay) {
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
                                (int64_t)(delay * NSEC_PER_SEC)),
                  dispatch_get_main_queue(), ^{
@@ -4354,25 +4354,25 @@ static void AppBoxInspectGuestRegistration(NSTimeInterval delay) {
         ((BOOL (*)(id, SEL))objc_msgSend)(root, displayingSelector);
     SEL renderCallbackSelector =
         NSSelectorFromString(@"setFlutterViewDidRenderCallback:");
-    if (!AppBoxDiagnosticFirstFrameHooked &&
+    if (!TempMailDiagnosticFirstFrameHooked &&
         [root respondsToSelector:renderCallbackSelector]) {
-      AppBoxDiagnosticFirstFrameHooked = YES;
+      TempMailDiagnosticFirstFrameHooked = YES;
       void (^callback)(void) = ^{
-        NSLog(@"APPBOX_DIAGNOSTIC_GUEST_FIRST_FRAME");
+        NSLog(@"TEMPMAIL_DIAGNOSTIC_GUEST_FIRST_FRAME");
       };
       ((void (*)(id, SEL, id))objc_msgSend)(root, renderCallbackSelector,
                                            callback);
     }
-    NSLog(@"APPBOX_DIAGNOSTIC_GUEST_STATE delay=%.0f delegate=%@ root=%@ "
+    NSLog(@"TEMPMAIL_DIAGNOSTIC_GUEST_STATE delay=%.0f delegate=%@ root=%@ "
           "registrant=%@ registrant_image=%@ super_player=%@ "
           "super_player_image=%@ has_api=%d has_super_player=%d "
           "has_no_screenshot=%d engine=%@ isolate=%@ displaying=%d "
           "view_window=%d subviews=%lu layer=%@",
           delay, NSStringFromClass([delegate class]),
           NSStringFromClass([root class]), NSStringFromClass(registrant),
-          AppBoxImageForImplementation(registrantIMP),
+          TempMailImageForImplementation(registrantIMP),
           NSStringFromClass(superPlayer),
-          AppBoxImageForImplementation(superPlayerIMP), supportsHasPlugin,
+          TempMailImageForImplementation(superPlayerIMP), supportsHasPlugin,
           hasSuperPlayer, hasNoScreenshot, NSStringFromClass([engine class]),
           isolateID, displayingFlutterUI, root.view.window != nil,
           (unsigned long)root.view.subviews.count,
@@ -4380,15 +4380,15 @@ static void AppBoxInspectGuestRegistration(NSTimeInterval delay) {
   });
 }
 
-static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
+static int TempMailRunPlayBoxGuest(int argc, char *argv[]) {
   NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
   NSString *bundleIdentifier = [defaults
-      stringForKey:@"AppBoxPlayBoxGuestBundleIdentifier"];
+      stringForKey:@"TempMailPlayBoxGuestBundleIdentifier"];
   if (bundleIdentifier.length == 0) {
     bundleIdentifier = @"com.amk2ns2n9j.alan2is71";
   }
   NSString *storageIdentifier = [defaults
-      stringForKey:@"AppBoxPlayBoxGuestStorageIdentifier"];
+      stringForKey:@"TempMailPlayBoxGuestStorageIdentifier"];
   if (storageIdentifier.length == 0) {
     storageIdentifier = bundleIdentifier;
   }
@@ -4409,13 +4409,13 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
       : @"";
   NSString *nivmPath = [bundlePath stringByAppendingPathComponent:@"rocketship.nivm"];
 
-  [defaults setObject:bundlePath forKey:AppBoxGuestBundleKey];
-  [defaults setObject:executablePath forKey:AppBoxGuestExecutableKey];
-  [defaults setObject:nivmPath forKey:AppBoxGuestNIVMKey];
+  [defaults setObject:bundlePath forKey:TempMailGuestBundleKey];
+  [defaults setObject:executablePath forKey:TempMailGuestExecutableKey];
+  [defaults setObject:nivmPath forKey:TempMailGuestNIVMKey];
 
   if (bundlePath.length == 0 || executablePath.length == 0 || nivmPath.length == 0) {
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_boot_failed reason=missing_paths");
-    [defaults setBool:NO forKey:AppBoxGuestModeKey];
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_boot_failed reason=missing_paths");
+    [defaults setBool:NO forKey:TempMailGuestModeKey];
     return -1;
   }
 
@@ -4423,28 +4423,28 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
   if (![files fileExistsAtPath:bundlePath] ||
       ![files fileExistsAtPath:executablePath] ||
       ![files fileExistsAtPath:nivmPath]) {
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_boot_failed reason=artifact_missing");
-    [defaults setBool:NO forKey:AppBoxGuestModeKey];
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_boot_failed reason=artifact_missing");
+    [defaults setBool:NO forKey:TempMailGuestModeKey];
     return -1;
   }
 
-  if (!AppBoxLoadPlayBoxRuntime()) {
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_boot_failed reason=runtime_load");
+  if (!TempMailLoadPlayBoxRuntime()) {
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_boot_failed reason=runtime_load");
     return -1;
   }
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-preload-native-app"]) {
-    void *nativeApp = AppBoxLoadFramework(@"App");
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME native_app_preload=%d", nativeApp != NULL);
+          containsObject:@"--tempmail-preload-native-app"]) {
+    void *nativeApp = TempMailLoadFramework(@"App");
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME native_app_preload=%d", nativeApp != NULL);
     if (nativeApp == NULL) {
       return -1;
     }
   }
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-preload-native-flutter"]) {
-    void *nativeFlutter = AppBoxLoadFramework(@"Flutter");
+          containsObject:@"--tempmail-preload-native-flutter"]) {
+    void *nativeFlutter = TempMailLoadFramework(@"Flutter");
     Class nativeChannelClass = NSClassFromString(@"FlutterMethodChannel");
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME native_flutter_preload=%d channel=%p image=%s",
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME native_flutter_preload=%d channel=%p image=%s",
           nativeFlutter != NULL, nativeChannelClass,
           nativeChannelClass == Nil
               ? "missing"
@@ -4454,8 +4454,8 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
     }
   }
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-observe-connect"]) {
-    AppBoxInstallConnectObservation();
+          containsObject:@"--tempmail-observe-connect"]) {
+    TempMailInstallConnectObservation();
   }
   // DYZB's translated plugin class cannot safely service the YunCeng method
   // channel after PBPlayerKit has installed its Flutter runtime.  The direct
@@ -4465,63 +4465,63 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
   // Start button and the harness execute an identical runtime path.
   BOOL nativeYunCengPlugin =
       [NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-native-yunceng-plugin"] ||
+          containsObject:@"--tempmail-native-yunceng-plugin"] ||
       [bundleIdentifier isEqualToString:@"ady.DYZB168dyzb.app"];
   if (nativeYunCengPlugin) {
-    AppBoxInstallNativeYunCengPluginClass();
+    TempMailInstallNativeYunCengPluginClass();
   }
-  NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_boot bundle=%@", bundlePath.lastPathComponent);
-  if (!AppBoxInstallGuestProcessIdentity(bundlePath, executablePath)) {
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_boot_failed reason=identity_redirect");
-    [defaults setBool:NO forKey:AppBoxGuestModeKey];
+  NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_boot bundle=%@", bundlePath.lastPathComponent);
+  if (!TempMailInstallGuestProcessIdentity(bundlePath, executablePath)) {
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_boot_failed reason=identity_redirect");
+    [defaults setBool:NO forKey:TempMailGuestModeKey];
     return -1;
   }
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-bridge-kiwi-listener"]) {
-    AppBoxInstallKiwiListenerBridge();
+          containsObject:@"--tempmail-bridge-kiwi-listener"]) {
+    TempMailInstallKiwiListenerBridge();
   }
-  AppBoxNUDGuestHooksInit();
-  AppBoxAdversarysHandler(AppBoxGuestCrashHandler);
+  TempMailNUDGuestHooksInit();
+  TempMailAdversarysHandler(TempMailGuestCrashHandler);
   // adversarys_4 accepts an Objective-C class name (it resolves the class and
   // metaclass with objc_getClass/object_getClass), not a framework name.
   // PBPlayerKit already loads KiwiWrap and therefore owns the process-wide
   // `Kiwi` class; register that class so guest references are bound to the
   // compatible host implementation instead of a duplicate translated class.
   if (![NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-use-translated-kiwi"]) {
-    AppBoxAdversarysClass("Kiwi");
+          containsObject:@"--tempmail-use-translated-kiwi"]) {
+    TempMailAdversarysClass("Kiwi");
   }
   if (nativeYunCengPlugin) {
-    AppBoxAdversarysClass("FlutterYunCengKiwiPlugin");
+    TempMailAdversarysClass("FlutterYunCengKiwiPlugin");
   }
-  AppBoxAdversarysClass("MJFoundation");
-  AppBoxAdversarysClass("MJProperty");
-  AppBoxAdversarysClass("MJPropertyKey");
-  AppBoxAdversarysClass("MJPropertyType");
+  TempMailAdversarysClass("MJFoundation");
+  TempMailAdversarysClass("MJProperty");
+  TempMailAdversarysClass("MJPropertyKey");
+  TempMailAdversarysClass("MJPropertyType");
 
   BOOL looseRuntime =
       [NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-run-dyzb-gq-loose"] ||
+          containsObject:@"--tempmail-run-dyzb-gq-loose"] ||
       [NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-run-chungong-loose"];
-  NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_open mode=%@",
+          containsObject:@"--tempmail-run-chungong-loose"];
+  NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_open mode=%@",
         looseRuntime ? @"loose" : @"nivm");
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-diagnostic-signals"]) {
-    AppBoxInstallDiagnosticSignalHandler();
+          containsObject:@"--tempmail-diagnostic-signals"]) {
+    TempMailInstallDiagnosticSignalHandler();
   }
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-bridge-guest-callbacks"] ||
+          containsObject:@"--tempmail-bridge-guest-callbacks"] ||
       [NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-bridge-dispatch-once-import"]) {
-    AppBoxInstallGuestCallbackBridges();
+          containsObject:@"--tempmail-bridge-dispatch-once-import"]) {
+    TempMailInstallGuestCallbackBridges();
   }
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-diagnostic-terminate"]) {
-    AppBoxInstallDiagnosticTerminateHandler();
+          containsObject:@"--tempmail-diagnostic-terminate"]) {
+    TempMailInstallDiagnosticTerminateHandler();
   }
-  if (looseRuntime && !AppBoxPreloadLooseGuestImages(bundlePath)) {
-    [defaults setBool:NO forKey:AppBoxGuestModeKey];
+  if (looseRuntime && !TempMailPreloadLooseGuestImages(bundlePath)) {
+    [defaults setBool:NO forKey:TempMailGuestModeKey];
     return -1;
   }
   // Test-only LLDB synchronization point.  Starting the process suspended at
@@ -4529,26 +4529,26 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
   // Stop here instead, after PBPlayerKit/adversarys and libc++abi are loaded,
   // so exception breakpoints can be resolved before the guest parser runs.
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-debug-stop-before-guest"]) {
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME debug_stop_before_guest");
+          containsObject:@"--tempmail-debug-stop-before-guest"]) {
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME debug_stop_before_guest");
     raise(SIGSTOP);
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME debug_resumed_before_guest");
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME debug_resumed_before_guest");
   }
-  AppBoxStartDiagnosticFileBurst(@"guest_open");
+  TempMailStartDiagnosticFileBurst(@"guest_open");
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-diagnostic-focused-result"]) {
-    AppBoxStartDiagnosticFocusedBurst();
+          containsObject:@"--tempmail-diagnostic-focused-result"]) {
+    TempMailStartDiagnosticFocusedBurst();
   }
-  AppBoxLogDiagnosticMemory(@"before_guest_open");
+  TempMailLogDiagnosticMemory(@"before_guest_open");
   void *guest = looseRuntime
-      ? AppBoxAdversarysOpenLoose(executablePath.fileSystemRepresentation)
-      : AppBoxAdversarysOpen(executablePath.fileSystemRepresentation,
+      ? TempMailAdversarysOpenLoose(executablePath.fileSystemRepresentation)
+      : TempMailAdversarysOpen(executablePath.fileSystemRepresentation,
                             nivmPath.fileSystemRepresentation);
   if (guest == NULL) {
-    const char *error = AppBoxAdversarysError();
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_open_failed error=%s",
+    const char *error = TempMailAdversarysError();
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_open_failed error=%s",
           error == NULL ? "unknown" : error);
-    [defaults setBool:NO forKey:AppBoxGuestModeKey];
+    [defaults setBool:NO forKey:TempMailGuestModeKey];
     return -1;
   }
   // Test-only LLDB synchronization point after adversarys has parsed every
@@ -4556,53 +4556,53 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
   // dlopen/dlsym breakpoint on the expensive guest_open phase when diagnosing
   // Flutter's later App.framework snapshot lookup.
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-debug-stop-after-guest-open"]) {
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME debug_stop_after_guest_open");
+          containsObject:@"--tempmail-debug-stop-after-guest-open"]) {
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME debug_stop_after_guest_open");
     raise(SIGSTOP);
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME debug_resumed_after_guest_open");
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME debug_resumed_after_guest_open");
   }
   if ([bundleIdentifier isEqualToString:@"com.cg.client.pro"] &&
-      !AppBoxInstallChungongKingfisherWrapperMetadataCompatibility()) {
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_boot_failed "
+      !TempMailInstallChungongKingfisherWrapperMetadataCompatibility()) {
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_boot_failed "
           "reason=kingfisher_wrapper_metadata");
     return -1;
   }
   if ([bundleIdentifier isEqualToString:@"com.cg.client.pro"] &&
-      !AppBoxInstallChungongKingfisherImageResourceMetadataCompatibility()) {
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_boot_failed "
+      !TempMailInstallChungongKingfisherImageResourceMetadataCompatibility()) {
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_boot_failed "
           "reason=kingfisher_image_resource_metadata");
     return -1;
   }
   if ([bundleIdentifier isEqualToString:@"com.cg.client.pro"] &&
-      !AppBoxInstallChungongKingfisherDownloadTaskMetadataCompatibility()) {
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_boot_failed "
+      !TempMailInstallChungongKingfisherDownloadTaskMetadataCompatibility()) {
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_boot_failed "
           "reason=kingfisher_download_task_metadata");
     return -1;
   }
   if ([bundleIdentifier isEqualToString:@"com.cg.client.pro"] &&
-      !AppBoxRegisterMappedGuestSwiftMetadata()) {
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_boot_failed "
+      !TempMailRegisterMappedGuestSwiftMetadata()) {
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_boot_failed "
           "reason=swift_metadata_registration");
     return -1;
   }
   if ([bundleIdentifier isEqualToString:@"com.cg.client.pro"]) {
-    AppBoxInstallChungongUIKitCompatibility();
+    TempMailInstallChungongUIKitCompatibility();
   }
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-bridge-dyzb-kiwi-plugin"]) {
-    AppBoxInstallDyzbKiwiPluginBridge();
+          containsObject:@"--tempmail-bridge-dyzb-kiwi-plugin"]) {
+    TempMailInstallDyzbKiwiPluginBridge();
   }
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-prepare-dyzb-kiwi"]) {
-    AppBoxInstallDyzbKiwiPrepareBridge();
+          containsObject:@"--tempmail-prepare-dyzb-kiwi"]) {
+    TempMailInstallDyzbKiwiPrepareBridge();
   }
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-bridge-dyzb-kiwi-class"]) {
-    AppBoxInstallDyzbKiwiClassBridge();
+          containsObject:@"--tempmail-bridge-dyzb-kiwi-class"]) {
+    TempMailInstallDyzbKiwiClassBridge();
   }
 
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-diagnostic-signals"]) {
+          containsObject:@"--tempmail-diagnostic-signals"]) {
     static const char *const snapshotSymbols[] = {
       "kDartVmSnapshotData",
       "kDartVmSnapshotInstructions",
@@ -4613,14 +4613,14 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
          index < sizeof(snapshotSymbols) / sizeof(snapshotSymbols[0]);
          index += 1) {
       const char *symbol = snapshotSymbols[index];
-      void *guestSymbol = AppBoxAdversarysSymbol(guest, symbol);
+      void *guestSymbol = TempMailAdversarysSymbol(guest, symbol);
       void *processSymbol = dlsym(RTLD_DEFAULT, symbol);
-      NSLog(@"APPBOX_DIAGNOSTIC_SNAPSHOT symbol=%s guest=%p process=%p",
+      NSLog(@"TEMPMAIL_DIAGNOSTIC_SNAPSHOT symbol=%s guest=%p process=%p",
             symbol, guestSymbol, processSymbol);
     }
     NSString *appFrameworkPath = [bundlePath
         stringByAppendingPathComponent:@"Frameworks/App.framework/App"];
-    NSLog(@"APPBOX_DIAGNOSTIC_SNAPSHOT app_path=%@ exists=%d bundle_resource=%@",
+    NSLog(@"TEMPMAIL_DIAGNOSTIC_SNAPSHOT app_path=%@ exists=%d bundle_resource=%@",
           appFrameworkPath,
           [NSFileManager.defaultManager fileExistsAtPath:appFrameworkPath],
           [NSBundle.mainBundle pathForResource:@"Frameworks/App.framework"
@@ -4628,16 +4628,16 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
   }
 
   typedef int (*GuestMain)(int, char **);
-  GuestMain guestMain = (GuestMain)AppBoxAdversarysSymbol(guest, "main");
+  GuestMain guestMain = (GuestMain)TempMailAdversarysSymbol(guest, "main");
   if (guestMain == NULL) {
-    const char *error = AppBoxAdversarysError();
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_main_missing error=%s",
+    const char *error = TempMailAdversarysError();
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_main_missing error=%s",
           error == NULL ? "unknown" : error);
-    [defaults setBool:NO forKey:AppBoxGuestModeKey];
+    [defaults setBool:NO forKey:TempMailGuestModeKey];
     return -1;
   }
 
-  if (AppBoxInProcessGuestBootstrap) {
+  if (TempMailInProcessGuestBootstrap) {
     UIApplication *application = UIApplication.sharedApplication;
     BOOL guestBuildsOwnWindow =
         [bundleIdentifier isEqualToString:@"com.cg.client.pro"];
@@ -4670,12 +4670,12 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
       }
     }
     if (delegateClass == Nil) {
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME in_process_failed "
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME in_process_failed "
             "reason=delegate_missing candidates=%@",
             delegateClassNames);
       return -1;
     }
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME in_process_delegate class=%@ candidate=%@",
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME in_process_delegate class=%@ candidate=%@",
           NSStringFromClass(delegateClass), delegateClassName);
     id hostDelegate = application.delegate;
     UIWindow *hostWindow = nil;
@@ -4684,51 +4684,51 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
                                                    @selector(window));
     }
     if (hostWindow == nil) {
-      hostWindow = AppBoxCurrentForegroundWindow(application);
+      hostWindow = TempMailCurrentForegroundWindow(application);
     }
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME host_window_captured delegate=%@ window=%@ "
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME host_window_captured delegate=%@ window=%@ "
           "key=%d hidden=%d",
           NSStringFromClass([hostDelegate class]),
           NSStringFromClass(hostWindow.class), hostWindow.isKeyWindow,
           hostWindow.hidden);
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME delegate_alloc_begin class=%@",
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME delegate_alloc_begin class=%@",
           NSStringFromClass(delegateClass));
     id guestDelegate = [delegateClass alloc];
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME delegate_alloc_end object=%p class=%@",
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME delegate_alloc_end object=%p class=%@",
           (__bridge void *)guestDelegate,
           guestDelegate == nil ? @"nil" : NSStringFromClass([guestDelegate class]));
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME delegate_init_begin object=%p",
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME delegate_init_begin object=%p",
           (__bridge void *)guestDelegate);
     guestDelegate = [guestDelegate init];
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME delegate_init_end object=%p class=%@",
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME delegate_init_end object=%p class=%@",
           (__bridge void *)guestDelegate,
           guestDelegate == nil ? @"nil" : NSStringFromClass([guestDelegate class]));
     SEL setDelegateSelector = NSSelectorFromString(@"setDelegate:");
     if (guestDelegate == nil ||
         ![application respondsToSelector:setDelegateSelector]) {
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME in_process_failed reason=delegate_setter");
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME in_process_failed reason=delegate_setter");
       return -1;
     }
-    AppBoxInProcessGuestDelegate = guestDelegate;
+    TempMailInProcessGuestDelegate = guestDelegate;
     if (preserveHostApplicationDelegate) {
       // Keep the launcher as UIApplication's system delegate. UIKit/FrontBoard
       // associates the active scene and its key window with that delegate;
       // replacing it after launch makes the process terminate. The guest
       // lifecycle is driven explicitly below and the guest delegate is retained
-      // independently in AppBoxInProcessGuestDelegate.
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME application_delegate_preserved class=%@",
+      // independently in TempMailInProcessGuestDelegate.
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME application_delegate_preserved class=%@",
             NSStringFromClass([hostDelegate class]));
     } else {
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME application_delegate_set_begin class=%@",
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME application_delegate_set_begin class=%@",
             NSStringFromClass([guestDelegate class]));
       ((void (*)(id, SEL, id))objc_msgSend)(application, setDelegateSelector,
                                             guestDelegate);
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME application_delegate_set_end class=%@",
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME application_delegate_set_end class=%@",
             NSStringFromClass([application.delegate class]));
     }
 
     // UIApplicationMain normally creates UIMainStoryboardFile and assigns its
-    // window before calling the app delegate. Because the AppBox launcher has
+    // window before calling the app delegate. Because the TempMail launcher has
     // already completed that work for its own delegate, reproduce the same
     // ordering for the selected guest.
     UIViewController *guestRoot = nil;
@@ -4739,23 +4739,23 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
         storyboardName = guestInfo[@"NSMainStoryboardFile"];
       }
       if (storyboardName.length == 0 &&
-          [AppBoxGuestMainBundle pathForResource:@"Main"
+          [TempMailGuestMainBundle pathForResource:@"Main"
                                           ofType:@"storyboardc"] != nil) {
         storyboardName = @"Main";
       }
       if (storyboardName.length > 0) {
-        NSLog(@"APPBOX_PLAYBOX_RUNTIME storyboard_create_begin name=%@ "
+        NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME storyboard_create_begin name=%@ "
               "bundle=%@ path=%@",
-              storyboardName, AppBoxGuestMainBundle.bundleIdentifier,
-              AppBoxGuestMainBundle.bundlePath);
+              storyboardName, TempMailGuestMainBundle.bundleIdentifier,
+              TempMailGuestMainBundle.bundlePath);
         UIStoryboard *storyboard =
             [UIStoryboard storyboardWithName:storyboardName
-                                      bundle:AppBoxGuestMainBundle];
-        NSLog(@"APPBOX_PLAYBOX_RUNTIME storyboard_create_end storyboard=%p",
+                                      bundle:TempMailGuestMainBundle];
+        NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME storyboard_create_end storyboard=%p",
               (__bridge void *)storyboard);
-        NSLog(@"APPBOX_PLAYBOX_RUNTIME storyboard_instantiate_begin");
+        NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME storyboard_instantiate_begin");
         guestRoot = [storyboard instantiateInitialViewController];
-        NSLog(@"APPBOX_PLAYBOX_RUNTIME storyboard_instantiate_end root=%p class=%@",
+        NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME storyboard_instantiate_end root=%p class=%@",
               (__bridge void *)guestRoot,
               guestRoot == nil ? @"nil" : NSStringFromClass([guestRoot class]));
       } else {
@@ -4765,44 +4765,44 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
         // that contract with a neutral root instead of assuming Main.storyboard.
         guestRoot = [[UIViewController alloc] init];
         guestRoot.view.backgroundColor = UIColor.blackColor;
-        NSLog(@"APPBOX_PLAYBOX_RUNTIME storyboard_absent fallback_root=%@",
+        NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME storyboard_absent fallback_root=%@",
               NSStringFromClass(guestRoot.class));
       }
       if (hostWindow.windowScene != nil) {
-        NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_window_create_begin mode=scene");
+        NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_window_create_begin mode=scene");
         guestWindow =
             [[UIWindow alloc] initWithWindowScene:hostWindow.windowScene];
       } else {
-        NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_window_create_begin mode=frame");
+        NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_window_create_begin mode=frame");
         guestWindow =
             [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
       }
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_window_create_end window=%p",
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_window_create_end window=%p",
             (__bridge void *)guestWindow);
       guestWindow.rootViewController = guestRoot;
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_window_root_set class=%@",
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_window_root_set class=%@",
             NSStringFromClass([guestRoot class]));
       SEL setWindowSelector = @selector(setWindow:);
       if ([guestDelegate respondsToSelector:setWindowSelector]) {
-        NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_delegate_window_set_begin");
+        NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_delegate_window_set_begin");
         ((void (*)(id, SEL, id))objc_msgSend)(guestDelegate,
                                               setWindowSelector, guestWindow);
-        NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_delegate_window_set_end");
+        NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_delegate_window_set_end");
       }
     } else {
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_window_mode=delegate");
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_window_mode=delegate");
       // The Chungong AppDelegate allocates and assigns its UIWindow before
       // makeKeyAndVisible. Pre-instantiating the storyboard here schedules its
       // translated lifecycle methods while didFinish is still running and
       // makes the non-reentrant guest interpreter reuse its return state.
-      AppBoxInstallChungongUIKitCompatibility();
-      AppBoxPrewarmChungongUIViewControllerMetadata();
-      AppBoxPrewarmChungongKingfisherWrapperMetadata();
-      AppBoxInstallChungongObjectMapperCompatibility();
-      AppBoxInstallChungongObjectMapperMetadataCompatibility();
-      AppBoxInstallChungongAppearanceEnumCompatibility();
-      AppBoxPrewarmChungongModelWitness();
-      AppBoxInstallChungongModelValueWitnessCompatibility();
+      TempMailInstallChungongUIKitCompatibility();
+      TempMailPrewarmChungongUIViewControllerMetadata();
+      TempMailPrewarmChungongKingfisherWrapperMetadata();
+      TempMailInstallChungongObjectMapperCompatibility();
+      TempMailInstallChungongObjectMapperMetadataCompatibility();
+      TempMailInstallChungongAppearanceEnumCompatibility();
+      TempMailPrewarmChungongModelWitness();
+      TempMailInstallChungongModelValueWitnessCompatibility();
     }
 
     NSDictionary *launchOptions = @{};
@@ -4812,21 +4812,21 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
     BOOL didResult = YES;
     BOOL deferredGuestWindowVisibility =
         [bundleIdentifier isEqualToString:@"com.cg.client.pro"]
-            ? AppBoxBeginGuestWindowVisibilityDeferral()
+            ? TempMailBeginGuestWindowVisibilityDeferral()
             : NO;
     if ([guestDelegate respondsToSelector:willFinish]) {
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME will_finish_begin");
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME will_finish_begin");
       willResult = ((BOOL (*)(id, SEL, id, id))objc_msgSend)(
           guestDelegate, willFinish, application, launchOptions);
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME will_finish_end result=%d", willResult);
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME will_finish_end result=%d", willResult);
     }
     if (willResult && [guestDelegate respondsToSelector:didFinish]) {
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME did_finish_begin");
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME did_finish_begin");
       didResult = ((BOOL (*)(id, SEL, id, id))objc_msgSend)(
           guestDelegate, didFinish, application, launchOptions);
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME did_finish_end result=%d", didResult);
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME did_finish_end result=%d", didResult);
     }
-    AppBoxEndGuestWindowVisibilityDeferral(deferredGuestWindowVisibility,
+    TempMailEndGuestWindowVisibilityDeferral(deferredGuestWindowVisibility,
                                            !guestBuildsOwnWindow);
     SEL windowSelector = @selector(window);
     if ([guestDelegate respondsToSelector:windowSelector]) {
@@ -4836,7 +4836,7 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
         guestWindow = delegateWindow;
       }
     }
-    AppBoxInProcessGuestWindow =
+    TempMailInProcessGuestWindow =
         guestBuildsOwnWindow ? hostWindow : guestWindow;
     SEL becameActive = @selector(applicationDidBecomeActive:);
     if (guestBuildsOwnWindow) {
@@ -4846,18 +4846,18 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
       // its dispatch/reachability callbacks. Move the entire window handoff to
       // a later main-runloop turn and retain the guest window independently of
       // the translated AppDelegate property.
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME window_activation_scheduled window=%@",
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME window_activation_scheduled window=%@",
             NSStringFromClass(guestWindow.class));
       dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
                                    (int64_t)(0.20 * NSEC_PER_SEC)),
                      dispatch_get_main_queue(), ^{
         UIWindow *deferredGuestWindow = nil;
         UIViewController *deferredGuestController =
-            AppBoxTakeDeferredGuestRootController(&deferredGuestWindow);
+            TempMailTakeDeferredGuestRootController(&deferredGuestWindow);
         UIViewController *nativeContainer = [[UIViewController alloc] init];
         nativeContainer.view.backgroundColor = UIColor.blackColor;
         UIImage *launchImage = [UIImage imageNamed:@"ic_welcome_m"
-                                          inBundle:AppBoxGuestMainBundle
+                                          inBundle:TempMailGuestMainBundle
                          compatibleWithTraitCollection:nil];
         UIImageView *launchImageView = [[UIImageView alloc]
             initWithFrame:nativeContainer.view.bounds];
@@ -4881,21 +4881,21 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
                                           .bottomAnchor
                          constant:-36.0],
         ]];
-        NSLog(@"APPBOX_PLAYBOX_RUNTIME native_container_apply_begin");
-        ((void (*)(id, SEL, id))AppBoxOriginalSetRootViewController)(
+        NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME native_container_apply_begin");
+        ((void (*)(id, SEL, id))TempMailOriginalSetRootViewController)(
             hostWindow, @selector(setRootViewController:), nativeContainer);
         hostWindow.hidden = NO;
-        AppBoxInstallGuestFloatingControl(hostWindow);
-        NSLog(@"APPBOX_PLAYBOX_RUNTIME native_container_applied window=%@",
+        TempMailInstallGuestFloatingControl(hostWindow);
+        NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME native_container_applied window=%@",
               NSStringFromClass(hostWindow.class));
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
                                      (int64_t)(0.10 * NSEC_PER_SEC)),
                        dispatch_get_main_queue(), ^{
-          NSLog(@"APPBOX_PLAYBOX_RUNTIME native_launch_surface_ready image=%d "
+          NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME native_launch_surface_ready image=%d "
                 "guest_controller=%@",
                 launchImage != nil,
                 NSStringFromClass(deferredGuestController.class));
-          NSLog(@"APPBOX_PLAYBOX_RUNTIME in_process_ready delegate=%@ will=%d "
+          NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME in_process_ready delegate=%@ will=%d "
                 "did=%d window=%@ root=%@ guest_root=%@",
                 NSStringFromClass(delegateClass), willResult, didResult,
                 NSStringFromClass([hostWindow class]),
@@ -4907,10 +4907,10 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
             tabControllerClass = objc_getClass(
                 "_TtC4Seal31ApplicationTabBarViewController");
           }
-          NSLog(@"APPBOX_PLAYBOX_RUNTIME tab_bootstrap_begin class=%@",
+          NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME tab_bootstrap_begin class=%@",
                 NSStringFromClass(tabControllerClass));
           if (tabControllerClass == Nil) {
-            NSLog(@"APPBOX_PLAYBOX_RUNTIME tab_bootstrap_failed "
+            NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME tab_bootstrap_failed "
                   "reason=class_missing");
             return;
           }
@@ -4918,22 +4918,22 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
           Method nativeTabInitializer = class_getInstanceMethod(
               class_getSuperclass(tabControllerClass), tabInitializer);
           if (nativeTabInitializer == NULL) {
-            NSLog(@"APPBOX_PLAYBOX_RUNTIME tab_bootstrap_failed "
+            NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME tab_bootstrap_failed "
                   "reason=super_initializer_missing");
             return;
           }
-          NSLog(@"APPBOX_PLAYBOX_RUNTIME tab_alloc_begin");
+          NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME tab_alloc_begin");
           id allocatedTabController = [tabControllerClass alloc];
-          NSLog(@"APPBOX_PLAYBOX_RUNTIME tab_alloc_end object=%@",
+          NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME tab_alloc_end object=%@",
                 NSStringFromClass([allocatedTabController class]));
           Class nativeTabControllerClass =
               class_getSuperclass(tabControllerClass);
           Class allocatedTabControllerClass = object_setClass(
               allocatedTabController, nativeTabControllerClass);
-          NSLog(@"APPBOX_PLAYBOX_RUNTIME tab_native_isa_applied old=%@ new=%@",
+          NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME tab_native_isa_applied old=%@ new=%@",
                 NSStringFromClass(allocatedTabControllerClass),
                 NSStringFromClass([allocatedTabController class]));
-          NSLog(@"APPBOX_PLAYBOX_RUNTIME tab_super_init_begin imp=%p",
+          NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME tab_super_init_begin imp=%p",
                 method_getImplementation(nativeTabInitializer));
           UIViewController *tabController =
               ((id (*)(id, SEL, id, id))method_getImplementation(
@@ -4942,10 +4942,10 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
           if (tabController != nil) {
             object_setClass(tabController, tabControllerClass);
           }
-          NSLog(@"APPBOX_PLAYBOX_RUNTIME tab_super_init_end object=%@",
+          NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME tab_super_init_end object=%@",
                 NSStringFromClass(tabController.class));
-          AppBoxInProcessGuestRootController = tabController;
-          NSLog(@"APPBOX_PLAYBOX_RUNTIME tab_bootstrap_end controller=%@ "
+          TempMailInProcessGuestRootController = tabController;
+          NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME tab_bootstrap_end controller=%@ "
                 "super=%@ view_loaded=%d",
                 NSStringFromClass(tabController.class),
                 NSStringFromClass(class_getSuperclass(tabControllerClass)),
@@ -4956,7 +4956,7 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
               guestTabViewDidLoad == NULL
                   ? NULL
                   : method_getImplementation(guestTabViewDidLoad);
-          NSLog(@"APPBOX_PLAYBOX_RUNTIME tab_view_did_load_begin imp=%p",
+          NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME tab_view_did_load_begin imp=%p",
                 guestTabViewDidLoadImplementation);
           if (guestTabViewDidLoadImplementation != NULL) {
             object_setClass(tabController, nativeTabControllerClass);
@@ -4964,7 +4964,7 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
                 tabController, @selector(viewDidLoad));
             object_setClass(tabController, tabControllerClass);
           }
-          NSLog(@"APPBOX_PLAYBOX_RUNTIME tab_view_did_load_end children=%lu "
+          NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME tab_view_did_load_end children=%lu "
                 "subviews=%lu",
                 (unsigned long)tabController.childViewControllers.count,
                 (unsigned long)tabController.view.subviews.count);
@@ -4973,134 +4973,134 @@ static int AppBoxRunPlayBoxGuest(int argc, char *argv[]) {
     } else {
       [guestWindow makeKeyAndVisible];
       hostWindow.hidden = YES;
-      AppBoxInstallGuestFloatingControl(guestWindow);
+      TempMailInstallGuestFloatingControl(guestWindow);
       if (didResult && [guestDelegate respondsToSelector:becameActive]) {
         ((void (*)(id, SEL, id))objc_msgSend)(guestDelegate, becameActive,
                                               application);
       }
-      NSLog(@"APPBOX_PLAYBOX_RUNTIME in_process_ready delegate=%@ will=%d "
+      NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME in_process_ready delegate=%@ will=%d "
             "did=%d window=%@ root=%@",
             NSStringFromClass(delegateClass), willResult, didResult,
             NSStringFromClass([guestWindow class]),
             NSStringFromClass([[guestWindow rootViewController] class]));
     }
-    AppBoxScheduleGuestScreenshot(5, @"inprocess-guest-screen-05.png");
-    AppBoxScheduleGuestScreenshot(15, @"inprocess-guest-screen-15.png");
-    AppBoxScheduleGuestScreenshot(30, @"inprocess-guest-screen-30.png");
+    TempMailScheduleGuestScreenshot(5, @"inprocess-guest-screen-05.png");
+    TempMailScheduleGuestScreenshot(15, @"inprocess-guest-screen-15.png");
+    TempMailScheduleGuestScreenshot(30, @"inprocess-guest-screen-30.png");
     return willResult && didResult && guestWindow != nil ? 0 : -1;
   }
 
-  NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_main_start");
-  AppBoxLogDiagnosticMemory(@"before_guest_main");
+  NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_main_start");
+  TempMailLogDiagnosticMemory(@"before_guest_main");
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-diagnostic-signals"]) {
-    AppBoxInstallDiagnosticSignalHandler();
+          containsObject:@"--tempmail-diagnostic-signals"]) {
+    TempMailInstallDiagnosticSignalHandler();
   }
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-diagnostic-samples"]) {
-    AppBoxInstallDiagnosticSampler();
+          containsObject:@"--tempmail-diagnostic-samples"]) {
+    TempMailInstallDiagnosticSampler();
   }
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-diagnostic-thread-samples"]) {
-    AppBoxScheduleDiagnosticThreadSampler();
-    AppBoxInspectGuestRegistration(2);
-    AppBoxInspectGuestRegistration(10);
+          containsObject:@"--tempmail-diagnostic-thread-samples"]) {
+    TempMailScheduleDiagnosticThreadSampler();
+    TempMailInspectGuestRegistration(2);
+    TempMailInspectGuestRegistration(10);
   }
   if ([NSProcessInfo.processInfo.arguments
-          containsObject:@"--appbox-debug-stop-before-guest-main"]) {
-    NSLog(@"APPBOX_PLAYBOX_RUNTIME debug_wait_before_guest_main");
+          containsObject:@"--tempmail-debug-stop-before-guest-main"]) {
+    NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME debug_wait_before_guest_main");
     sleep(12);
   }
   argv[0] = strdup(executablePath.fileSystemRepresentation);
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
                                (int64_t)(2.0 * NSEC_PER_SEC)),
                  dispatch_get_main_queue(), ^{
-    AppBoxInstallGuestFloatingControl(
-        AppBoxCurrentForegroundWindow(UIApplication.sharedApplication));
+    TempMailInstallGuestFloatingControl(
+        TempMailCurrentForegroundWindow(UIApplication.sharedApplication));
   });
-  AppBoxScheduleGuestScreenshot(5, @"guest-screen-05.png");
-  AppBoxScheduleGuestScreenshot(15, @"guest-screen-15.png");
-  AppBoxScheduleGuestScreenshot(30, @"guest-screen-30.png");
-  AppBoxScheduleGuestScreenshot(60, @"guest-screen-60.png");
-  AppBoxScheduleGuestScreenshot(120, @"guest-screen-120.png");
-  AppBoxScheduleGuestScreenshot(180, @"guest-screen-180.png");
+  TempMailScheduleGuestScreenshot(5, @"guest-screen-05.png");
+  TempMailScheduleGuestScreenshot(15, @"guest-screen-15.png");
+  TempMailScheduleGuestScreenshot(30, @"guest-screen-30.png");
+  TempMailScheduleGuestScreenshot(60, @"guest-screen-60.png");
+  TempMailScheduleGuestScreenshot(120, @"guest-screen-120.png");
+  TempMailScheduleGuestScreenshot(180, @"guest-screen-180.png");
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 60 * NSEC_PER_SEC),
                  dispatch_get_main_queue(), ^{
     [NSFileManager.defaultManager
-        removeItemAtURL:AppBoxPlayBoxContinuationMarkerURL()
+        removeItemAtURL:TempMailPlayBoxContinuationMarkerURL()
                   error:nil];
   });
   int result = guestMain(argc, argv);
-  NSLog(@"APPBOX_PLAYBOX_RUNTIME guest_main_returned code=%d", result);
+  NSLog(@"TEMPMAIL_PLAYBOX_RUNTIME guest_main_returned code=%d", result);
   return result;
 }
 
-int AppBoxLaunchSelectedPlayBoxGuestInProcess(void) {
-  AppBoxInProcessGuestBootstrap = YES;
+int TempMailLaunchSelectedPlayBoxGuestInProcess(void) {
+  TempMailInProcessGuestBootstrap = YES;
   const char *executable = NSBundle.mainBundle.executablePath.fileSystemRepresentation;
   char *arguments[] = {(char *)executable, NULL};
-  int result = AppBoxRunPlayBoxGuest(1, arguments);
-  AppBoxInProcessGuestBootstrap = NO;
+  int result = TempMailRunPlayBoxGuest(1, arguments);
+  TempMailInProcessGuestBootstrap = NO;
   return result;
 }
 
 int main(int argc, char *argv[]) {
   @autoreleasepool {
-    AppBoxHostBundle = NSBundle.mainBundle;
+    TempMailHostBundle = NSBundle.mainBundle;
     NSArray<NSString *> *processArguments = NSProcessInfo.processInfo.arguments;
     NSUInteger decryptProbeIndex =
-        [processArguments indexOfObject:@"--appbox-probe-lnkiwi-decrypt"];
+        [processArguments indexOfObject:@"--tempmail-probe-lnkiwi-decrypt"];
     if (decryptProbeIndex != NSNotFound) {
       if (decryptProbeIndex + 1 >= processArguments.count) {
-        NSLog(@"APPBOX_LNKIWI_DECRYPT error=missing_argument");
+        NSLog(@"TEMPMAIL_LNKIWI_DECRYPT error=missing_argument");
         return 64;
       }
-      if (AppBoxLoadFramework(@"PBPlayerKit") == NULL) {
-        NSLog(@"APPBOX_LNKIWI_DECRYPT error=framework_load_failed");
+      if (TempMailLoadFramework(@"PBPlayerKit") == NULL) {
+        NSLog(@"TEMPMAIL_LNKIWI_DECRYPT error=framework_load_failed");
         return 65;
       }
       NSString *encrypted = processArguments[decryptProbeIndex + 1];
-      AppBoxProbeLNKiwiDecrypt(encrypted.UTF8String);
+      TempMailProbeLNKiwiDecrypt(encrypted.UTF8String);
       return 0;
     }
 
     if ([NSProcessInfo.processInfo.arguments
-            containsObject:@"--appbox-playbox-developer"]) {
+            containsObject:@"--tempmail-playbox-developer"]) {
       return UIApplicationMain(
           argc, argv, nil,
-          NSStringFromClass(NSClassFromString(@"AppBoxHostDelegate")));
+          NSStringFromClass(NSClassFromString(@"TempMailHostDelegate")));
     }
 
     NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
     BOOL installCommand = NO;
     for (NSString *argument in processArguments) {
-      if ([argument hasPrefix:@"--appbox-install-"]) {
+      if ([argument hasPrefix:@"--tempmail-install-"]) {
         installCommand = YES;
         break;
       }
     }
     if (installCommand ||
-        [processArguments containsObject:@"--appbox-clear-launch-state"]) {
-      [defaults removeObjectForKey:AppBoxRuntimeLaunchTokenKey];
-      [defaults removeObjectForKey:AppBoxGuestLaunchTokenKey];
-      [defaults removeObjectForKey:AppBoxGuestModeKey];
+        [processArguments containsObject:@"--tempmail-clear-launch-state"]) {
+      [defaults removeObjectForKey:TempMailRuntimeLaunchTokenKey];
+      [defaults removeObjectForKey:TempMailGuestLaunchTokenKey];
+      [defaults removeObjectForKey:TempMailGuestModeKey];
       [defaults synchronize];
       [NSFileManager.defaultManager
-          removeItemAtURL:AppBoxPlayBoxContinuationMarkerURL()
+          removeItemAtURL:TempMailPlayBoxContinuationMarkerURL()
                     error:nil];
-      NSLog(@"APPBOX_RUNTIME launch_state_cleared reason=%@",
+      NSLog(@"TEMPMAIL_RUNTIME launch_state_cleared reason=%@",
             installCommand ? @"install" : @"explicit");
     }
-    NSString *launchToken = [defaults stringForKey:AppBoxRuntimeLaunchTokenKey];
-    NSString *runtimeKind = [defaults stringForKey:AppBoxRuntimeKindKey];
+    NSString *launchToken = [defaults stringForKey:TempMailRuntimeLaunchTokenKey];
+    NSString *runtimeKind = [defaults stringForKey:TempMailRuntimeKindKey];
     if (launchToken.length == 0) {
-      launchToken = [defaults stringForKey:AppBoxGuestLaunchTokenKey];
+      launchToken = [defaults stringForKey:TempMailGuestLaunchTokenKey];
       if (launchToken.length > 0) {
         runtimeKind = @"playbox";
       }
     }
     if (launchToken.length == 0 &&
-        AppBoxConsumeFreshPlayBoxContinuationMarker()) {
+        TempMailConsumeFreshPlayBoxContinuationMarker()) {
       // The supported HBuilder guest performs one internal relaunch after its
       // resource/bootstrap phase. PBPlayerKit also restores a preferences
       // snapshot during that transition, so this one-use Documents marker is
@@ -5111,21 +5111,21 @@ int main(int argc, char *argv[]) {
 
     // Older builds persisted guest mode forever, which made every normal app
     // launch jump straight into the guest. Guest launch is now a one-shot
-    // command: consume it before entering the runtime, so the next AppBox open
+    // command: consume it before entering the runtime, so the next TempMail open
     // always returns to the launcher even if the guest crashes.
-    [defaults removeObjectForKey:AppBoxGuestModeKey];
+    [defaults removeObjectForKey:TempMailGuestModeKey];
     if (launchToken.length > 0) {
-      [defaults removeObjectForKey:AppBoxRuntimeLaunchTokenKey];
-      [defaults removeObjectForKey:AppBoxGuestLaunchTokenKey];
+      [defaults removeObjectForKey:TempMailRuntimeLaunchTokenKey];
+      [defaults removeObjectForKey:TempMailGuestLaunchTokenKey];
       [defaults synchronize];
       int result = [runtimeKind isEqualToString:@"flutter"]
-          ? AppBoxRunFlutterGuest(argc, argv)
-          : AppBoxRunPlayBoxGuest(argc, argv);
+          ? TempMailRunFlutterGuest(argc, argv)
+          : TempMailRunPlayBoxGuest(argc, argv);
       if (result >= 0) {
         return result;
       }
     }
     return UIApplicationMain(argc, argv, nil,
-                             NSStringFromClass(NSClassFromString(@"AppBoxHostDelegate")));
+                             NSStringFromClass(NSClassFromString(@"TempMailHostDelegate")));
   }
 }

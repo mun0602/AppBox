@@ -23,8 +23,8 @@ python3 "$PROJECT_ROOT/Tools/NIVMReverse/patch_adversarys_epilogue.py" \
   "$DESTINATION/adversarys.framework/adversarys"
 
 # Diagnostic builds can preserve the module-index failure registers in an iOS
-# crash report.  Normal AppBox builds keep the original PlayBox instruction.
-if [[ "${APPBOX_RUNTIME_DIAGNOSTIC_TRAP:-0}" == "1" ]]; then
+# crash report.  Normal TempMail builds keep the original PlayBox instruction.
+if [[ "${TEMPMAIL_RUNTIME_DIAGNOSTIC_TRAP:-0}" == "1" ]]; then
   python3 "$PROJECT_ROOT/Tools/NIVMReverse/patch_adversarys_abort.py" \
     "$DESTINATION/adversarys.framework/adversarys"
 fi

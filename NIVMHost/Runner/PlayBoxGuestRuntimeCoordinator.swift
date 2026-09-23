@@ -21,7 +21,7 @@ struct PlayBoxGuestDescriptor: Codable, Hashable {
   let expectedNIVMSHA256: String?
 
   /// Source-built Flutter guests use the signed sidecar archive produced by
-  /// AppBox's Flutter pipeline. Converted PlayBox guests embed raw
+  /// TempMail's Flutter pipeline. Converted PlayBox guests embed raw
   /// `rocketship.nivm` inside the IPA and expose that raw file as `nivmURL`.
   var usesFlutterSidecar: Bool {
     nivmURL?.lastPathComponent.lowercased().hasSuffix(".nivm.zip") == true

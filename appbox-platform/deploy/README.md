@@ -70,6 +70,11 @@ The iOS client should then retrieve
 `https://3601.help/api/v1/appbox/catalog`. Add converted applications from the
 admin page at `https://3601.help/`.
 
+To temporarily hide every application from the public catalog without deleting
+admin data, set `APPBOX_CATALOG_EMPTY=true` in `/etc/appbox/appbox.env` and
+restart `appbox-api.service`. Set it back to `false` and restart the service to
+restore the catalog.
+
 ## Updating
 
 Pull or copy the new repository revision and rerun `deploy/install-server.sh`.

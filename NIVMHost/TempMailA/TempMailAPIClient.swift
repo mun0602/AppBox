@@ -199,7 +199,7 @@ final class TempMailAPIClient {
       "stable_recovery_id": stableID,
       "installation_id": stableID,
       "install_instance_id": installID,
-      "device_fingerprint": SHA256.hash(data: Data("appbox-ios-\(stableID)".utf8)).hexString,
+      "device_fingerprint": SHA256.hash(data: Data("temp-mail-ios-\(stableID)".utf8)).hexString,
       "device_info": [
         "platform": "ios",
         "model": device.model,
@@ -370,7 +370,7 @@ final class TempMailAPIClient {
         authenticatedPayload["plat"] = "ios"
         authenticatedPayload["platform"] = "ios"
         let payloadData = try JSONSerialization.data(withJSONObject: authenticatedPayload)
-        guard let encrypted = AppBoxAssetCrypto.encryptTempMailAPIData(payloadData) else {
+        guard let encrypted = TempMailAssetCrypto.encryptTempMailAPIData(payloadData) else {
           throw TempMailAPIError.invalidResponse
         }
         let encryptedString = encrypted.base64EncodedString()
@@ -420,11 +420,11 @@ final class TempMailAPIClient {
     guard timestamp > 0,
           hmacHex("data=\(encryptedString)&timestamp=\(timestamp)&nonce=\(nonce)") == signature.lowercased(),
           abs(Int(Date().addingTimeInterval(serverClockOffset).timeIntervalSince1970) - timestamp) <= 90,
-          var decrypted = AppBoxAssetCrypto.decryptTempMailAPIData(encrypted) else {
+          var decrypted = TempMailAssetCrypto.decryptTempMailAPIData(encrypted) else {
       throw TempMailAPIError.invalidResponse
     }
     if boolValue(envelope["compressed"]) {
-      guard let uncompressed = AppBoxAssetCrypto.gunzipTempMailAPIData(decrypted) else {
+      guard let uncompressed = TempMailAssetCrypto.gunzipTempMailAPIData(decrypted) else {
         throw TempMailAPIError.invalidResponse
       }
       decrypted = uncompressed
@@ -559,7 +559,7 @@ final class TempMailAPIClient {
 
 private enum TempMailKeychain {
   private static var service: String {
-    (Bundle.main.bundleIdentifier ?? "com.tianya.appbox") + ".temp-mail"
+    (Bundle.main.bundleIdentifier ?? "com.tianya.tempmail") + ".temp-mail"
   }
 
   static func read(_ key: String) -> String? {

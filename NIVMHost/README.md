@@ -1,59 +1,42 @@
-# Quietform (AppBox NIVM Host)
+# 临时邮箱（TempMail）
 
-`Quietform` is the App Store-facing English product name. This repository is
-the active iPhone host for the PlayBox-style AppBox flow.
+`临时邮箱` 是用户可见名称，工程产品名为 `TempMail`，Bundle ID 为
+`com.tianya.tempmail`。A 面提供完整的临时邮箱体验，B 面继续承载现有应用空间流程。
 
 ## A/B surfaces
 
-AppBox now keeps the original privacy surface as its A face and the NIVM app
-catalog as its B face:
+TempMail 由两个既有表面组成：
 
-- A face (`Quietform`) uses Apple's `FamilyControls`, `ManagedSettings`, and
-  the system `FamilyActivityPicker`. The user grants Screen Time access,
-  chooses apps/categories in the iOS-owned picker, and applies Apple's system
-  shield during a focus period. Only Apple's opaque selection tokens are persisted.
-- B face (`Quietform 应用空间`) is the existing encrypted catalog, download,
+- A 面（`临时邮箱`）提供邮箱创建、地址复制、更换地址、收件箱、邮件详情、附件下载、
+  邮箱管理以及深色/浅色主题。
+- B face (`TempMail 应用空间`) is the existing encrypted catalog, download,
   installation, NIVM/QEMU runtime, and guest-return flow described below.
-- A fresh install starts on A. Opening `quietform://box` (or the existing
-  `quietform://open`, `quietform://install`, and `quietform://native` entry commands)
+- A fresh install starts on A. Opening `tempmail://box` (or the existing
+  `tempmail://open`, `tempmail://install`, and `tempmail://native` entry commands)
   activates B and persists it across normal launches.
-- Opening `quietform://privacy` returns to A and persists that choice. The internal
-  `quietform://sandbox.relaunch` callback deliberately preserves B so the
+- Opening `tempmail://privacy` returns to A and persists that choice. The guest-return
+  `tempmail://sandbox.relaunch` callback deliberately preserves B so the
   guest floating menu continues to return to the box instead of exposing A.
 
-The A surface is a complete focus workflow rather than a static review shell:
-
-- Home shows the current focus state, real selected-item/rule counts, a 15/30/60
-  minute quick session, a continuous session, and the next scheduled rule.
-- Rules supports recurring weekdays, overnight time ranges, and arrival/departure
-  geofences.
-- Apps exposes the private Apple-owned picker and renders selected tokens through
-  Apple-provided labels.
-- A `DeviceActivityMonitor` extension applies and restores shields at schedule
-  boundaries and when a timed session ends, including while the host is closed.
-
-The host and `FocusMonitor` targets both require
-`com.apple.developer.family-controls` and the `group.com.tianya.appbox` App Group.
-For App Store distribution, request Family Controls distribution permission for
-both bundle identifiers (`com.tianya.appbox` and
-`com.tianya.appbox.focusmonitor`) and regenerate both provisioning profiles. A
-development-only capability or approval for the host alone is not sufficient.
+The A surface boots directly into the current mailbox and keeps existing content
+visible while refreshing. Empty, loading, error, read/unread, attachment, delete,
+copy, and mailbox-switch states are handled by the first-party SwiftUI module.
 
 ## User flow
 
 1. The activated B face restores its last verified catalog from Application Support so a
    return/relaunch can render immediately, then refreshes the encrypted catalog
-   from `QuietformCatalogBaseURL` in the background.
+   from `TempMailCatalogBaseURL` in the background.
 2. The launcher renders server categories as five-column cards with real app
    icons and per-app `安装` / `启动` state.
 3. `安装` downloads the converted IPA, verifies its SHA-256, bundle ID,
    version, build, `rocketship.nivm`/Flutter sidecar, and NIVM SHA-256.
-4. The validated application is kept under AppBox's Documents container.
-5. `启动` enters the selected NIVM/QEMU guest in the current AppBox process;
-   the user does not need to reopen AppBox manually.
+4. The validated application is kept under TempMail's Documents container.
+5. `启动` enters the selected NIVM/QEMU guest in the current TempMail process;
+   the user does not need to reopen TempMail manually.
 6. The guest window keeps a draggable PlayBox-style floating control. Tap it
    once to open PlayBox's full-screen pass-through menu and its separate
-   `返回沙盒` action, then tap that action to relaunch the AppBox launcher
+   `返回沙盒` action, then tap that action to relaunch the TempMail launcher
    automatically.
 
 Every visible tile, including the source-built `pornhub_client`/天涯 package,
@@ -91,7 +74,7 @@ entries in two groups:
   can be dragged vertically and snaps to the nearest screen edge.
 - The floating control loads the original icon, highlighted icon, return icon,
   and localized title from `PBPlayerKit.framework/Floating.bundle`; a built-in
-  AppBox symbol remains as the runtime fallback. Its expanded return action uses
+  TempMail symbol remains as the runtime fallback. Its expanded return action uses
   a compact black translucent card so it does not visually compete with guest
   content.
 
@@ -114,9 +97,9 @@ surfaces.
 - Xcode and CocoaPods
 - a connected, trusted iPhone included in the development profile
 - `pornhub_client` at `../pornhub/pornhub_client`, or set
-  `APPBOX_CLIENT_IOS_ROOT`
+  `TEMPMAIL_CLIENT_IOS_ROOT`
 - the local converted artifacts under `/Users/king/Documents/AppBox`, or set
-  `APPBOX_ARTIFACT_ROOT`
+  `TEMPMAIL_ARTIFACT_ROOT`
 - an installed `/Applications/PlayBox.app`; the build stages the required
   private runtime frameworks from that local application
 
@@ -130,8 +113,8 @@ pod install
 ./scripts/build_and_install.sh 003F06EE-CAF3-553A-8035-CDD0276F9ED1
 ```
 
-Successful completion prints `APPBOX_HOST_OK`, installs
-`com.tianya.appbox`, and launches it on the selected device.
+Successful completion prints `TEMPMAIL_HOST_OK`, installs
+`com.tianya.tempmail`, and launches it on the selected device.
 
 ## App Store IPA
 
@@ -144,7 +127,7 @@ cd /Users/king/Documents/GitHub/AppBox/NIVMHost
 ```
 
 The script creates a `generic/platform=iOS` archive, embeds and validates the
-`FocusMonitor` extension, stages and signs the NIVM
+`TempMailActivityMonitor` extension, stages and signs the NIVM
 runtime, preserves the required standalone 167x167 iPad Pro icon and its
 `Info.plist` references, exports with App Store Connect signing, and then
 verifies the ZIP, host/extension entitlements, nested code signatures, source
@@ -162,39 +145,29 @@ default because the smaller pure release engine currently crashes the
 source-built Flutter guest during VM initialization. Debug and local symbols
 are stripped from the staged copy, leaving the original engine build untouched.
 
-Useful A/B QA launches are:
+The alternate surface is selected only through the registered URL scheme:
 
 ```bash
-# Reset to and capture A.
+# Select the mailbox surface.
 xcrun devicectl device process launch --device <device-identifier> \
-  --terminate-existing com.tianya.appbox --appbox-capture-privacy
+  --terminate-existing --payload-url tempmail://privacy com.tianya.tempmail
 
-# Force and capture B.
+# Select the app-center surface.
 xcrun devicectl device process launch --device <device-identifier> \
-  --terminate-existing com.tianya.appbox --appbox-capture-launcher
+  --terminate-existing --payload-url tempmail://box com.tianya.tempmail
 ```
 
-For repeatable device QA of a server-provided catalog app, launch AppBox with
-its catalog id:
-
-```bash
-xcrun devicectl device process launch --device <device-identifier> \
-  --terminate-existing --console com.tianya.appbox \
-  --appbox-force-surface \
-  --appbox-install-and-start-catalog-id=<catalog-app-id>
-```
-
-This waits for the encrypted remote catalog, downloads and validates the
-selected package, and starts it in-process after installation succeeds.
+The selected surface is persisted so a guest relaunch can return to the same
+surface. Opening `tempmail://privacy` switches back to the mailbox surface.
 
 Production catalog and encrypted-image settings can be supplied without
 editing source:
 
 ```bash
-APPBOX_CATALOG_BASE_URL=https://3601.help \
-APPBOX_CLIENT_AES_KEY='<base64-32-byte-key>' \
-APPBOX_ASSET_AES_KEY='<base64-or-hex-key>' \
-APPBOX_ASSET_AES_IV='<base64-or-hex-iv>' \
+TEMPMAIL_CATALOG_BASE_URL=https://3601.help \
+TEMPMAIL_CLIENT_AES_KEY='<base64-32-byte-key>' \
+TEMPMAIL_ASSET_AES_KEY='<base64-or-hex-key>' \
+TEMPMAIL_ASSET_AES_IV='<base64-or-hex-iv>' \
 ./scripts/build_and_install.sh <device-identifier>
 ```
 
@@ -203,7 +176,7 @@ SHA-256 fallback material. Never commit production secrets.
 
 ## Adding another application
 
-Convert and validate the exact IPA first. Then create the entry in AppBox
+Convert and validate the exact IPA first. Then create the entry in TempMail
 Admin with all of the following fields:
 
 - display name, icon, category, and group

@@ -1,2 +1,2 @@
 #import "GeneratedPluginRegistrant.h"
-#import "AppBoxAssetCrypto.h"
+#import "TempMailAssetCrypto.h"

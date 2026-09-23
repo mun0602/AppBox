@@ -7,7 +7,7 @@ IOS_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 ASSET_DIR="${IOS_DIR}/Runner/Assets.xcassets"
 BUILT_APP="${1:-}"
 
-PRIMARY_ICON_SET="AppIcon"
+PRIMARY_ICON_SET="TempMailAppIcon"
 ICON_SETS=("${PRIMARY_ICON_SET}")
 
 fail() {

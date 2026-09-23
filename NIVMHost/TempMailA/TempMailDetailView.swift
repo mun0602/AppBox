@@ -122,6 +122,7 @@ private struct TempMailDetailContent: View {
 
   @State private var headerExpanded = false
   @State private var htmlHeight: CGFloat = 160
+  @State private var htmlIsReady = false
 
   var body: some View {
     ScrollView {
@@ -213,8 +214,27 @@ private struct TempMailDetailContent: View {
     let text = detail.text.trimmingCharacters(in: .whitespacesAndNewlines)
 
     if !html.isEmpty {
-      TempMailHTMLView(html: html, colorScheme: colorScheme, height: $htmlHeight)
-        .frame(height: max(120, htmlHeight))
+      ZStack {
+        if !htmlIsReady {
+          ProgressView()
+            .tint(TempMailPalette.green)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .accessibilityLabel("正在排版邮件")
+        }
+
+        TempMailHTMLView(
+          html: html,
+          colorScheme: colorScheme,
+          height: $htmlHeight,
+          isReady: $htmlIsReady
+        )
+        .opacity(htmlIsReady ? 1 : 0)
+        .accessibilityHidden(!htmlIsReady)
+      }
+      .frame(height: htmlIsReady ? max(120, htmlHeight) : 160)
+      .transaction { transaction in
+        transaction.animation = nil
+      }
     } else if !text.isEmpty {
       Text(text)
         .font(.body)
@@ -603,20 +623,22 @@ private struct TempMailHTMLView: UIViewRepresentable {
   let html: String
   let colorScheme: ColorScheme
   @Binding var height: CGFloat
+  @Binding var isReady: Bool
 
   func makeCoordinator() -> Coordinator {
-    Coordinator(height: $height)
+    Coordinator(height: $height, isReady: $isReady)
   }
 
   func makeUIView(context: Context) -> WKWebView {
     let configuration = WKWebViewConfiguration()
     configuration.websiteDataStore = .nonPersistent()
     configuration.defaultWebpagePreferences.allowsContentJavaScript = false
+    configuration.suppressesIncrementalRendering = true
+    configuration.allowsInlineMediaPlayback = false
+    configuration.mediaTypesRequiringUserActionForPlayback = .all
 
     let webView = WKWebView(frame: .zero, configuration: configuration)
-    webView.isOpaque = false
-    webView.backgroundColor = .clear
-    webView.scrollView.backgroundColor = .clear
+    applyBackground(to: webView)
     webView.scrollView.isScrollEnabled = false
     webView.scrollView.bounces = false
     webView.navigationDelegate = context.coordinator
@@ -625,10 +647,9 @@ private struct TempMailHTMLView: UIViewRepresentable {
   }
 
   func updateUIView(_ webView: WKWebView, context: Context) {
+    applyBackground(to: webView)
     let document = Self.document(html: html, colorScheme: colorScheme)
-    guard context.coordinator.loadedDocument != document else { return }
-    context.coordinator.loadedDocument = document
-    webView.loadHTMLString(document, baseURL: nil)
+    context.coordinator.load(document: document, in: webView)
   }
 
   static func dismantleUIView(_ webView: WKWebView, coordinator: Coordinator) {
@@ -637,28 +658,64 @@ private struct TempMailHTMLView: UIViewRepresentable {
   }
 
   final class Coordinator: NSObject, WKNavigationDelegate {
-    var loadedDocument: String?
+    private var loadedDocument: String?
     private var contentSizeObservation: NSKeyValueObservation?
+    private var pendingHeightCommit: DispatchWorkItem?
     private var height: Binding<CGFloat>
+    private var isReady: Binding<Bool>
+    private var candidateHeight: CGFloat?
+    private var committedHeight: CGFloat?
+    private var observedViewportWidth: CGFloat = 0
+    private var generation = 0
+    private var navigationFinished = false
 
-    init(height: Binding<CGFloat>) {
+    init(height: Binding<CGFloat>, isReady: Binding<Bool>) {
       self.height = height
+      self.isReady = isReady
     }
 
     func observe(_ webView: WKWebView) {
-      contentSizeObservation = webView.scrollView.observe(\.contentSize, options: [.new]) { [weak self] _, change in
+      contentSizeObservation = webView.scrollView.observe(\.contentSize, options: [.new]) { [weak self, weak webView] _, change in
         guard let value = change.newValue?.height else { return }
-        self?.updateHeight(value)
+        DispatchQueue.main.async {
+          guard let self, let webView else { return }
+          self.receiveHeight(value, viewportWidth: webView.bounds.width, webView: webView)
+        }
       }
     }
 
+    func load(document: String, in webView: WKWebView) {
+      guard loadedDocument != document else { return }
+      loadedDocument = document
+      generation += 1
+      navigationFinished = false
+      candidateHeight = nil
+      committedHeight = nil
+      observedViewportWidth = 0
+      pendingHeightCommit?.cancel()
+      pendingHeightCommit = nil
+      let expectedGeneration = generation
+      DispatchQueue.main.async { [weak self] in
+        guard let self, self.generation == expectedGeneration else { return }
+        self.publish(height: nil, ready: false)
+      }
+      webView.loadHTMLString(document, baseURL: nil)
+    }
+
     func stopObserving() {
+      pendingHeightCommit?.cancel()
+      pendingHeightCommit = nil
       contentSizeObservation?.invalidate()
       contentSizeObservation = nil
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation?) {
-      updateHeight(webView.scrollView.contentSize.height)
+      navigationFinished = true
+      receiveHeight(
+        webView.scrollView.contentSize.height,
+        viewportWidth: webView.bounds.width,
+        webView: webView
+      )
     }
 
     func webView(
@@ -683,13 +740,71 @@ private struct TempMailHTMLView: UIViewRepresentable {
       decisionHandler(scheme == "about" || scheme == "data" ? .allow : .cancel)
     }
 
-    private func updateHeight(_ newValue: CGFloat) {
-      let measured = min(max(newValue, 120), 100_000)
-      guard measured.isFinite, abs(height.wrappedValue - measured) > 1 else { return }
-      DispatchQueue.main.async { [height] in
-        height.wrappedValue = measured
+    private func receiveHeight(_ newValue: CGFloat, viewportWidth: CGFloat, webView: WKWebView) {
+      guard navigationFinished else { return }
+      let measured = min(max(ceil(newValue), 120), 100_000)
+      guard measured.isFinite else { return }
+
+      let widthChanged = observedViewportWidth > 0 && abs(observedViewportWidth - viewportWidth) > 1
+      if viewportWidth > 0 { observedViewportWidth = viewportWidth }
+
+      if widthChanged {
+        candidateHeight = measured
+        committedHeight = nil
+      } else {
+        candidateHeight = max(candidateHeight ?? measured, measured)
+      }
+
+      pendingHeightCommit?.cancel()
+      let expectedGeneration = generation
+      let work = DispatchWorkItem { [weak self, weak webView] in
+        guard let self,
+              let webView,
+              self.generation == expectedGeneration,
+              let candidate = self.candidateHeight else { return }
+
+        if let committed = self.committedHeight,
+           candidate <= committed + 2 {
+          if !self.isReady.wrappedValue {
+            self.publish(height: committed, ready: true)
+          }
+          return
+        }
+
+        self.committedHeight = candidate
+        self.publish(height: candidate, ready: true)
+
+        // A height write can itself produce one final content-size callback.
+        // Re-read after layout, but the monotonic/threshold guard prevents a
+        // feedback loop or sub-pixel oscillation.
+        webView.setNeedsLayout()
+      }
+      pendingHeightCommit = work
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.12, execute: work)
+    }
+
+    private func publish(height newHeight: CGFloat?, ready: Bool) {
+      var transaction = Transaction()
+      transaction.disablesAnimations = true
+      withTransaction(transaction) {
+        if let newHeight, abs(height.wrappedValue - newHeight) > 2 {
+          height.wrappedValue = newHeight
+        }
+        if isReady.wrappedValue != ready {
+          isReady.wrappedValue = ready
+        }
       }
     }
+  }
+
+  private func applyBackground(to webView: WKWebView) {
+    let color = colorScheme == .dark
+      ? UIColor(red: 60 / 255, green: 62 / 255, blue: 64 / 255, alpha: 1)
+      : UIColor.white
+    webView.isOpaque = true
+    webView.backgroundColor = color
+    webView.scrollView.backgroundColor = color
+    webView.underPageBackgroundColor = color
   }
 
   private static func document(html: String, colorScheme: ColorScheme) -> String {
@@ -702,9 +817,9 @@ private struct TempMailHTMLView: UIViewRepresentable {
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; object-src 'none'; frame-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'; img-src data: https: http:; style-src 'unsafe-inline'">
     <style>
       :root { color-scheme: \(isDark ? "dark" : "light"); }
-      html, body { margin: 0; padding: 0; width: 100%; min-height: 1px; background: \(background); color: \(foreground); }
+      html, body { margin: 0; padding: 0; width: 100%; min-height: 1px; background: \(background); color: \(foreground); scroll-behavior: auto !important; }
       body { box-sizing: border-box; padding: 18px; font: -apple-system-body; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 17px; line-height: 1.55; overflow-wrap: anywhere; }
-      *, *::before, *::after { box-sizing: border-box; max-width: 100%; }
+      *, *::before, *::after { box-sizing: border-box; max-width: 100%; animation: none !important; transition: none !important; }
       img { max-width: 100% !important; height: auto !important; }
       a { color: #18CA88; text-decoration-thickness: from-font; }
       table { display: block; width: 100% !important; overflow-x: auto; border-collapse: collapse; }

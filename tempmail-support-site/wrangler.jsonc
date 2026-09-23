@@ -1,0 +1,15 @@
+{
+  "name": "tempmail-support",
+  "account_id": "74dcb623526e1925a35e0991a0940f16",
+  "compatibility_date": "2026-09-15",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./public"
+  },
+  "routes": [
+    {
+      "pattern": "tempmail.9355.my",
+      "custom_domain": true
+    }
+  ]
+}

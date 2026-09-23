@@ -9,10 +9,7 @@ struct TempMailRootView: View {
   @State private var drawerPresented: Bool
   @State private var createPresented = false
 
-  let onInternalUnlock: () -> Void
-
-  init(onInternalUnlock: @escaping () -> Void) {
-    self.onInternalUnlock = onInternalUnlock
+  init() {
     let arguments = ProcessInfo.processInfo.arguments
     let initialTab: TempMailTab
     if arguments.contains("--temp-mail-test-tab=inbox") {
@@ -65,8 +62,7 @@ struct TempMailRootView: View {
           isPresented: $drawerPresented,
           appearanceMode: appearanceBinding,
           animationsEnabled: $animationsEnabled,
-          onCreateMailbox: { createPresented = true },
-          onInternalUnlock: onInternalUnlock
+          onCreateMailbox: { createPresented = true }
         )
         .transition(.opacity)
         .zIndex(20)
@@ -384,7 +380,7 @@ private struct TempMailInboxView: View {
           } else {
             LazyVStack(spacing: 6) {
               ForEach(store.messages) { message in
-                NavigationLink(value: message) {
+                NavigationLink(value: message.id) {
                   TempMailMessageRow(message: message)
                 }
                 .buttonStyle(.plain)
@@ -420,8 +416,8 @@ private struct TempMailInboxView: View {
           trailingAction: { Task { await store.refresh() } }
         )
       }
-      .navigationDestination(for: TempMailMessage.self) { message in
-        TempMailDetailView(messageID: message.id)
+      .navigationDestination(for: Int.self) { messageID in
+        TempMailDetailView(messageID: messageID)
       }
       .confirmationDialog(
         "删除这封邮件？",
@@ -777,19 +773,8 @@ private struct TempMailDrawer: View {
   @Binding var appearanceMode: TempMailAppearanceMode
   @Binding var animationsEnabled: Bool
   let onCreateMailbox: () -> Void
-  let onInternalUnlock: () -> Void
   @State private var infoPage: TempMailInfoPage?
   @GestureState private var dragOffset: CGFloat = 0
-
-#if APPBOX_INTERNAL_UNLOCK
-  @State private var internalTapCount = 0
-  @State private var internalTapDeadline = Date.distantPast
-  @State private var isInternalPromptPresented = false
-  @State private var internalCode = ""
-  @State private var isInternalUnlocking = false
-  @State private var internalUnlockError = ""
-  @State private var isInternalErrorPresented = false
-#endif
 
   var body: some View {
     GeometryReader { proxy in
@@ -861,10 +846,6 @@ private struct TempMailDrawer: View {
               .font(.subheadline)
               .padding(.horizontal, 18)
               .frame(height: 52)
-              .contentShape(Rectangle())
-#if APPBOX_INTERNAL_UNLOCK
-              .onTapGesture(perform: registerInternalTap)
-#endif
             }
             .padding(.horizontal, 12)
           }
@@ -893,38 +874,11 @@ private struct TempMailDrawer: View {
             }
         )
 
-#if APPBOX_INTERNAL_UNLOCK
-        if isInternalUnlocking {
-          Color.black.opacity(0.16).ignoresSafeArea()
-          ProgressView("正在验证…")
-            .padding(.horizontal, 24)
-            .padding(.vertical, 18)
-            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-#endif
       }
     }
     .sheet(item: $infoPage) { page in
       TempMailInfoSheet(page: page)
     }
-#if APPBOX_INTERNAL_UNLOCK
-    .alert("输入验证码", isPresented: $isInternalPromptPresented) {
-      TextField("验证码", text: $internalCode)
-        .textInputAutocapitalization(.characters)
-        .autocorrectionDisabled()
-      Button("取消", role: .cancel) { internalCode = "" }
-      Button("验证", action: redeemInternalCode)
-        .disabled(internalCode.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-    } message: {
-      Text("请输入验证码以完成验证。")
-    }
-    .alert("验证失败", isPresented: $isInternalErrorPresented) {
-      Button("确定", role: .cancel) {}
-    } message: {
-      Text(internalUnlockError)
-    }
-#endif
   }
 
   private var versionLabel: String {
@@ -933,40 +887,6 @@ private struct TempMailDrawer: View {
     return "\(version) (\(build))"
   }
 
-#if APPBOX_INTERNAL_UNLOCK
-  private func registerInternalTap() {
-    let now = Date()
-    if now > internalTapDeadline { internalTapCount = 0 }
-    internalTapCount += 1
-    internalTapDeadline = now.addingTimeInterval(5)
-    guard internalTapCount >= 7 else { return }
-    internalTapCount = 0
-    internalTapDeadline = .distantPast
-    internalCode = ""
-    UIImpactFeedbackGenerator(style: .light).impactOccurred()
-    isInternalPromptPresented = true
-  }
-
-  private func redeemInternalCode() {
-    let code = internalCode.trimmingCharacters(in: .whitespacesAndNewlines)
-    guard !code.isEmpty, !isInternalUnlocking else { return }
-    internalCode = ""
-    isInternalUnlocking = true
-    Task {
-      do {
-        try await AppBoxInternalUnlockService().redeem(code: code)
-        isInternalUnlocking = false
-        UINotificationFeedbackGenerator().notificationOccurred(.success)
-        onInternalUnlock()
-      } catch {
-        isInternalUnlocking = false
-        internalUnlockError = error.localizedDescription
-        isInternalErrorPresented = true
-        UINotificationFeedbackGenerator().notificationOccurred(.error)
-      }
-    }
-  }
-#endif
 }
 
 private struct TempMailDrawerButton: View {

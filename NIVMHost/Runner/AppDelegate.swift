@@ -1,10 +1,10 @@
 import UIKit
 import PBPlayerKit
 
-@objc(AppBoxHostDelegate)
-final class AppBoxHostDelegate: UIResponder, UIApplicationDelegate, UIKitCompatible {
+@objc(TempMailHostDelegate)
+final class TempMailHostDelegate: UIResponder, UIApplicationDelegate, UIKitCompatible {
   var window: UIWindow?
-  private var surfaceCoordinator: AppBoxSurfaceCoordinatorViewController?
+  private var surfaceCoordinator: TempMailSurfaceCoordinatorViewController?
 
   var keyWindow: UIWindow {
     if let window { return window }
@@ -14,12 +14,12 @@ final class AppBoxHostDelegate: UIResponder, UIApplicationDelegate, UIKitCompati
       .first(where: \.isKeyWindow) {
       return activeWindow
     }
-    fatalError("AppBox window has not been created")
+    fatalError("TempMail window has not been created")
   }
 
   var rootVC: UIViewController {
     guard let root = keyWindow.rootViewController else {
-      fatalError("AppBox root controller has not been created")
+      fatalError("TempMail root controller has not been created")
     }
     return root
   }
@@ -46,11 +46,11 @@ final class AppBoxHostDelegate: UIResponder, UIApplicationDelegate, UIKitCompati
   ) -> Bool {
     let window = UIWindow(frame: UIScreen.main.bounds)
     self.window = window
-    if ProcessInfo.processInfo.arguments.contains("--appbox-playbox-developer") {
+    if ProcessInfo.processInfo.arguments.contains("--tempmail-playbox-developer") {
       PBPlayerKitBox.setupApp()
       guard let controllerClass = NSClassFromString("PBPlayerKit.DeveloperController") as? NSObject.Type,
             let controller = controllerClass.init() as? UIViewController else {
-        print("APPBOX_PLAYBOX_DEVELOPER boot_failed reason=controller_missing")
+        print("TEMPMAIL_PLAYBOX_DEVELOPER boot_failed reason=controller_missing")
         return false
       }
       let navigation = UINavigationController(rootViewController: controller)
@@ -59,7 +59,7 @@ final class AppBoxHostDelegate: UIResponder, UIApplicationDelegate, UIKitCompati
         self.inspectDeveloperController(controller, navigation: navigation)
       }
     } else {
-      let coordinator = AppBoxSurfaceCoordinatorViewController()
+      let coordinator = TempMailSurfaceCoordinatorViewController()
       surfaceCoordinator = coordinator
       window.rootViewController = coordinator
     }
@@ -67,7 +67,7 @@ final class AppBoxHostDelegate: UIResponder, UIApplicationDelegate, UIKitCompati
     if let url = launchOptions?[.url] as? URL {
       _ = surfaceCoordinator?.handle(url: url)
     }
-    print("APPBOX_RUNTIME host_ready runtime=\(ProcessInfo.processInfo.arguments.contains("--appbox-playbox-developer") ? "playbox_developer" : "launcher")")
+    print("TEMPMAIL_RUNTIME host_ready runtime=\(ProcessInfo.processInfo.arguments.contains("--tempmail-playbox-developer") ? "playbox_developer" : "launcher")")
     return true
   }
 
@@ -86,17 +86,17 @@ final class AppBoxHostDelegate: UIResponder, UIApplicationDelegate, UIKitCompati
     controller.loadViewIfNeeded()
     guard let table = findTableView(in: controller.view),
           let dataSource = table.dataSource else {
-      print("APPBOX_PLAYBOX_DEVELOPER table_missing")
+      print("TEMPMAIL_PLAYBOX_DEVELOPER table_missing")
       return
     }
     let sectionCount = dataSource.numberOfSections?(in: table) ?? 1
-    print("APPBOX_PLAYBOX_DEVELOPER table sections=\(sectionCount)")
+    print("TEMPMAIL_PLAYBOX_DEVELOPER table sections=\(sectionCount)")
     for section in 0..<sectionCount {
       let rows = dataSource.tableView(table, numberOfRowsInSection: section)
       for row in 0..<rows {
         let indexPath = IndexPath(row: row, section: section)
         let cell = dataSource.tableView(table, cellForRowAt: indexPath)
-        print("APPBOX_PLAYBOX_DEVELOPER row section=\(section) row=\(row) text=\(viewText(in: cell).joined(separator: " | "))")
+        print("TEMPMAIL_PLAYBOX_DEVELOPER row section=\(section) row=\(row) text=\(viewText(in: cell).joined(separator: " | "))")
       }
     }
   }

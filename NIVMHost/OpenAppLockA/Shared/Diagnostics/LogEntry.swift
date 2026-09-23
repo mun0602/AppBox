@@ -38,10 +38,10 @@ nonisolated enum LogSource: String, Sendable {
 
     static func current(bundleIdentifier: String?) -> LogSource {
         switch bundleIdentifier {
-        case "dev.bchen.OpenAppLock.Monitor": return .monitor
-        case "dev.bchen.OpenAppLock.ShieldConfig": return .shieldConfig
-        case "dev.bchen.OpenAppLock.ShieldAction": return .shieldAction
-        case "dev.bchen.OpenAppLock.Report": return .report
+        case "com.tianya.tempmail.Monitor": return .monitor
+        case "com.tianya.tempmail.ShieldConfig": return .shieldConfig
+        case "com.tianya.tempmail.ShieldAction": return .shieldAction
+        case "com.tianya.tempmail.Report": return .report
         default: return .app
         }
     }

@@ -9,7 +9,7 @@ import Foundation
 /// tracking and rule snapshots live in its UserDefaults suite so the
 /// DeviceActivity monitor and shield extensions can read and write them.
 nonisolated enum AppGroup {
-    static let identifier = "group.com.tianya.appbox"
+    static let identifier = "group.com.tianya.tempmail"
 
     /// Defaults key for the Uninstall Protection opt-in. Lives here (not on the
     /// app-only `AppSettingsStore`) so the Screen Time extensions can read the

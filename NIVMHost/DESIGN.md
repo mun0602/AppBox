@@ -5,6 +5,7 @@
 - Structural source: Android Temp Mail `com.tempmail` version 4.09, verified from its installed APK resources and live view hierarchy on the connected Samsung device.
 - Platform adaptation: preserve Temp Mail's hierarchy and dimensions while using native SwiftUI navigation, sheets, menus, accessibility, Dynamic Type, and iOS Liquid Glass tab bars.
 - Product identity remains this app's own. Do not copy Temp Mail trademarks, store metadata, icon, or subscription UI.
+- Brand anchor: the app uses an original green envelope-and-clock mark named `TempMailAppIcon`; every exported size is an opaque PNG with no embedded rounded corners or third-party marks.
 
 ## Visual theme and atmosphere
 
@@ -38,6 +39,7 @@ The A surface is a fast, content-first disposable inbox. The mailbox address and
 - Message detail: subject above one 17pt radius reading surface. The surface contains sender identity, time, a collapsible From/To/Date block, a divider, auto-height HTML or selectable plain text, then attachments.
 - Secondary mail actions live in one native sheet opened from the overflow button. Delete remains confirmed.
 - HTML mail uses a non-persistent `WKWebView`, disables scripts/forms/frames, adapts to theme, and reports its real content height to SwiftUI.
+- HTML mail reveals once after WebKit finishes its first stable layout. Height changes are debounced, sub-pixel changes are ignored, shrinking is accepted only after a viewport change, and neither email-authored animation nor layout-height animation may disturb reading.
 
 ## Layout principles
 

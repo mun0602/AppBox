@@ -5,13 +5,11 @@
 
 import SwiftData
 import SwiftUI
-import UIKit
 
 /// The Settings tab: device-level protection and app-list management.
 struct SettingsView: View {
     @Environment(RuleEnforcer.self) private var enforcer
     @Environment(AppSettingsStore.self) private var settings
-    @Environment(\.appBoxInternalUnlockAction) private var appBoxInternalUnlockAction
     @Query private var rules: [BlockingRule]
 
     /// Local mirror of the persisted setting; the explicit binding below writes
@@ -21,16 +19,6 @@ struct SettingsView: View {
     /// UI-test only: the destination of the most recent link tap, captured by
     /// the `openURL` interceptor so a test can assert it (see `linkSection`).
     @State private var lastOpenedLink: URL?
-
-#if APPBOX_INTERNAL_UNLOCK
-    @State private var internalTapCount = 0
-    @State private var internalTapDeadline = Date.distantPast
-    @State private var isInternalPromptPresented = false
-    @State private var internalCode = ""
-    @State private var isInternalUnlocking = false
-    @State private var internalUnlockError = ""
-    @State private var isInternalErrorPresented = false
-#endif
 
     private let launch = LaunchConfiguration.current
 
@@ -134,39 +122,6 @@ struct SettingsView: View {
         .onAppear {
             uninstallProtectionOn = settings.uninstallProtectionEnabled
         }
-#if APPBOX_INTERNAL_UNLOCK
-        .alert("输入验证码", isPresented: $isInternalPromptPresented) {
-            TextField("验证码", text: $internalCode)
-                .textInputAutocapitalization(.characters)
-                .autocorrectionDisabled()
-            Button("取消", role: .cancel) {
-                internalCode = ""
-            }
-            Button("验证") {
-                redeemInternalCode()
-            }
-            .disabled(internalCode.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-        } message: {
-            Text("请输入验证码以完成验证。")
-        }
-        .alert("验证失败", isPresented: $isInternalErrorPresented) {
-            Button("确定", role: .cancel) {}
-        } message: {
-            Text(internalUnlockError)
-        }
-        .overlay {
-            if isInternalUnlocking {
-                ZStack {
-                    Color.black.opacity(0.18).ignoresSafeArea()
-                    ProgressView("正在验证…")
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 18)
-                        .background(.regularMaterial)
-                        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-                }
-            }
-        }
-#endif
     }
 
     /// "About" section: external links (GitHub repo, marketing site). A link is
@@ -188,10 +143,6 @@ struct SettingsView: View {
                 Text(versionLabel)
                     .foregroundStyle(.secondary)
             }
-            .contentShape(Rectangle())
-#if APPBOX_INTERNAL_UNLOCK
-            .onTapGesture(perform: registerInternalTap)
-#endif
         } header: {
             Text(.settingsAboutSectionHeader).textCase(nil)
         }
@@ -226,41 +177,6 @@ struct SettingsView: View {
         )
     }
 
-#if APPBOX_INTERNAL_UNLOCK
-    private func registerInternalTap() {
-        let now = Date()
-        if now > internalTapDeadline { internalTapCount = 0 }
-        internalTapCount += 1
-        internalTapDeadline = now.addingTimeInterval(5)
-        guard internalTapCount >= 7 else { return }
-
-        internalTapCount = 0
-        internalTapDeadline = .distantPast
-        internalCode = ""
-        UIImpactFeedbackGenerator(style: .light).impactOccurred()
-        isInternalPromptPresented = true
-    }
-
-    private func redeemInternalCode() {
-        let code = internalCode.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !code.isEmpty, !isInternalUnlocking else { return }
-        internalCode = ""
-        isInternalUnlocking = true
-        Task {
-            do {
-                try await AppBoxInternalUnlockService().redeem(code: code)
-                isInternalUnlocking = false
-                UINotificationFeedbackGenerator().notificationOccurred(.success)
-                appBoxInternalUnlockAction()
-            } catch {
-                isInternalUnlocking = false
-                internalUnlockError = error.localizedDescription
-                isInternalErrorPresented = true
-                UINotificationFeedbackGenerator().notificationOccurred(.error)
-            }
-        }
-    }
-#endif
 }
 
 private extension View {
