@@ -1,6 +1,7 @@
 #import "FoundationPrivate.h"
 #import "LCMachOUtils.h"
 #import "LCSharedUtils.h"
+#import "Localization.h"
 #import "UIKitPrivate.h"
 #import "utils.h"
 
@@ -259,7 +260,7 @@ static NSString* invokeAppMain(NSString *selectedApp, NSString *selectedContaine
     if (!LCSharedUtils.certificatePassword && !isSideStore) {
 #if !TARGET_OS_SIMULATOR
         if(@available(iOS 26.0 ,*))  {
-            return @"JITLess mode is required since iOS 26. Please set it up in settings. \nPlease go to LiveContainer settings -> tap \"Import Certificate from SideStore\" / \"Import Certificate\"";
+            return @"lc.bootstrap.jitlessRequired".loc;
         }
 #endif
         // First of all, let's check if we have JIT
@@ -267,7 +268,7 @@ static NSString* invokeAppMain(NSString *selectedApp, NSString *selectedContaine
             usleep(1000*100);
         }
         if (!checkJITEnabled()) {
-            appError = @"JIT was not enabled. If you want to use LiveContainer without JIT, setup JITLess mode in settings.";
+            appError = @"lc.bootstrap.noJit".loc;
             return appError;
         }
     }
@@ -527,7 +528,6 @@ static NSString* invokeAppMain(NSString *selectedApp, NSString *selectedContaine
     
     BOOL hookDlopen = !isSideStore && !isSharedBundle && LCSharedUtils.certificatePassword && isLiveProcess;
     DyldHooksInit([guestAppInfo[@"hideLiveContainer"] boolValue], hookDlopen, [guestAppInfo[@"spoofSDKVersion"] unsignedIntValue]);
-    
     if([guestContainerInfo[@"spoofIdentifierForVendor"] boolValue]) {
         NSString* idForVendorStr = guestContainerInfo[@"spoofedIdentifierForVendor"];
         if([idForVendorStr isKindOfClass:NSString.class]) {
@@ -631,6 +631,11 @@ static NSString* invokeAppMain(NSString *selectedApp, NSString *selectedContaine
     }
     NSLog(@"[LCBootstrap] loaded bundle");
 
+    // mun container: install MunChanger hooks NOW — the guest image is loaded
+    // but its main has not run, so dyld_dynamic_interpose can rewrite its GOT
+    // (calling this earlier, before the bundle load, misses the guest image).
+    MCProfileInit();
+
     // Find main()
     appMain = getAppEntryPoint(appHandle);
     if (!appMain) {
@@ -667,6 +672,153 @@ static void exceptionHandler(NSException *exception) {
     }
 }
 
+@interface LCGuestHomeWindow : UIWindow
+@property(nonatomic, weak) UIView *homeButton;
+@end
+
+@implementation LCGuestHomeWindow
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    if (self.rootViewController.presentedViewController) {
+        return YES;
+    }
+    UIView *button = self.homeButton;
+    if (!button || button.hidden) return NO;
+    return CGRectContainsPoint(button.frame, point);
+}
+@end
+
+static LCGuestHomeWindow *LCGuestHomeWindowShared;
+static BOOL LCGuestHomeDragged;
+
+static void LCReturnGuestToHome(void) {
+    [lcUserDefaults setObject:@"ui" forKey:@"selected"];
+    [lcUserDefaults removeObjectForKey:@"selectedContainer"];
+    [lcUserDefaults removeObjectForKey:@"launchAppUrlScheme"];
+    [lcUserDefaults synchronize];
+    [LCSharedUtils launchToGuestAppWithClassicMode:0];
+}
+
+static void LCGuestHomeTapped(void) {
+    if (LCGuestHomeDragged) {
+        LCGuestHomeDragged = NO;
+        return;
+    }
+    LCGuestHomeWindow *window = LCGuestHomeWindowShared;
+    if (!window || window.rootViewController.presentedViewController) return;
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"lc.guest.homeTitle".loc
+                                                                   message:@"lc.guest.homeMessage".loc
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"lc.common.cancel".loc style:UIAlertActionStyleCancel handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"lc.guest.home".loc style:UIAlertActionStyleDefault handler:^(__unused UIAlertAction *action) {
+        LCReturnGuestToHome();
+    }]];
+    [window makeKeyAndVisible];
+    [window.rootViewController presentViewController:alert animated:YES completion:nil];
+}
+
+static void LCGuestHomePanned(UIPanGestureRecognizer *pan) {
+    UIView *button = pan.view;
+    UIView *host = button.superview;
+    if (!host) return;
+    if (pan.state == UIGestureRecognizerStateBegan) {
+        LCGuestHomeDragged = NO;
+    }
+    CGPoint move = [pan translationInView:host];
+    [pan setTranslation:CGPointZero inView:host];
+    if (fabs(move.x) + fabs(move.y) > 1) {
+        LCGuestHomeDragged = YES;
+    }
+    CGRect frame = button.frame;
+    frame.origin.x += move.x;
+    frame.origin.y += move.y;
+    CGRect bounds = host.bounds;
+    frame.origin.x = MIN(MAX(8, frame.origin.x), MAX(8, bounds.size.width - frame.size.width - 8));
+    frame.origin.y = MIN(MAX(48, frame.origin.y), MAX(48, bounds.size.height - frame.size.height - 24));
+    button.frame = frame;
+}
+
+static void LCInstallGuestHomeButton(void) {
+    static int tries;
+    if (LCGuestHomeWindowShared) return;
+    UIApplication *app = [UIApplication sharedApplication];
+    UIWindowScene *scene = nil;
+    for (UIScene *one in app.connectedScenes) {
+        if ([one isKindOfClass:UIWindowScene.class]) {
+            scene = (UIWindowScene *)one;
+            break;
+        }
+    }
+    if (!scene) {
+        if (tries++ < 20) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                LCInstallGuestHomeButton();
+            });
+        }
+        return;
+    }
+
+    CGRect screen = scene.coordinateSpace.bounds;
+    LCGuestHomeWindow *window = [[LCGuestHomeWindow alloc] initWithFrame:screen];
+    window.windowLevel = 100000;
+    window.backgroundColor = UIColor.clearColor;
+    window.windowScene = scene;
+    UIViewController *root = [UIViewController new];
+    root.view.backgroundColor = UIColor.clearColor;
+    window.rootViewController = root;
+
+    CGFloat side = 48;
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    button.frame = CGRectMake(screen.size.width - side - 16, 56, side, side);
+    button.backgroundColor = [UIColor colorWithWhite:0 alpha:0.55];
+    button.tintColor = UIColor.whiteColor;
+    button.layer.cornerRadius = side / 2;
+    button.accessibilityLabel = @"lc.guest.home".loc;
+    UIImage *icon = [UIImage systemImageNamed:@"house.fill"];
+    if (icon) {
+        [button setImage:icon forState:UIControlStateNormal];
+    } else {
+        [button setTitle:@"lc.guest.home".loc forState:UIControlStateNormal];
+        [button setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    }
+    [button addTarget:button action:@selector(lc_guestHomeTapped) forControlEvents:UIControlEventTouchUpInside];
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:button action:@selector(lc_guestHomePanned:)];
+    [button addGestureRecognizer:pan];
+    [root.view addSubview:button];
+    window.homeButton = button;
+    LCGuestHomeWindowShared = window;
+    window.hidden = NO;
+
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification object:nil queue:NSOperationQueue.mainQueue usingBlock:^(__unused NSNotification *note) {
+        LCGuestHomeWindow *live = LCGuestHomeWindowShared;
+        if (!live) return;
+        if (!live.windowScene) {
+            for (UIScene *one in UIApplication.sharedApplication.connectedScenes) {
+                if ([one isKindOfClass:UIWindowScene.class]) {
+                    live.windowScene = (UIWindowScene *)one;
+                    break;
+                }
+            }
+        }
+        live.windowLevel = 100000;
+        live.hidden = NO;
+    }];
+}
+
+@interface UIButton (LCGuestHome)
+- (void)lc_guestHomeTapped;
+- (void)lc_guestHomePanned:(UIPanGestureRecognizer *)pan;
+@end
+
+@implementation UIButton (LCGuestHome)
+- (void)lc_guestHomeTapped {
+    LCGuestHomeTapped();
+}
+- (void)lc_guestHomePanned:(UIPanGestureRecognizer *)pan {
+    LCGuestHomePanned(pan);
+}
+@end
+
 int LiveContainerMain(int argc, char *argv[]) {
     lcMainBundle = [NSBundle mainBundle];
     lcUserDefaults = NSUserDefaults.standardUserDefaults;
@@ -676,6 +828,17 @@ int LiveContainerMain(int argc, char *argv[]) {
     lcAppGroupPath = [[NSFileManager.defaultManager containerURLForSecurityApplicationGroupIdentifier:[NSClassFromString(@"LCSharedUtils") appGroupID]] path];
     isLiveProcess = [lcAppUrlScheme isEqualToString:@"liveprocess"];
     setenv("LC_HOME_PATH", getenv("HOME"), 0);
+
+    // mun container: start remote API in guest mode too (UI mode starts it via SwiftUI App init)
+    if(!isLiveProcess) {
+        void* mcUiHandle = dlopen("@executable_path/Frameworks/LiveContainerSwiftUI.framework/LiveContainerSwiftUI", RTLD_LAZY);
+        if(mcUiHandle) {
+            void (*mcMaybeStartRemoteAPI)(void) = dlsym(mcUiHandle, "MCMaybeStartRemoteAPI");
+            if(mcMaybeStartRemoteAPI) {
+                mcMaybeStartRemoteAPI();
+            }
+        }
+    }
 
     NSString *selectedApp = [lcUserDefaults stringForKey:@"selected"];
     NSString *selectedContainer = [lcUserDefaults stringForKey:@"selectedContainer"];
@@ -810,6 +973,9 @@ int LiveContainerMain(int argc, char *argv[]) {
             lcLaunchURL = launchUrl;
             [lcUserDefaults removeObjectForKey:@"launchAppUrlScheme"];
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            LCInstallGuestHomeButton();
+        });
         NSString *appError = invokeAppMain(selectedApp, selectedContainer, argc, argv);
         if (appError) {
             if(isLiveProcess) {

@@ -169,8 +169,32 @@ extension String: @retroactive LocalizedError {
         return bundle
     }()
     
+    private static var langBundleCache: [String: Bundle] = [:]
+    private static func overrideStringsBundle() -> Bundle? {
+        // default language is Vietnamese when nothing is selected;
+        // "system" explicitly follows the iOS system language
+        let lang = UserDefaults.standard.string(forKey: "MCLanguageOverride") ?? "vi"
+        guard !lang.isEmpty, lang != "system" else {
+            return nil
+        }
+        if let cached = langBundleCache[lang] {
+            return cached
+        }
+        guard let path = Bundle.main.path(forResource: lang, ofType: "lproj"),
+              let bundle = Bundle(path: path) else {
+            return nil
+        }
+        langBundleCache[lang] = bundle
+        return bundle
+    }
+
     var loc: String {
-        let message = NSLocalizedString(self, comment: "")
+        let message: String
+        if let overrideBundle = String.overrideStringsBundle() {
+            message = overrideBundle.localizedString(forKey: self, value: self, table: nil)
+        } else {
+            message = NSLocalizedString(self, comment: "")
+        }
         if message != self {
             return message
         }

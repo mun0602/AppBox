@@ -119,10 +119,10 @@ struct LCEntitlementView : View {
             }
             if let keyChainAccessGroups = entitlementDict["keychain-access-groups"] as? Array<String> {
                 var notFound = true
-                if keyChainAccessGroups.contains("\(entitlementTeamId).com.kdt.livecontainer.shared") {
+                if keyChainAccessGroups.contains("\(entitlementTeamId).com.mun.container.shared") {
                     notFound = false
                     for i in 1..<SharedModel.keychainAccessGroupCount {
-                        if !keyChainAccessGroups.contains("\(entitlementTeamId).com.kdt.livecontainer.shared.\(i)") {
+                        if !keyChainAccessGroups.contains("\(entitlementTeamId).com.mun.container.shared.\(i)") {
                             notFound = true
                             continue
                         }

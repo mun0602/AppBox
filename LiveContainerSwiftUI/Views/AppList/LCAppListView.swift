@@ -40,6 +40,7 @@ struct LCAppListView : View, LCAppBannerDelegate, LCAppModelDelegate {
     @State var didAppear = false
     // ipa choosing stuff
     @State var choosingIPA = false
+    @State var showQrScanner = false
     @State var errorShow = false
     @State var errorInfo = ""
     
@@ -225,6 +226,9 @@ struct LCAppListView : View, LCAppBannerDelegate, LCAppModelDelegate {
                                 Button("lc.appList.installFromUrl".loc, systemImage: "link.badge.plus", action: {
                                     Task{ await startInstallFromUrl() }
                                 })
+                                Button("lc.appList.installFromQr".loc, systemImage: "qrcode.viewfinder", action: {
+                                    showQrScanner = true
+                                })
                             } label: {
                                 Label("add", systemImage: "plus")
                             }
@@ -295,6 +299,34 @@ struct LCAppListView : View, LCAppBannerDelegate, LCAppModelDelegate {
             })
         } message: {
             Text(errorInfo)
+        }
+        .sheet(isPresented: $showQrScanner) {
+            NavigationView {
+                MCQRScannerView(onQR: { value in
+                    showQrScanner = false
+                    let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
+                    guard let url = URL(string: trimmed),
+                          let scheme = url.scheme?.lowercased(),
+                          scheme == "http" || scheme == "https" || scheme == "file",
+                          let encoded = trimmed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+                          let openUrl = URL(string: "livecontainer://install?url=\(encoded)") else {
+                        errorInfo = "lc.sources.scanQrInvalid".loc
+                        errorShow = true
+                        return
+                    }
+                    UIApplication.shared.open(openUrl)
+                }, onError: { _ in
+                    showQrScanner = false
+                })
+                .ignoresSafeArea()
+                .navigationTitle("lc.sources.scanQr".loc)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("lc.common.cancel".loc) { showQrScanner = false }
+                    }
+                }
+            }
         }
         .betterFileImporter(isPresented: $choosingIPA, types: [.ipa, .tipa], multiple: false, callback: { fileUrls in
             Task { await startInstallApp(fileUrls[0]) }

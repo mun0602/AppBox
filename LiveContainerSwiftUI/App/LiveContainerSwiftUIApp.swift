@@ -11,6 +11,9 @@ struct LiveContainerSwiftUIApp : SwiftUI.App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     init() {
+        if UserDefaults.standard.bool(forKey: MCRemoteAPI.enabledKey) {
+            MCRemoteAPI.shared.start()
+        }
         let fm = FileManager()
         var tempAppDataFolderNames : [String] = []
         var tempTweakFolderNames : [String] = []

@@ -32,11 +32,18 @@ struct LCAppSettingsView: View {
     @StateObject private var moveToPrivateDocAlert = YesNoHelper()
     @StateObject private var signUnsignedAlert = YesNoHelper()
     @StateObject private var addExternalNonLocalContainerWarningAlert = YesNoHelper()
+    @StateObject private var cloneAlert = YesNoHelper()
+    @State private var cloneNote = ""
+    @State private var cloneNoteShow = false
     @State var choosingStorage = false
     
     @State private var errorShow = false
     @State private var errorInfo = ""
     @State private var selectUnusedContainerSheetShow = false
+
+    // MARK: - MunChanger (Device Changer)
+    @State private var mcProfile: [String: Any] = [:]
+    @State private var mcModelList: [String] = []
     
     @EnvironmentObject private var sharedModel : SharedModel
     
@@ -55,6 +62,9 @@ struct LCAppSettingsView: View {
                         .foregroundColor(.gray)
                         .multilineTextAlignment(.trailing)
                         .textSelection(.enabled)
+                }
+                Button("lc.appSettings.cloneApp".loc) {
+                    Task { await cloneThisApp() }
                 }
                 HStack {
                     Text("lc.appSettings.remark".loc)
@@ -388,9 +398,58 @@ struct LCAppSettingsView: View {
                 Text("lc.common.statistics")
             }
 
+            Section {
+                if mcProfile.isEmpty {
+                    Button {
+                        mcRandomize()
+                    } label: {
+                        Label("lc.mc.generate".loc, systemImage: "iphone.gen3")
+                    }
+                } else {
+                    Toggle("lc.mc.enabled".loc, isOn: Binding(
+                        get: { (mcProfile["enabled"] as? Bool) ?? false },
+                        set: { mcProfile["enabled"] = $0; mcSave() }
+                    ))
+                    Picker("lc.mc.device".loc, selection: Binding(
+                        get: { mcProfile["model"] as? String ?? "" },
+                        set: { mcPickModel($0) }
+                    )) {
+                        ForEach(mcModels(), id: \.self) { m in
+                            Text(MCDeviceCatalog.displayName(forModel: m) ?? m).tag(m)
+                        }
+                    }
+                    mcInfoRow("iOS", ((mcProfile["ios"] as? String) ?? "-") + " (\((mcProfile["build"] as? String) ?? "-"))")
+                    mcInfoRow("lc.mc.serial".loc, (mcProfile["serial"] as? String) ?? "-")
+                    mcInfoRow("UDID", (mcProfile["udid"] as? String) ?? "-")
+                    mcInfoRow("lc.mc.carrier".loc, (mcProfile["carrier"] as? String) ?? "-")
+                    Button("lc.mc.randomize".loc) { mcRandomize() }
+                    Button("lc.mc.removeProfile".loc, role: .destructive) { mcRemove() }
+                }
+            } header: {
+                Text("lc.mc.title".loc)
+            } footer: {
+                Text("lc.mc.footer".loc)
+            }
+
         }
         .navigationTitle(appInfo.displayName())
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear { mcLoad() }
+        .alert("lc.appSettings.cloneApp".loc, isPresented: $cloneAlert.show) {
+            Button("lc.appSettings.cloneApp".loc) {
+                self.cloneAlert.close(result: true)
+            }
+            Button("lc.common.cancel".loc, role: .cancel) {
+                self.cloneAlert.close(result: false)
+            }
+        } message: {
+            Text("lc.appSettings.cloneAppDesc".loc)
+        }
+        .alert("lc.appSettings.cloneAppDone".loc, isPresented: $cloneNoteShow) {
+            Button("lc.common.ok".loc, action: {})
+        } message: {
+            Text(cloneNote)
+        }
         .alert("lc.common.error".loc, isPresented: $errorShow) {
             Button("lc.common.ok".loc, action: {
             })
@@ -463,6 +522,21 @@ struct LCAppSettingsView: View {
         }
         .fileImporter(isPresented: $choosingStorage, allowedContentTypes: [.folder]) { result in
             Task { await importDataStorage(result: result) }
+        }
+    }
+
+    func cloneThisApp() async {
+        guard let go = await cloneAlert.open(), go else { return }
+        let bundle = appInfo.relativeBundlePath ?? ""
+        switch MCRemoteAPI.shared.cloneApp(bundle: bundle) {
+        case .success(let created):
+            let name = created["name"] as? String ?? ""
+            let folder = created["bundle_path"] as? String ?? ""
+            cloneNote = folder.isEmpty ? name : "\(name)\n\(folder)"
+            cloneNoteShow = true
+        case .failure(let err):
+            errorInfo = err
+            errorShow = true
         }
     }
 
@@ -747,6 +821,73 @@ struct LCAppSettingsView: View {
         }
     }
     
+    // MARK: - MunChanger (Device Changer)
+
+    /// Plist trong data container của app — guest process đọc qua
+    /// NSHomeDirectory()/Library/Preferences (MCConfig.m fallback).
+    private var mcPlistURL: URL? {
+        let container = model.uiSelectedContainer ?? model.uiContainers.first { $0.folderName == model.uiDefaultDataFolder }
+        guard let containerURL = container?.containerURL else { return nil }
+        return containerURL.appendingPathComponent("Library/Preferences/com.mun.changer.plist")
+    }
+
+    private func mcLoad() {
+        if let url = mcPlistURL, let dict = NSDictionary(contentsOf: url) as? [String: Any] {
+            mcProfile = dict
+        } else {
+            mcProfile = [:]
+        }
+    }
+
+    private func mcSave() {
+        guard let url = mcPlistURL else { return }
+        try? FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+        (mcProfile as NSDictionary).write(to: url, atomically: true)
+    }
+
+    private func mcRemove() {
+        if let url = mcPlistURL {
+            try? FileManager.default.removeItem(at: url)
+        }
+        mcProfile = [:]
+    }
+
+    private func mcModels() -> [String] {
+        if mcModelList.isEmpty {
+            mcModelList = MCDeviceCatalog.modelIdentifiers(forFamily: "iPhone")
+                + MCDeviceCatalog.modelIdentifiers(forFamily: "iPad")
+        }
+        return mcModelList
+    }
+
+    private func mcRandomize() {
+        let dict = NSMutableDictionary()
+        MCRandom.fillIdentity(dict)
+        dict["enabled"] = true
+        mcProfile = (dict as? [String: Any]) ?? [:]
+        mcSave()
+    }
+
+    private func mcPickModel(_ newModel: String) {
+        let dict = NSMutableDictionary()
+        MCRandom.fillIdentity(forModel: newModel, into: dict)
+        dict["enabled"] = (mcProfile["enabled"] as? Bool) ?? true
+        mcProfile = (dict as? [String: Any]) ?? [:]
+        mcSave()
+    }
+
+    @ViewBuilder
+    private func mcInfoRow(_ title: String, _ value: String) -> some View {
+        HStack {
+            Text(title)
+            Spacer()
+            Text(value)
+                .foregroundStyle(.gray)
+                .lineLimit(1)
+                .truncationMode(.middle)
+        }
+    }
+
     func formatDate(date: Date?) -> String {
         guard let date else {
             return "lc.common.unknown".loc

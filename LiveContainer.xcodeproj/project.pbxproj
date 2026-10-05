@@ -1105,7 +1105,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kdt.livecontainer.SideStore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mun.container.SideStore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -1147,7 +1147,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kdt.livecontainer.SideStore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mun.container.SideStore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -1194,7 +1194,7 @@
 					"-DCONFIG_COMMIT=\\\"$(CONFIG_COMMIT)\\\"",
 				);
 				OTHER_LDFLAGS = "-Wl,-U,_OBJC_CLASS_$_RBSTarget";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kdtLiveContainerSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mun.LiveContainerSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1237,7 +1237,7 @@
 					"-DCONFIG_COMMIT=\\\"$(CONFIG_COMMIT)\\\"",
 				);
 				OTHER_LDFLAGS = "-Wl,-U,_OBJC_CLASS_$_RBSTarget";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kdtLiveContainerSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mun.LiveContainerSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1608,7 +1608,7 @@
 				);
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LiveContainer;
+				INFOPLIST_KEY_CFBundleDisplayName = "mun container";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1652,7 +1652,7 @@
 				);
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LiveContainer;
+				INFOPLIST_KEY_CFBundleDisplayName = "mun container";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1928,8 +1928,11 @@
 					"-Wl,-U,_OBJC_CLASS_$__LSOpenConfiguration",
 					"-Wl,-U,_OBJC_CLASS_$_LSApplicationWorkspace",
 					"-Wl,-U,_FBSOpenApplicationOptionKeyActivateAsClassic",
+					"-Wl,-U,_MGCopyAnswer",
+					"-Wl,-U,_CNCopyCurrentNetworkInfo",
+					"-Wl,-U,_CNCopySupportedInterfaces",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kdt.livecontainer.LiveContainerShared;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mun.container.LiveContainerShared;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = debugging;
@@ -1974,8 +1977,11 @@
 					"-Wl,-U,_OBJC_CLASS_$__LSOpenConfiguration",
 					"-Wl,-U,_OBJC_CLASS_$_LSApplicationWorkspace",
 					"-Wl,-U,_FBSOpenApplicationOptionKeyActivateAsClassic",
+					"-Wl,-U,_MGCopyAnswer",
+					"-Wl,-U,_CNCopyCurrentNetworkInfo",
+					"-Wl,-U,_CNCopySupportedInterfaces",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kdt.livecontainer.LiveContainerShared;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mun.container.LiveContainerShared;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = debugging;

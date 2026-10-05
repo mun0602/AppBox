@@ -487,11 +487,27 @@ struct LCSourcesView: View {
     @ObservedObject public var searchContext: SearchContext
     @State private var expandedSources: Set<URL> = []
     @State private var isManagingSources = false
+    @State private var choosingLocalIpa = false
+    @State private var showQrScanner = false
     
     @EnvironmentObject private var sharedModel : SharedModel
     
     @State private var isViewAppeared = false
     
+    private func handleScannedInstallUrl(_ value: String) {
+        let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let url = URL(string: trimmed),
+              let scheme = url.scheme?.lowercased(),
+              scheme == "http" || scheme == "https" || scheme == "file" else {
+            errorMessage = "lc.sources.scanQrInvalid".loc
+            return
+        }
+        if let encoded = trimmed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+           let openUrl = URL(string: "livecontainer://install?url=\(encoded)") {
+            UIApplication.shared.open(openUrl)
+        }
+    }
+
     var body: some View {
         NavigationView {
             Group {
@@ -552,6 +568,16 @@ struct LCSourcesView: View {
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
+                    Button("lc.sources.scanQr".loc, systemImage: "qrcode.viewfinder") {
+                        showQrScanner = true
+                    }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("lc.sources.installLocalFile".loc, systemImage: "folder.badge.plus") {
+                        choosingLocalIpa = true
+                    }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
                     Button("lc.sources.addSource".loc, systemImage: "plus") {
                         isManagingSources = true
                     }
@@ -559,6 +585,36 @@ struct LCSourcesView: View {
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .sheet(isPresented: $showQrScanner) {
+            NavigationView {
+                MCQRScannerView(onQR: { value in
+                    showQrScanner = false
+                    handleScannedInstallUrl(value)
+                }, onError: { _ in
+                    showQrScanner = false
+                    errorMessage = "lc.sources.scanQrCameraError".loc
+                })
+                .ignoresSafeArea()
+                .navigationTitle("lc.sources.scanQr".loc)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("lc.common.cancel".loc) { showQrScanner = false }
+                    }
+                }
+            }
+        }
+        .betterFileImporter(isPresented: $choosingLocalIpa, types: [.ipa, .tipa], multiple: false, callback: { fileUrls in
+            choosingLocalIpa = false
+            let picked = fileUrls[0]
+            // hand the local file to the existing install pipeline via the app's own URL scheme
+            if let encoded = picked.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+               let openUrl = URL(string: "livecontainer://install?url=\(encoded)") {
+                UIApplication.shared.open(openUrl)
+            }
+        }, onDismiss: {
+            choosingLocalIpa = false
+        })
         .alert("lc.common.error".loc, isPresented: Binding<Bool>(
             get: { errorMessage != nil },
             set: { if !$0 { errorMessage = nil } })

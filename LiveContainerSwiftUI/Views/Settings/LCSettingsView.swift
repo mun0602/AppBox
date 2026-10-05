@@ -73,6 +73,19 @@ struct LCSettingsView: View {
     @EnvironmentObject private var sharedModel : SharedModel
     
     @State private var isViewAppeared = false
+    @State private var langOverride = UserDefaults.standard.string(forKey: "MCLanguageOverride") ?? "vi"
+    private var availableLanguages: [(code: String, name: String)] {
+        var langs = Bundle.main.localizations.filter { $0 != "Base" }
+        langs.sort { ($0 == "vi") || ($0 < $1 && $1 != "vi") }
+        return langs.map { code in
+            let name = Locale.current.localizedString(forIdentifier: code)?.capitalized ?? code
+            return (code, name)
+        }
+    }
+@State private var apiEnabled = UserDefaults.standard.bool(forKey: MCRemoteAPI.enabledKey)
+    @State private var apiPort = String(UserDefaults.standard.integer(forKey: MCRemoteAPI.portKey) == 0 ? Int(MCRemoteAPI.defaultPort) : UserDefaults.standard.integer(forKey: MCRemoteAPI.portKey))
+    @State private var apiError: String? = nil
+    @State private var apiRunning = false
     
     let storeName = LCUtils.getStoreName()
     
@@ -257,6 +270,84 @@ struct LCSettingsView: View {
                     } label: {
                         Text("lc.settings.clearNotifications".loc)
                     }
+                }
+
+                Section {
+                    Picker("lc.settings.language".loc, selection: Binding(
+                        get: { langOverride },
+                        set: { newVal in
+                            langOverride = newVal
+                            if newVal == "system" {
+                                UserDefaults.standard.removeObject(forKey: "MCLanguageOverride")
+                            } else {
+                                UserDefaults.standard.set(newVal, forKey: "MCLanguageOverride")
+                            }
+                        }
+                    )) {
+                        Text("lc.settings.languageSystem".loc).tag("system")
+                        ForEach(availableLanguages, id: \.code) { lang in
+                            Text(lang.name).tag(lang.code)
+                        }
+                    }
+                } footer: {
+                    Text("lc.settings.languageFooter".loc)
+                }
+
+                Section {
+                    Toggle("lc.api.title".loc, isOn: Binding(
+                        get: { apiEnabled },
+                        set: { newVal in
+                            apiEnabled = newVal
+                            UserDefaults.standard.set(newVal, forKey: MCRemoteAPI.enabledKey)
+                            if newVal {
+                                apiError = MCRemoteAPI.shared.start()
+                                apiRunning = apiError == nil
+                            } else {
+                                MCRemoteAPI.shared.stop()
+                                apiRunning = false
+                            }
+                        }
+                    ))
+                    if apiEnabled {
+                        HStack {
+                            Text("lc.api.port".loc)
+                            Spacer()
+                            TextField("8642", text: $apiPort)
+                                .keyboardType(.numberPad)
+                                .multilineTextAlignment(.trailing)
+                                .frame(width: 90)
+                                .onChange(of: apiPort) { newVal in
+                                    if let p = Int(newVal), p >= 1024, p <= 65535 {
+                                        UserDefaults.standard.set(p, forKey: MCRemoteAPI.portKey)
+                                        apiError = MCRemoteAPI.shared.start()
+                                        apiRunning = apiError == nil
+                                    }
+                                }
+                        }
+                        HStack {
+                            Text("lc.api.token".loc)
+                            Spacer()
+                            Text(MCRemoteAPI.shared.token)
+                                .font(.system(size: 12, design: .monospaced))
+                                .lineLimit(1)
+                                .truncationMode(.middle)
+                            Button {
+                                UIPasteboard.general.string = MCRemoteAPI.shared.token
+                            } label: {
+                                Image(systemName: "doc.on.doc")
+                            }
+                        }
+                        if let apiError {
+                            Text(apiError).foregroundStyle(.red)
+                        } else if apiRunning {
+                            Text("lc.api.running".loc).foregroundStyle(.green)
+                        }
+                        Text("lc.api.hint".loc)
+                    }
+                } header: {
+                    Text("lc.api.section".loc)
+                } footer: {
+                    Text("lc.api.footer".loc)
                 }
 
                 Section {
@@ -589,7 +680,7 @@ struct LCSettingsView: View {
                     kSecAttrAccount as String: "signingCertificate",
                     kSecReturnData as String: true,
                     kSecMatchLimit as String: kSecMatchLimitOne,
-                    kSecAttrService as String: "com.kdt.livecontainer",
+                    kSecAttrService as String: "com.mun.container",
                     kSecAttrSynchronizable as String: kSecAttrSynchronizableAny
                 ]
                 

@@ -20,10 +20,31 @@
     return enBundle;
 }
 
+// In-app language override (mun container). "system" or empty = follow iOS language.
++ (NSBundle *)lcStringsBundle {
+    static NSBundle *overrideBundle = nil;
+    static NSString *cachedLang = nil;
+    NSString *lang = [NSUserDefaults.standardUserDefaults stringForKey:@"MCLanguageOverride"] ?: @"vi";
+    if (lang.length == 0 || [lang isEqualToString:@"system"]) {
+        return [NSUserDefaults lcMainBundle];
+    }
+    if (overrideBundle == nil || ![lang isEqualToString:cachedLang]) {
+        NSString *path = [[NSUserDefaults lcMainBundle] pathForResource:lang ofType:@"lproj"];
+        NSBundle *b = path ? [NSBundle bundleWithPath:path] : nil;
+        if (b) {
+            overrideBundle = b;
+            cachedLang = lang;
+        }
+        if (!b) {
+            return [NSUserDefaults lcMainBundle];
+        }
+    }
+    return overrideBundle;
+}
+
 // Instance method to return a localized string
 - (NSString *)localized {
-    NSString *message = [[NSUserDefaults lcMainBundle] localizedStringForKey:self value:@"" table:nil];
-    
+    NSString *message = [[[self class] lcStringsBundle] localizedStringForKey:self value:self table:nil];
     if (![message isEqualToString:self]) {
         return message;
     }

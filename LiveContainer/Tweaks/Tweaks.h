@@ -16,6 +16,29 @@ void NSURLSCGuestHooksInit(void);
 void initDead10ccFix(void);
 void IDFVHookInit(NSUUID* uuid);
 
+// MunChanger profile hooks — called by MCProfileInit()
+// NOTE: keychain hook intentionally absent — LC's own SecItem hooks own that domain.
+void MCHookGestaltInstall(void);
+void MCHookDeviceInstall(void);
+void MCHookVersionInstall(void);
+void MCHookCarrierInstall(void);
+void MCHookScreenInstall(void);
+void MCHookNetworkInstall(void);
+void MCHookAdvertisingInstall(void);
+void MCHookLocaleInstall(void);
+void MCHookTimeInstall(void);
+void MCHookLocationInstall(void);
+void MCHookMotionInstall(void);
+void MCHookSensorsInstall(void);
+void MCHookFileManagerInstall(void);
+void MCHookDefaultsInstall(void);
+void MCHookJBDetectInstall(void);
+void MCHookAntiDebugInstall(void);
+void MCHookWolverineInstall(void);
+void MCHookSignatureInstall(void);
+void MCMissingAPIInstall(void);
+BOOL MCProfileInit(void);
+
 @interface NSBundle(LiveContainer)
 - (instancetype)initWithPathForMainBundle:(NSString *)path;
 @end

@@ -16,5 +16,7 @@
 #include "../MultitaskSupport/PiPManager.h"
 #include "../MultitaskSupport/VirtualWindowsHostView.h"
 #include "../LiveContainer/FoundationPrivate.h"
+#include "../LiveContainer/Tweaks/MCDeviceCatalog.h"
+#include "../LiveContainer/Tweaks/MCRandom.h"
 
 #endif /* LiveContainerSwiftUI_Bridging_Header_h_h */

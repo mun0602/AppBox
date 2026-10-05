@@ -15,7 +15,7 @@
 #include <sys/syscall.h>
 
 #include "dyld_bypass_validation.h"
-#include "litehook.h"
+#include "../litehook/src/litehook.h"
 #include "utils.h"
 
 static int (*orig_fcntl)(int fildes, int cmd, void *param) = 0;
